@@ -1,0 +1,17 @@
+﻿@model IEnumerable<OnlineWebShop.Models.Catogory>
+
+<li class="grid">
+    <a href="#">Gaming Laptop</a>
+    <div class="mepanel">
+        <div class="row">
+            <div class="col1 me-one">
+                @foreach (var item in Model)
+                {
+                    <ul>
+                        <li><a href="@Url.Action("SortByCatogories","Home",new {id=item.CatogoriesID})">@item.CatogoriesName</a></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</li>

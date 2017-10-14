@@ -1,0 +1,228 @@
+﻿@using OnlineWebShop.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Product>
+@{   ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!--bottom-header-->
+<!--banner-starts-->
+<!------->
+<div class="bnr" id="home">
+    <div id="top" class="callbacks_container">
+        <ul class="rslides" id="slider4">
+            <li>
+                <div class="banner-1"></div>
+            </li>
+            <li>
+                <div class="banner-2"></div>
+            </li>
+            <li>
+                <div class="banner-3"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!--banner-ends-->
+<!--Slider-Starts-Here-->
+
+@*<script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+        // Slideshow 4
+        $("#slider4").responsiveSlides({
+            auto: true,
+            pager: true,
+            nav: false,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+</script>*@
+<!--End-slider-script-->
+<!--start-banner-bottom-->
+@*<div class="banner-bottom">
+        <div class="container">
+            <div class="banner-bottom-top">
+                <div class="col-md-6 banner-bottom-left">
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <h1><a href="single.html">Duis dictum volutpat</a></h1>
+                            <p>Nulla tempus facilisis purus at.</p>
+                            <div class="b-btn">
+                                <a href="single.html">SHOP NOW</a>
+                            </div>
+                        </div>
+                        <div class="bnr-right">
+                            <a href="single.html"><img src="~/Assets/images/b-1.jpg" alt="" /></a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+                <div class="col-md-6 banner-bottom-right">
+                    <div class="bnr-two">
+                        <div class="bnr-left">
+                            <h2><a href="single.html">Phasellus quis nunc</a></h2>
+                            <p>Nulla tempus facilisis purus at.</p>
+                            <div class="b-btn">
+                                <a href="single.html">SHOP NOW</a>
+                            </div>
+                        </div>
+                        <div class="bnr-right">
+                            <a href="single.html"><img src="~/Assets/images/b-2.jpg" alt="" /></a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>*@
+<!--end-banner-bottom-->
+<!--start-shoes-->
+<div class="shoes">
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="product-one">
+                <div class="col-md-3 product-left">
+                    <div class="p-one simpleCart_shelfItem" style="height:500px">
+                        <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
+                            <img src="/Assets/images/@item.ProductImages" alt="" />
+                            <div class="mask">
+                                <span>Quick View</span>
+                            </div>
+                            <h4>@item.Name</h4>
+
+                            <p><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = item.ProductID, url= @Request.Url.ToString()})"><i></i></a> <span class=" item_price">@String.Format("{0:0,0}", @item.Price) VND</span></p>
+                        </a>
+                        <div class="single-but item_add">
+                            <a href="@Url.Action("InsertCart","ShoppingCart",new { proid = item.ProductID, url= @Request.Url.ToString()})"><input type="submit" value="Thêm vào giỏ hàng" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clearfix"> </div>
+    </div>
+    <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))</div>
+</div>
+
+
+@*<div class="col-md-3 product-left">
+        <div class="p-one simpleCart_shelfItem">
+
+            <a href="single.html">
+                <img src="~/Assets/images/shoes-2.png" alt="" />
+                <div class="mask">
+                    <span>Quick View</span>
+                </div>
+            </a>
+            <h4>Aenean placerat</h4>
+            <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+        </div>
+    </div>
+    <div class="col-md-3 product-left">
+        <div class="p-one simpleCart_shelfItem">
+
+            <a href="single.html">
+                <img src="~/Assets/images/shoes-3.png" alt="" />
+                <div class="mask">
+                    <span>Quick View</span>
+                </div>
+            </a>
+            <h4>Aenean placerat</h4>
+            <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+        </div>
+    </div>
+    <div class="col-md-3 product-left">
+        <div class="p-one simpleCart_shelfItem">
+
+            <a href="single.html">
+                <img src="~/Assets/images/shoes-13.png" alt="" />
+                <div class="mask">
+                    <span>Quick View</span>
+                </div>
+            </a>
+            <h4>Aenean placerat</h4>
+            <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+        </div>
+    </div>*@
+@*<div class="clearfix"> </div>
+        </div>
+    </div>*@
+@*<div class="product-one">
+        <div class="col-md-3 product-left">
+            <div class="p-one simpleCart_shelfItem">
+
+                <a href="single.html">
+                    <img src="~/Assets/images/shoes-5.png" alt="" />
+                    <div class="mask">
+                        <span>Quick View</span>
+                    </div>
+                </a>
+                <h4>Aenean placerat</h4>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+            </div>
+        </div>
+        <div class="col-md-3 product-left">
+            <div class="p-one simpleCart_shelfItem">
+
+                <a href="single.html">
+                    <img src="~/Assets/images/shoes-6.png" alt="" />
+                    <div class="mask">
+                        <span>Quick View</span>
+                    </div>
+                </a>
+                <h4>Aenean placerat</h4>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+            </div>
+        </div>
+        <div class="col-md-3 product-left">
+            <div class="p-one simpleCart_shelfItem">
+
+                <a href="single.html">
+                    <img src="~/Assets/images/shoes-7.png" alt="" />
+                    <div class="mask">
+                        <span>Quick View</span>
+                    </div>
+                </a>
+                <h4>Aenean placerat</h4>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+            </div>
+        </div>
+        <div class="col-md-3 product-left">
+            <div class="p-one simpleCart_shelfItem">
+
+                <a href="single.html">
+                    <img src="~/Assets/images/shoes-8.png" alt="" />
+                    <div class="mask">
+                        <span>Quick View</span>
+                    </div>
+                </a>
+                <h4>Aenean placerat</h4>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
+
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>*@
+
+<!--end-shoes-->
+<!--start-abt-shoe-->
+@Html.Action("NewsPartial", "Home")
+<!--end-abt-shoe-->
+<!--start-footer-->

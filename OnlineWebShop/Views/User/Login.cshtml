@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<table align="center">
+    <h3 style="text-align:center">Đăng Nhập</h3>
+    <h4>@ViewBag.Mess</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height:40px">
+            <td>Email:</td>
+            <td>@Html.TextBox("email")
+                @ViewData["Error1"]</td>
+        </tr>
+        <tr style="height:40px">
+            <td >Mật khẩu:</td>
+            <td><input name="pass" type="password" /> @ViewData["Error2"]</td>
+        </tr>
+        <tr>
+            <td><input type="Submit" value="Đăng Nhập"/></td>
+        </tr>
+    }
+ </table>
+
+
+

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<OnlineWebShop.Models.Slider>
+<div class="bnr" id="home">
+    @foreach (var item in Model)
+    {
+    <div id="top" class="callbacks_container">
+        <ul class="rslides" id="slider4">
+            <li>
+                @for (int i = 1; i <= 3; i++)
+                {
+                <div class="banner-@i" style="background:url(~/Assets/images/@item.ImagesLink)"></div>
+                }
+            </li>
+            @*<li>
+                <div class="banner-2"></div>
+            </li>
+            <li>
+                <div class="banner-3"></div>
+            </li>*@
+        </ul>
+    </div>
+    }
+    <div class="clearfix"> </div>
+</div>

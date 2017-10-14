@@ -1,0 +1,28 @@
+﻿@model IEnumerable<OnlineWebShop.Models.Product>
+@{
+    ViewBag.Title = "SearchingwName";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Kết quả tìm kiếm : @ViewBag.Message</h2>
+    <table>
+        <tr>
+            <td>Tên sản phẩm</td>
+            <td width="100px">Hình Ảnh</td>
+            <td>Giá sản phẩm</td>
+            <td></td>
+            <td></td>
+        </tr>
+@foreach (var item in Model)
+{
+        <tr>
+        <td>@item.Name</td>
+        <td><img src="~/Assets/img/@item.ProductImages" /></td>
+        <td>@String.Format("{0:0,0}", @item.Price) VND</td>
+        <td>@Html.ActionLink("Xem chi tiết","Details","Home",new {id=item.ProductID },null)</td>
+            <td><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = item.ProductID, url= @Request.Url.ToString()})" class="btn btn-success" role="button">Thêm giỏ hàng</a></td>
+        </tr>
+}
+    </table>
+
+

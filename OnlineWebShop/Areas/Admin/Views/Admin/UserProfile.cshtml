@@ -1,0 +1,10 @@
+﻿@using OnlineWebShop.Models
+@model User
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<h2 style="text-align:center">Thông Tin Tài Khoản</h2>
+<p style="text-align:center"> @Session["AdminName"]</p>
+<p style="text-align:center"> @Session["AdminMail"]</p>
+

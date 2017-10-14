@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>BBA SHOP</title>
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Assets/js/jquery-1.11.0.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="~/Assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Free Style Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100,300,400,500,700,800,900,100italic,300italic,400italic,500italic,700italic,800italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <!--//fonts-->
+    <script type="text/javascript" src="~/Assets/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Assets/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- start menu -->
+    <script src="~/Assets/js/simpleCart.min.js"> </script>
+    <link href="~/Assets/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Assets/js/memenu.js"></script>
+    <script>$(document).ready(function () { $(".memenu").memenu(); });</script>
+</head>
+<body>
+    <!--top-header-->
+    <div class="top-header">
+        <div class="container">
+            <div class="top-header-main">
+                <ul>
+                    @if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
+                    {
+
+                        using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            <li><a>@Session["AccountName"]</a></li>
+                            <li><a href="@Url.Action("LogOut","User")">Logout</a></li>
+
+                        }
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
+
+                    }
+                    <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
+                </ul>
+                <div class="col-md-4 top-header-left">
+                    <div class="search-bar">
+                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                        <input type="submit" value="">
+                    </div>
+                </div>
+                <div class="col-md-4 top-header-middle">
+                    <a href="@Url.Action("Index","Home")"><img src="~/Assets/images/logo-4.png" alt="" /></a>
+                </div>
+                <!--Cart-->
+                @*<div class="col-md-4 top-header-right">
+                    <div class="cart box_1">
+                        <a href="checkout.html">
+                                <div class="total">
+                                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+                                </div>
+                                <img src="~/Assets/images/cart-1.png" alt="" />
+                        </a>
+                        <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>*@
+                @Html.Action("CartPartial","ShoppingCart")
+                <!--EndCart-->
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--top-header-->
+    <!--bottom-header-->
+    <div class="header-bottom">
+        <div class="container">
+            <div class="top-nav">
+                <ul class="memenu skyblue">
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                                @Html.Action("GearCatogories","Home")
+                                @Html.Action("LaptopCatogories", "Home") 
+                   <li class="grid">
+                    <a href="@Url.Action("Contact","Home")">Phản hồi</a>
+                    <a href="#">Tin Tức</a> 
+                    <a href="@Url.Action("AboutUs", "Home")">Vì sao chọn chúng tôi ?</a> 
+                    </li>
+               </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="col-md-3 footer-left">
+                    <h3>ABOUT US</h3>
+                    <ul>
+                        <li><a href="#">Who We Are</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Our Sites</a></li>
+                        <li><a href="#">In The News</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Carrers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-left">
+                    <h3>YOUR ACCOUNT</h3>
+                    <ul>
+                        <li><a href="account.html">Your Account</a></li>
+                        <li><a href="#">Personal Information</a></li>
+                        <li><a href="contact.html">Addresses</a></li>
+                        <li><a href="#">Discount</a></li>
+                        <li><a href="#">Track your order</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-left">
+                    <h3>CUSTOMER SERVICES</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Cancellation</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Bulk Orders</a></li>
+                        <li><a href="#">Buying Guides</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-left">
+                    <h3>CATEGORIES</h3>
+                    <ul>
+                        <li><a href="#">Sports Shoes</a></li>
+                        <li><a href="#">Casual Shoes</a></li>
+                        <li><a href="#">Formal Shoes</a></li>
+                        <li><a href="#">Party Shoes</a></li>
+                        <li><a href="#">Ethnic</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!--end-footer-->
+    <!--end-footer-text-->
+    <div class="footer-text">
+        <div class="container">
+            <div class="footer-main">
+                <p class="footer-class">© 2017 BBA SHOP | Design by  <a href="http://w3layouts.com/" target="_blank">BBA SHOP</a> </p>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                /*
+                var defaults = {
+                        containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
+                    };
+                */
+
+                $().UItoTop({ easingType: 'easeOutQuart' });
+
+            });
+        </script>
+        <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    </div>
+    <!--end-footer-text-->
+    <script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+        // Slideshow 4
+        $("#slider4").responsiveSlides({
+            auto: true,
+            pager: true,
+            nav: false,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+    </script>
+    <script src="~/Assets/js/responsiveslides.min.js"></script>
+</body>
+</html>

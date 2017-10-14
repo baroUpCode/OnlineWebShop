@@ -1,0 +1,980 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_NewBackgroundProfile>True</_NewBackgroundProfile>
+    <_PublishTargetUrl>C:\Users\LENOVO\Desktop</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="ApplicationInsights.config">
+      <publishTime>09/15/2017 15:13:26</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/data/flot-data.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/data/morris-data.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/dist/css/sb-admin-2.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/dist/css/sb-admin-2.min.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/dist/js/sb-admin-2.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/dist/js/sb-admin-2.min.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/js/sb-admin-2.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/less/mixins.less">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/less/sb-admin-2.less">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/less/variables.less">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap-social/bootstrap-social.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap-social/bootstrap-social.less">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap-social/bootstrap-social.scss">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/css/bootstrap.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/css/bootstrap.min.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/js/bootstrap.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/bootstrap/js/bootstrap.min.js">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-plugins/dataTables.bootstrap.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-plugins/dataTables.bootstrap.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-plugins/dataTables.bootstrap.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-plugins/index.html">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-responsive/dataTables.responsive.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-responsive/dataTables.responsive.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables-responsive/dataTables.responsive.scss">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.bootstrap.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.bootstrap.min.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.bootstrap4.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.bootstrap4.min.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.foundation.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.foundation.min.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.jqueryui.css">
+      <publishTime>10/06/2017 13:27:50</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.jqueryui.min.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.material.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.material.min.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.semanticui.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.semanticui.min.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.uikit.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/dataTables.uikit.min.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/jquery.dataTables.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/jquery.dataTables.min.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/css/jquery.dataTables_themeroller.css">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/favicon.ico">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/Sorting icons.psd">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/sort_asc.png">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/sort_asc_disabled.png">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/sort_both.png">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/sort_desc.png">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/images/sort_desc_disabled.png">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.bootstrap.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.bootstrap.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.bootstrap4.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.bootstrap4.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.foundation.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.foundation.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.jqueryui.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.jqueryui.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.material.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.material.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.semanticui.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.semanticui.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.uikit.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/dataTables.uikit.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/jquery.dataTables.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/jquery.dataTables.min.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/datatables/js/jquery.js">
+      <publishTime>10/06/2017 13:27:51</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot-tooltip/jquery.flot.tooltip.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot-tooltip/jquery.flot.tooltip.min.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot-tooltip/jquery.flot.tooltip.source.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/excanvas.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/excanvas.min.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.colorhelpers.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.canvas.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.categories.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.crosshair.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.errorbars.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.fillbetween.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.image.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.navigate.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.pie.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.resize.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.selection.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.stack.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.symbol.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.threshold.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.flot.time.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/flot/jquery.js">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/css/font-awesome.css">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/css/font-awesome.css.map">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/css/font-awesome.min.css">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/fonts/fontawesome-webfont.eot">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/fonts/fontawesome-webfont.svg">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/fonts/fontawesome-webfont.ttf">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/fonts/fontawesome-webfont.woff">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/fonts/fontawesome-webfont.woff2">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/fonts/FontAwesome.otf">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/HELP-US-OUT.txt">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/animated.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/bordered-pulled.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/core.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/extras.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/fixed-width.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/font-awesome.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/icons.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/larger.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/list.less">
+      <publishTime>10/06/2017 13:27:52</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/mixins.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/path.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/rotated-flipped.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/screen-reader.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/spinning.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/stacked.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/less/variables.less">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/font-awesome.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_animated.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_bordered-pulled.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_core.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_extras.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_fixed-width.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_icons.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_larger.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_list.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_mixins.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_path.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_rotated-flipped.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_screen-reader.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_spinning.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_stacked.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/font-awesome/scss/_variables.scss">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/jquery/jquery.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/jquery/jquery.min.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/metisMenu/metisMenu.css">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/metisMenu/metisMenu.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/metisMenu/metisMenu.min.css">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/metisMenu/metisMenu.min.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/morrisjs/morris.css">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/morrisjs/morris.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/morrisjs/morris.min.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/raphael/raphael.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Assets/vendor/raphael/raphael.min.js">
+      <publishTime>10/06/2017 13:27:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Admin/Index.cshtml">
+      <publishTime>10/13/2017 20:32:16</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Admin/Login.cshtml">
+      <publishTime>10/06/2017 19:55:41</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Admin/UserProfile.cshtml">
+      <publishTime>10/09/2017 13:23:34</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/Catogories.cshtml">
+      <publishTime>10/07/2017 15:17:16</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/Customers.cshtml">
+      <publishTime>10/07/2017 15:17:43</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/InsertCatogories.cshtml">
+      <publishTime>10/07/2017 18:14:37</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/News.cshtml">
+      <publishTime>10/07/2017 15:17:36</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/Producer.cshtml">
+      <publishTime>10/07/2017 15:17:30</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/Products.cshtml">
+      <publishTime>10/07/2017 14:52:16</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Modules/Sliders.cshtml">
+      <publishTime>10/07/2017 15:19:08</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Shared/_layoutAdmin.cshtml">
+      <publishTime>10/09/2017 20:53:08</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/web.config">
+      <publishTime>10/06/2017 13:14:54</publishTime>
+    </File>
+    <File Include="Assets/css/bootstrap.css">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/css/flexslider.css">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/css/memenu.css">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/css/style.css">
+      <publishTime>10/14/2017 13:48:09</publishTime>
+    </File>
+    <File Include="Assets/images/abt-1.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/abt-2.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/abt-3.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/ASUS G752VM-GC066T.jpg">
+      <publishTime>10/12/2017 20:23:09</publishTime>
+    </File>
+    <File Include="Assets/images/ASUS GX800VH-GY004T.png">
+      <publishTime>10/12/2017 20:23:09</publishTime>
+    </File>
+    <File Include="Assets/images/b-1.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/b-2.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/banner-1.jpg">
+      <publishTime>10/13/2017 20:12:21</publishTime>
+    </File>
+    <File Include="Assets/images/banner-2.jpg">
+      <publishTime>10/13/2017 20:12:20</publishTime>
+    </File>
+    <File Include="Assets/images/banner-3.jpg">
+      <publishTime>10/13/2017 20:12:21</publishTime>
+    </File>
+    <File Include="Assets/images/banner.jpg">
+      <publishTime>10/13/2017 20:13:51</publishTime>
+    </File>
+    <File Include="Assets/images/cart-1.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/cart-2.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/cart.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/close-1.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/Corsair VOID RGB 7.1 Wireless SE Yellowjacket.jpg">
+      <publishTime>10/12/2017 20:23:09</publishTime>
+    </File>
+    <File Include="Assets/images/Corsair-Gaming-VOID-USB-RGB-Gaming-Headset-Carbon-6.jpg">
+      <publishTime>10/12/2017 20:23:09</publishTime>
+    </File>
+    <File Include="Assets/images/GH70.jpg">
+      <publishTime>10/13/2017 18:48:55</publishTime>
+    </File>
+    <File Include="Assets/images/logo-4.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/MSI GS73VR 7RF-265XVN Stealth Pro.jpg">
+      <publishTime>10/12/2017 20:23:09</publishTime>
+    </File>
+    <File Include="Assets/images/MSI-GV62-6.jpg">
+      <publishTime>10/12/2017 20:23:09</publishTime>
+    </File>
+    <File Include="Assets/images/News2.jpg">
+      <publishTime>10/13/2017 18:48:55</publishTime>
+    </File>
+    <File Include="Assets/images/News2Images.jpg">
+      <publishTime>10/13/2017 18:48:55</publishTime>
+    </File>
+    <File Include="Assets/images/Razer DeathAdderElite %28Destiny 2 Edition%29.jpg">
+      <publishTime>10/12/2017 20:23:10</publishTime>
+    </File>
+    <File Include="Assets/images/Razer Mamba 5G Tournament.jpg">
+      <publishTime>10/12/2017 20:23:10</publishTime>
+    </File>
+    <File Include="Assets/images/Razer Mamba 5G Wireless.png">
+      <publishTime>10/12/2017 20:23:10</publishTime>
+    </File>
+    <File Include="Assets/images/s-1.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/s-2.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/s-4.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/s1.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/s2.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/s3.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/s4.jpg">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/search.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-1.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-10.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-11.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-12.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-13.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-15.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-16.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-2.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-3.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-5.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-6.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-7.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-8.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/shoes-9.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/images/top-arrow.png">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/easing.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/jquery-1.11.0.min.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/jquery.flexslider.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/memenu.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/move-top.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/responsiveslides.min.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="Assets/js/simpleCart.min.js">
+      <publishTime>10/11/2017 20:20:50</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>09/15/2017 15:13:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>11/30/2016 16:07:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>12/07/2016 11:45:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>12/07/2016 11:50:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>12/06/2016 15:15:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>12/07/2016 11:49:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>12/07/2016 11:50:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>12/06/2016 15:09:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>12/13/2016 03:10:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>01/05/2012 11:08:46</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/03/2014 20:33:56</publishTime>
+    </File>
+    <File Include="bin/OnlineWebShop.dll">
+      <publishTime>10/14/2017 14:06:26</publishTime>
+    </File>
+    <File Include="bin/OnlineWebShop.pdb">
+      <publishTime>10/14/2017 14:06:26</publishTime>
+    </File>
+    <File Include="bin/PagedList.dll">
+      <publishTime>09/30/2013 17:36:38</publishTime>
+    </File>
+    <File Include="bin/PagedList.Mvc.dll">
+      <publishTime>09/30/2013 18:15:20</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.ValidatingIssuerNameRegistry.dll">
+      <publishTime>04/01/2013 23:51:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/28/2015 04:02:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>01/28/2015 04:02:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>09/10/2013 17:28:38</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="Content/PagedList.css">
+      <publishTime>09/27/2017 16:26:26</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>09/15/2017 15:13:11</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>09/15/2017 15:13:11</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>09/15/2017 15:13:14</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>09/15/2017 15:13:11</publishTime>
+    </File>
+    <File Include="Models/dbOnlineWebShop.dbml">
+      <publishTime>10/07/2017 15:48:03</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/27/2017 16:26:26</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>09/15/2017 15:13:14</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>09/15/2017 15:13:14</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>09/15/2017 15:13:15</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>09/15/2017 15:13:23</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>09/15/2017 15:13:23</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>09/15/2017 15:13:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>09/15/2017 15:13:24</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>09/15/2017 15:13:22</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>09/15/2017 15:13:23</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>09/15/2017 15:13:23</publishTime>
+    </File>
+    <File Include="Views/Home/AboutUs.cshtml">
+      <publishTime>10/11/2017 22:15:22</publishTime>
+    </File>
+    <File Include="Views/Home/Banner.cshtml">
+      <publishTime>10/14/2017 12:53:53</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>10/11/2017 22:08:32</publishTime>
+    </File>
+    <File Include="Views/Home/Details.cshtml">
+      <publishTime>10/13/2017 17:23:24</publishTime>
+    </File>
+    <File Include="Views/Home/GearCatogories.cshtml">
+      <publishTime>10/11/2017 21:48:29</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>10/14/2017 14:00:58</publishTime>
+    </File>
+    <File Include="Views/Home/LaptopCatogories.cshtml">
+      <publishTime>10/11/2017 21:43:32</publishTime>
+    </File>
+    <File Include="Views/Home/LoadSlider.cshtml">
+      <publishTime>10/13/2017 20:51:00</publishTime>
+    </File>
+    <File Include="Views/Home/News.cshtml">
+      <publishTime>10/13/2017 19:19:27</publishTime>
+    </File>
+    <File Include="Views/Home/NewsPartial.cshtml">
+      <publishTime>10/13/2017 20:23:15</publishTime>
+    </File>
+    <File Include="Views/Home/ProducerName.cshtml">
+      <publishTime>10/10/2017 21:44:18</publishTime>
+    </File>
+    <File Include="Views/Home/RelatedProductCatogory.cshtml">
+      <publishTime>10/13/2017 00:37:20</publishTime>
+    </File>
+    <File Include="Views/Home/SearchingwName.cshtml">
+      <publishTime>10/01/2017 18:16:28</publishTime>
+    </File>
+    <File Include="Views/Home/SortByCatogories.cshtml">
+      <publishTime>10/13/2017 00:32:51</publishTime>
+    </File>
+    <File Include="Views/Home/SortByProducer.cshtml">
+      <publishTime>10/13/2017 00:32:59</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>09/15/2017 15:13:11</publishTime>
+    </File>
+    <File Include="Views/Shared/_backupLayout.cshtml">
+      <publishTime>10/06/2017 14:30:21</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>10/04/2017 12:33:45</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutUser.cshtml">
+      <publishTime>10/14/2017 13:59:21</publishTime>
+    </File>
+    <File Include="Views/ShoppingCart/Cart.cshtml">
+      <publishTime>10/13/2017 18:38:00</publishTime>
+    </File>
+    <File Include="Views/ShoppingCart/CartPartial.cshtml">
+      <publishTime>10/13/2017 17:29:51</publishTime>
+    </File>
+    <File Include="Views/ShoppingCart/OrderInform.cshtml">
+      <publishTime>10/03/2017 16:17:03</publishTime>
+    </File>
+    <File Include="Views/ShoppingCart/OrderSuccess.cshtml">
+      <publishTime>09/30/2017 17:47:40</publishTime>
+    </File>
+    <File Include="Views/User/Login.cshtml">
+      <publishTime>10/05/2017 15:42:47</publishTime>
+    </File>
+    <File Include="Views/User/Register.cshtml">
+      <publishTime>09/27/2017 17:33:45</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>10/11/2017 10:59:18</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>09/15/2017 15:13:11</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/14/2017 14:06:28</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

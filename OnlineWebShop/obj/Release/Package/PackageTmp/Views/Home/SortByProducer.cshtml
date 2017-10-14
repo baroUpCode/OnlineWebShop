@@ -1,0 +1,30 @@
+﻿@using OnlineWebShop.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<Product>
+@{
+    ViewBag.Title = "SortByProducer";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="shoes">
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="product-one">
+                <div class="col-md-3 product-left">
+                    <div class="p-one simpleCart_shelfItem" style="height:500px">
+                        <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
+                            <img src="/Assets/images/@item.ProductImages" alt="" />
+                            <div class="mask">
+                                <span>Quick View</span>
+                            </div>
+                            <h4>@item.Name</h4>
+                            <p><i></i> <span class=" item_price">@String.Format("{0:0,0}", @item.Price) VND</span></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clearfix"> </div>
+    </div>
+    <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SortByProducer", new { page = page }))</div>
+</div>

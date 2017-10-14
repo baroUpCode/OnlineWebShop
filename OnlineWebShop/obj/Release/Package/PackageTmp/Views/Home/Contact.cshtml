@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Contact</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--end-breadcrumbs-->
+<!--start-contact-->
+<div class="contact">
+    <div class="container">
+        <div class="contact-top heading">
+            <h3>Gửi ý kiến phản hồi về chúng tôi.</h3>
+        </div>
+        <div class="contact-bottom">
+            <div class="col-md-6 contact-left">
+                <form>
+                    <input type="text" placeholder="Name" required="">
+                    <input type="text" placeholder="E-mail" required="">
+                    <input type="text" placeholder="Phone" required="">
+                </form>
+            </div>
+            <div class="col-md-6 contact-left">
+                <form>
+                    <textarea placeholder="Message"></textarea>
+                    <input type="submit" value="SEND">
+                </form>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+

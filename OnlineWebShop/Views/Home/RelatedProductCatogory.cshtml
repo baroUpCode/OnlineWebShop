@@ -1,0 +1,21 @@
+﻿@model IEnumerable<OnlineWebShop.Models.Product>
+<div class="latest products">
+
+    <div class="product-one">
+@foreach (var item in Model)
+{
+        <div class="col-md-4 product-left single-left" >
+            <div class="p-one simpleCart_shelfItem">
+                <a href="@Url.Action("Details", "Home", new { id = item.ProductID }, null)">
+                    <img src="~/Assets/images/@item.ProductImages" alt="@item.Name" />
+                    <div class="mask mask1">
+                        <span>Quick View</span>
+                    </div>
+                    <h4>@item.Name</h4>
+                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">@String.Format("{0:0,0}", item.Price) VND</span></a></p>
+                </a>
+            </div>
+        </div>
+}
+    </div>
+</div>

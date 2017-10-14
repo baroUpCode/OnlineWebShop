@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>BBA Shop</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Fontawesome core CSS -->
+    <link href="~/Assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--Slide Show Css -->
+    <link href="~/Assets/ItemSlider/css/main-style.css" rel="stylesheet" />
+    <!-- custom CSS here -->
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")"><strong>BBA</strong> Shop</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    @*<li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
+                        <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
+                        <li>@Html.Action("MenuPartial", "User")</li>
+                        <li>@Html.Action("CartPartial", "ShoppingCart")</li>*@
+                    @if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
+                    {
+
+                        using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            <li><a>@Session["AccountName"]</a></li>
+                                <li><a href="@Url.Action("LogOut","User")">Logout</a></li>
+
+                        }
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
+
+                    }
+                    <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
+                    <li>@Html.Action("CartPartial", "ShoppingCart")</li>
+                </ul>
+                @using (Html.BeginForm("SearchingwName", "Home", FormMethod.Get, new { @class = "navbar-form navbar-right", role = "search", id = "search-form" }))
+                {
+                    @*<form class="navbar-form navbar-right" role="search">*@
+                    <div class="form-group">
+                        <input type="text" placeholder="Nhập tên sản phẩm" class="form-control" value="@ViewBag.Message" name="searchString">
+                    </div>
+                    //&nbsp;
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                    @*</form>*@
+                }
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="col-md-8 clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main box-border">
+                    <div id="mi-slider" class="mi-slider">
+                        <img src="~/Assets/img/SliderImages_Lenovo.jpg" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <ul class="list-group">
+                        @Html.Action("ShowCatogories", "Home")
+                    </ul>
+                </div>
+            </div>
+            <!--RenderBody()-->
+            <div>@RenderBody()</div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-12 end-box ">
+        &copy; 2014 | &nbsp; All Rights Reserved | &nbsp; www.yourdomain.com | &nbsp; 24x7 support | &nbsp; Email us: info@yourdomain.com
+    </div>
+    <!-- /.col -->
+    <!--Footer end -->
+    <!--Core JavaScript file  -->
+    <script src="~/Assets/js/jquery-1.10.2.js"></script>
+    <!--bootstrap JavaScript file  -->
+    <script src="~/Assets/js/bootstrap.js"></script>
+    <!--Slider JavaScript file  -->
+    <script src="~/Assets/ItemSlider/js/modernizr.custom.63321.js"></script>
+    <script src="~/Assets/ItemSlider/js/jquery.catslider.js"></script>
+    <script>
+            $(function () {
+
+                $('#mi-slider').catslider();
+
+            });
+    </script>
+</body>
+</html>
+@*<div class="row">
+               @foreach (var product in Model)
+               {
+
+                   <div class="col-md-2 text-center col-sm-4 col-xs-6">
+                       <div class="thumbnail product-box">
+                           <a href="@Url.Action("Details", "Home", new { id = product.ProductID })">
+                               <img src="~/Assets/img/@product.ProductImages" alt="@product.Name" />
+                               <div class="caption">
+                                   <h3><a href="@Url.Action("Details", "Home", new { id = product.ProductID})">@product.Name </a></h3>
+                                   <p>Price : <strong>@String.Format("{0:0,0}",@product.Price) VND</strong>  </p>
+                                   <p><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = product.ProductID, url= @Request.Url.ToString()})" class="btn btn-success" role="button">Thêm giỏ hàng</a><a href="@Url.Action("Details", "Home", new { id = product.ProductID})" class="btn btn-primary" role="button">Xem chi tiết</a></p>
+                               </div>
+                           </a>
+                       </div>
+           </div>
+
+               }
+    </div>
+    Trang (Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+    hiển thị giao diện phân trang
+        Truyền vào 2 tham số : Danh sách dữ liệu (Model) và action khi click vào số trang khi click vào thì chuyển sang
+    Html.PagedListPager(Model,pages=>Url.Action("Index",new { page = pages }))*@

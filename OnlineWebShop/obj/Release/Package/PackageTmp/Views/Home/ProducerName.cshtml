@@ -1,0 +1,3 @@
+﻿@using OnlineWebShop.Models
+@model Producer
+<a href="@Url.Action("SortByProducer","Home",new {id=Model.ProducerID})">@Model.Name</a>
