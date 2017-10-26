@@ -44,7 +44,7 @@
     <div class="container">
         <div class="breadcrumbs-main">
             <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="@Url.Action("Index","Home")">Home</a></li>
                 <li class="active">Giỏ hàng</li>
             </ol>
         </div>
@@ -93,26 +93,24 @@ $(document).ready(function(c) {
                         <li><span>Số lượng</span></li>
                         <li><span>Đơn giá</span></li>
                         <li><span>Thành tiền</span></li>
-                        <li><span></span></li>
-                        <li><span></span></li>
                         @*<li><span>Tình trạng</span></li>*@
                         <div class="clearfix"> </div>
                     </ul>
                     @foreach (var item in Model)
                     {
                     <ul class="cart-header">
-                        <li><a href="@Url.Action("DeleteProductCart", "ShoppingCart", new { proid = item._productID },null)">
+                        <li><a href="@Url.Action("DeleteProductCart", "ShoppingCart", new { proid = item._productID })">
                             <div class="close1"> </div></a></li>
                         <li class="ring-in">
                             <a href="@Url.Action("Details","Home",new {id=item._productID})"><img src="~/Assets/images/@item._productImages" class="img-responsive" alt=""></a>
                         </li>
-                        <li><span><a href="@Url.Action("Details","Home",new {id=item._productID})">@item._productName</a></span></li>
+                        <li><a href="@Url.Action("Details","Home",new {id=item._productID})"><span>@item._productName</span></a></li>
                         @using (Html.BeginForm("UpdateAmount", "ShoppingCart", new { id = item._productID }))
                         {
-                            <li><input type="number" min="1" name="amount" value="@item._quantity"/></li>
-                            <li>@String.Format("{0:0,0}", item._unitPrice) VND</li>
-                            <li>@String.Format("{0:0,0}", item._total) VND</li>
-                            <li><input type="submit" value="Cập Nhật" /></li>
+                            <li><span><input type="number" min="1" name="amount" value="@item._quantity" /><input type="submit" value="Cập Nhật"/></span></li>
+                            <li><span>@String.Format("{0:0,0}", item._unitPrice) VND </span></li>
+                            <li><span>@String.Format("{0:0,0}", item._total) VND</span></li>
+                            
                         }
                         @*if (item._status == )
                         {
@@ -131,34 +129,11 @@ $(document).ready(function(c) {
                     <div colspan="6" style="text-align:right">@Html.ActionLink("Xóa giỏ hàng", "DeleteCart", "ShoppingCart")</div>
                     <div colspan="6" style="text-align:right">@Html.ActionLink("Tiếp tục mua hàng", "Index", "Home")</div>
                     <div colspan="6" style="text-align:right"><a href="@Url.Action("OrderInform","ShoppingCart")">Đặt Hàng</a></div>
-                   
-                    @*<ul class=" cart-header1">
-                        <div class="close2"> </div>
-                        <li class="ring-in">
-                            <a href="single.html"><img src="images/s-2.jpg" class="img-responsive" alt=""></a>
-                        </li>
-                        <li><span>Elliot Shoes</span></li>
-                        <li><span>$ 300.00</span></li>
-                        <li><span>In Stock</span></li>
-                        <li> <a href="single.html" class="add-cart cart-check">ADD TO CART</a></li>
-                        <div class="clearfix"> </div>
-                    </ul>
-                    <ul class="cart-header2">
-                        <div class="close3"> </div>
-                        <li class="ring-in">
-                            <a href="single.html"><img src="images/s-4.jpg" class="img-responsive" alt=""></a>
-                        </li>
-                        <li><span>Woo Dress</span></li>
-                        <li><span>$ 360.00</span></li>
-                        <li><span>In Stock</span></li>
-                        <li> <a href="single.html" class="add-cart cart-check">ADD TO CART</a></li>
-                        <div class="clearfix"> </div>
-                    </ul>*@
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--end-ckeckout-->
+
 
 

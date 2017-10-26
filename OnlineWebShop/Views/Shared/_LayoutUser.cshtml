@@ -37,54 +37,142 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <!--top-header-->
     <div class="top-header">
-        <div class="container">
-            <div class="top-header-main">
-                <ul>
-                    @if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
-                    {
-
-                        using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        <div class="header-top">
+            <div class="container clearfix">
+                <div class="headerTop-left">
+                    <ul>
+                        <li class="marginR40"><a href="#"><span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>@Session["AccountName"]</a></li>
+                        @*<li><a href="#"><span><i class="fa fa-phone" aria-hidden="true"></i></span>+84 123 456 7890</a></li>*@
+                    </ul>
+                </div>
+                <div class="headerTop-right">
+                    <ul>
+                        @if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
                         {
-                            <li><a>@Session["AccountName"]</a></li>
-                            <li><a href="@Url.Action("LogOut","User")">Logout</a></li>
+
+                            using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                <li><a href="@Url.Action("LogOut","User")">Logout</a></li>
+
+                            }
+                        }
+                        else
+                        {
+                            @*<li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
+                        <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
+                        </ul>*@
+                            <li><a href="#" class="link_modal_login"><span><i class="fa fa-sign-in" aria-hidden="true"></i></span>Đăng nhập</a></li>
+
+                    <!-- Login Modal -->
+                                <div class="modal_outside_login" id="modal">
+                                    <div class="border_modal_login">
+                                        <div class="modal_contain_login">
+                                            @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                                            {
+                                                <h1>
+                                                    <span class="text_login">ĐĂNG NHẬP</span>
+                                                </h1>
+                                                @*@using (Html.BeginForm("Login", "User", FormMethod.Post))
+                                            {*@
+                                                <label class="email_group">
+                                                    <h5>Email:</h5>
+                                                    <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input" required></input>
+                                                    <h5>Password:</h5>
+                                                    <input type="password" name="pass" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input" required></input>
+                                                </label>
+                                                <input type="submit" class="btn_login" value="Đăng nhập">
+                                                <p>Chưa có tài khoản thì bấm vô <a href="@Url.Action("Register", "User")" class="link_signup link_modal_signup">Đăng Ký</a></p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                        <li class="marginL40"><a href="@Url.Action("Register","User")"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Đăng ký</a></li>
+                    </ul>
+                </div>
+                <!-- End Login Modal -->
+                <!-- Signup Modal -->
+                @*<div class="modal_outside_signup" id="modal">
+                <div class="border_modal_signup">
+                    <div class="modal_contain_signup">
+                        <form action="User/Register">
+                            <h1>
+                                <span class="text_login">ĐĂNG KÝ</span>
+                            </h1>
+                            <label class="email_group">
+                                <h5>Họ tên:</h5>
+                                <input type="text" name="name" placeholder="Họ và tên" id="name" aria-required="true" class="input"></input>
+                                <h5>Email:</h5>
+                                <input type="text" name="email" placeholder="Email" id="email" aria-required="true" class="input"></input>
+                                <h5>Địa chỉ:</h5>
+                                <input type="text" name="email" placeholder="Địa chỉ" id="address" aria-required="true" class="input"></input>
+                                <h5>Password:</h5>
+                                <input type="password" name="pwd" placeholder="Mật khẩu" id="pwd" aria-required="true" class="input"></input>
+                                <h5>Nhập lại Password:</h5>
+                                <input type="text" name="conf-pwd" placeholder="Nhập lại Mật khẩu" id="conf-pwd" aria-required="true" class="input"></input>
+                            </label>
+                            <a href="@Url.Action("Register","User")" class="btn_login">ĐĂNG KÝ</a>
+                            <p>Có tài khoản rồi thì bấm <a href="#" class="link_signup link_modal_login">Đăng Nhập</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>*@
+                <!-- End Signup Modal -->
+
+            </div>
+
+                    </div>
+                    <div class="container">
+                        <div class="top-header-main">
+                            @*<ul>
+                        @if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
+                        {
+
+                            using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                <li><a>@Session["AccountName"]</a></li>
+                                <li><a href="@Url.Action("LogOut","User")">Logout</a></li>
+
+                            }
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
 
                         }
-                    }
-                    else
-                    {
-                        <li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
-
-                    }
-                    <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
-                </ul>
-                <div class="col-md-4 top-header-left">
-                    <div class="search-bar">
-                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-                        <input type="submit" value="">
-                    </div>
-                </div>
-                <div class="col-md-4 top-header-middle">
-                    <a href="@Url.Action("Index","Home")"><img src="~/Assets/images/logo-4.png" alt="" /></a>
-                </div>
-                <!--Cart-->
-                @*<div class="col-md-4 top-header-right">
-                    <div class="cart box_1">
-                        <a href="checkout.html">
-                                <div class="total">
-                                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+                        <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
+                    </ul>*@
+                            <div class="col-md-4 top-header-left">
+                                <div class="search-bar">
+                                    @using (Html.BeginForm ("SearchingwName", "Home", FormMethod.Get))
+                                    {
+                                        <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
+                                        <input type="submit" value="" >
+                                    }
                                 </div>
-                                <img src="~/Assets/images/cart-1.png" alt="" />
-                        </a>
-                        <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-                        <div class="clearfix"> </div>
+                            </div>
+                            <div class="col-md-4 top-header-middle">
+                                <a href="@Url.Action("Index", "Home")">BBA <span>SHOP</span></a>
+                            </div>
+                            <!--Cart-->
+                            @*<div class="col-md-4 top-header-right">
+                        <div class="cart box_1">
+                            <a href="checkout.html">
+                                    <div class="total">
+                                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+                                    </div>
+                                    <img src="~/Assets/images/cart-1.png" alt="" />
+                            </a>
+                            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>*@
+                            @Html.Action("CartPartial", "ShoppingCart")
+                            <!--EndCart-->
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                </div>*@
-                @Html.Action("CartPartial","ShoppingCart")
-                <!--EndCart-->
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
+                </div>
     <!--top-header-->
     <!--bottom-header-->
     <div class="header-bottom">
@@ -92,14 +180,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="top-nav">
                 <ul class="memenu skyblue">
                     <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
-                                @Html.Action("GearCatogories","Home")
-                                @Html.Action("LaptopCatogories", "Home") 
-                   <li class="grid">
-                    <a href="@Url.Action("Contact","Home")">Phản hồi</a>
-                    <a href="#">Tin Tức</a> 
-                    <a href="@Url.Action("AboutUs", "Home")">Vì sao chọn chúng tôi ?</a> 
+                    @Html.Action("GearCatogories", "Home")
+                    @Html.Action("LaptopCatogories", "Home")
+                    <li class="grid">
+                        <a href="@Url.Action("Contact","Home")">Phản hồi</a>
+                        <a href="#">Tin Tức</a>
+                        <a href="@Url.Action("AboutUs", "Home")">Vì sao chọn chúng tôi ?</a>
                     </li>
-               </ul>
+                </ul>
             </div>
             <div class="clearfix"> </div>
         </div>
@@ -181,25 +269,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!--end-footer-text-->
     <script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-        // Slideshow 4
-        $("#slider4").responsiveSlides({
-            auto: true,
-            pager: true,
-            nav: false,
-            speed: 500,
-            namespace: "callbacks",
-            before: function () {
-                $('.events').append("<li>before event fired.</li>");
-            },
-            after: function () {
-                $('.events').append("<li>after event fired.</li>");
-            }
-        });
+            // You can also use "$(window).load(function() {"
+            $(function () {
+                // Slideshow 4
+                $("#slider4").responsiveSlides({
+                    auto: true,
+                    pager: true,
+                    nav: false,
+                    speed: 500,
+                    namespace: "callbacks",
+                    before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                    },
+                    after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                    }
+                });
 
-    });
+            });
     </script>
     <script src="~/Assets/js/responsiveslides.min.js"></script>
+    <script src="~/Assets/js/style.js"></script>
 </body>
 </html>
+

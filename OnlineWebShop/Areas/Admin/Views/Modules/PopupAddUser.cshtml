@@ -1,0 +1,33 @@
+﻿
+
+
+
+
+
+
+
+<div class="modal_outside_login" id="modal">
+    <div class="border_modal_login">
+        <div class="modal_contain_login">
+            @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
+            {
+                <h1>
+                    <span class="text_login">ĐĂNG NHẬP</span>
+                </h1>
+                      @*@using (Html.BeginForm("Login", "User", FormMethod.Post))
+                          {*@
+                <label class="email_group">
+                    <h5>Họ và tên:</h5>
+                    <input type="text" name="nameUser" placeholder="Họ và tên" id="pwd[1]" aria-required="true" class="input"></input>
+                    <h5>Quyền hạn</h5>
+                    <input type="text" name="permissionUser" placeholder="Mã quyền hạn" id="pwd[1]" aria-required="true" class="input"></input>
+                    <h5>Email:</h5>
+                    <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input"></input>
+                </label>
+                    <input type="submit" class="btn_login" value="Đăng nhập">
+                     <p>Chưa có tài khoản thì bấm vô <a href="@Url.Action("Register", "User")" class="link_signup link_modal_signup">Đăng Ký</a></p>
+            }
+        </div>
+    </div>
+</div>
+

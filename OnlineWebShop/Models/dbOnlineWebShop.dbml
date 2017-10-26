@@ -11,9 +11,21 @@
       <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UsersID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+  <Table Name="dbo.Slider" Member="Sliders">
+    <Type Name="Slider">
+      <Column Name="ImagesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="URL" Type="System.String" DbType="Text" CanBeNull="true" />
+      <Column Name="ImagesLink" Type="System.String" DbType="Text" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AdminAccount" Member="AdminAccounts">
+    <Type Name="AdminAccount">
+      <Column Name="AdminID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FullName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Pass" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
@@ -23,20 +35,21 @@
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PermissionID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Permission_User" Member="Permission" ThisKey="PermissionID" OtherKey="PermissionID" Type="Permission" IsForeignKey="true" />
+      <Association Name="Permission_AdminAccount" Member="Permission" ThisKey="PermissionID" OtherKey="PermissionID" Type="Permission" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Catogories" Member="Catogories">
+  <Table Name="dbo.Catogory" Member="Catogories">
     <Type Name="Catogory">
       <Column Name="CatogoriesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
       <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="CatogoriesName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="RootCatogories" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Catogory_Product" Member="Products" ThisKey="CatogoriesID" OtherKey="CatogoriesID" Type="Product" />
+      <Association Name="RootCatogory_Catogory" Member="RootCatogory" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="RootCatogory" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Contact" Member="Contacts">
@@ -48,11 +61,11 @@
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Customers" Member="Customers">
+  <Table Name="dbo.Customer" Member="Customers">
     <Type Name="Customer">
       <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FullName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="Phone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
       <Column Name="Address" Type="System.String" DbType="NText" CanBeNull="true" />
       <Column Name="Province" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -67,13 +80,14 @@
       <Association Name="Customer_Reciever" Member="Recievers" ThisKey="CustomerID" OtherKey="CustomerID" Type="Reciever" />
     </Type>
   </Table>
-  <Table Name="dbo.Details" Member="Details">
+  <Table Name="dbo.Detail" Member="Details">
     <Type Name="Detail">
       <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Total" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.News" Member="News">
@@ -110,7 +124,7 @@
     <Type Name="Permission">
       <Column Name="PermissionID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PermissionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Association Name="Permission_User" Member="Users" ThisKey="PermissionID" OtherKey="PermissionID" Type="User" />
+      <Association Name="Permission_AdminAccount" Member="AdminAccounts" ThisKey="PermissionID" OtherKey="PermissionID" Type="AdminAccount" />
     </Type>
   </Table>
   <Table Name="dbo.Producer" Member="Producers">
@@ -162,16 +176,16 @@
       <Association Name="Customer_Reciever" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Slider" Member="Sliders">
-    <Type Name="Slider">
-      <Column Name="ImagesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="URL" Type="System.String" DbType="Text" CanBeNull="true" />
-      <Column Name="ImagesLink" Type="System.String" DbType="Text" CanBeNull="true" />
+  <Table Name="dbo.RootCatogory" Member="RootCatogories">
+    <Type Name="RootCatogory">
+      <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RootCatogoryName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
       <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="RootCatogory_Catogory" Member="Catogories" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="Catogory" />
     </Type>
   </Table>
 </Database>

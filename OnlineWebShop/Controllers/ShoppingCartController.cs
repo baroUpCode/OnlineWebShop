@@ -19,8 +19,6 @@ namespace OnlineWebShop.Controllers
         /// <returns></returns>
         public List<ShoppingCartModels> GetShoppingCart()
         {
-             
-            
             //Dùng as thay vì ép kiểu để tạo mới giỏ hàng khi mà người dùng chưa tao, còn nếu ép kiểu sẽ bị lỗi vì giỏ hàng vẫn chưa tồn tại
             //Tạo mới một Session kiểu List<ShoppingCarts>, nếu trong Session chưa có đối tượng thì tạo mới đối tượng cho session và gán lại giá
             //trị đối tượng khởi tạo vào session
@@ -220,6 +218,7 @@ namespace OnlineWebShop.Controllers
                 db.Recievers.InsertOnSubmit(rec);
                 db.SubmitChanges();
                 order.RecieverID = rec.RecieverID;
+                order.Total = Convert.ToInt64(f["cartTotal"]);
                 order.Status = false;
                 db.Orders.InsertOnSubmit(order);
                 db.SubmitChanges();
@@ -232,6 +231,7 @@ namespace OnlineWebShop.Controllers
                 de.Quantity = item._quantity;
                 de.UnitPrice = item._unitPrice;
                 de.Total = item._total;
+                de.DeliveryDate = Convert.ToDateTime(f["deliveryDate"]);
                 db.Details.InsertOnSubmit(de);
             }
             db.SubmitChanges();

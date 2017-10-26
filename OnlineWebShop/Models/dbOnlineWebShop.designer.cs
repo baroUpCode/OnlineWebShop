@@ -33,9 +33,12 @@ namespace OnlineWebShop.Models
     partial void InsertAbout(About instance);
     partial void UpdateAbout(About instance);
     partial void DeleteAbout(About instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
+    partial void InsertSlider(Slider instance);
+    partial void UpdateSlider(Slider instance);
+    partial void DeleteSlider(Slider instance);
+    partial void InsertAdminAccount(AdminAccount instance);
+    partial void UpdateAdminAccount(AdminAccount instance);
+    partial void DeleteAdminAccount(AdminAccount instance);
     partial void InsertCatogory(Catogory instance);
     partial void UpdateCatogory(Catogory instance);
     partial void DeleteCatogory(Catogory instance);
@@ -66,9 +69,9 @@ namespace OnlineWebShop.Models
     partial void InsertReciever(Reciever instance);
     partial void UpdateReciever(Reciever instance);
     partial void DeleteReciever(Reciever instance);
-    partial void InsertSlider(Slider instance);
-    partial void UpdateSlider(Slider instance);
-    partial void DeleteSlider(Slider instance);
+    partial void InsertRootCatogory(RootCatogory instance);
+    partial void UpdateRootCatogory(RootCatogory instance);
+    partial void DeleteRootCatogory(RootCatogory instance);
     #endregion
 		
 		public dbOnlineWebShopDataContext() : 
@@ -109,11 +112,19 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<Slider> Sliders
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<Slider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AdminAccount> AdminAccounts
+		{
+			get
+			{
+				return this.GetTable<AdminAccount>();
 			}
 		}
 		
@@ -197,11 +208,11 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Slider> Sliders
+		public System.Data.Linq.Table<RootCatogory> RootCatogories
 		{
 			get
 			{
-				return this.GetTable<Slider>();
+				return this.GetTable<RootCatogory>();
 			}
 		}
 	}
@@ -412,13 +423,243 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Slider")]
+	public partial class Slider : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _UsersID;
+		private int _ImagesID;
+		
+		private string _URL;
+		
+		private string _ImagesLink;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Data.Linq.Binary _CreatedAt;
+		
+		private System.Nullable<byte> _Deleted;
+		
+		private System.Nullable<int> _ModifiedBy;
+		
+		private System.Nullable<System.DateTime> _ModifiedAt;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnImagesIDChanging(int value);
+    partial void OnImagesIDChanged();
+    partial void OnURLChanging(string value);
+    partial void OnURLChanged();
+    partial void OnImagesLinkChanging(string value);
+    partial void OnImagesLinkChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
+    partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
+    partial void OnCreatedAtChanged();
+    partial void OnDeletedChanging(System.Nullable<byte> value);
+    partial void OnDeletedChanged();
+    partial void OnModifiedByChanging(System.Nullable<int> value);
+    partial void OnModifiedByChanged();
+    partial void OnModifiedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedAtChanged();
+    #endregion
+		
+		public Slider()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagesID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int ImagesID
+		{
+			get
+			{
+				return this._ImagesID;
+			}
+			set
+			{
+				if ((this._ImagesID != value))
+				{
+					this.OnImagesIDChanging(value);
+					this.SendPropertyChanging();
+					this._ImagesID = value;
+					this.SendPropertyChanged("ImagesID");
+					this.OnImagesIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string URL
+		{
+			get
+			{
+				return this._URL;
+			}
+			set
+			{
+				if ((this._URL != value))
+				{
+					this.OnURLChanging(value);
+					this.SendPropertyChanging();
+					this._URL = value;
+					this.SendPropertyChanged("URL");
+					this.OnURLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagesLink", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string ImagesLink
+		{
+			get
+			{
+				return this._ImagesLink;
+			}
+			set
+			{
+				if ((this._ImagesLink != value))
+				{
+					this.OnImagesLinkChanging(value);
+					this.SendPropertyChanging();
+					this._ImagesLink = value;
+					this.SendPropertyChanged("ImagesLink");
+					this.OnImagesLinkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<byte> Deleted
+		{
+			get
+			{
+				return this._Deleted;
+			}
+			set
+			{
+				if ((this._Deleted != value))
+				{
+					this.OnDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._Deleted = value;
+					this.SendPropertyChanged("Deleted");
+					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> ModifiedBy
+		{
+			get
+			{
+				return this._ModifiedBy;
+			}
+			set
+			{
+				if ((this._ModifiedBy != value))
+				{
+					this.OnModifiedByChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedBy = value;
+					this.SendPropertyChanged("ModifiedBy");
+					this.OnModifiedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> ModifiedAt
+		{
+			get
+			{
+				return this._ModifiedAt;
+			}
+			set
+			{
+				if ((this._ModifiedAt != value))
+				{
+					this.OnModifiedAtChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedAt = value;
+					this.SendPropertyChanged("ModifiedAt");
+					this.OnModifiedAtChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AdminAccount")]
+	public partial class AdminAccount : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AdminID;
 		
 		private string _FullName;
 		
@@ -444,8 +685,8 @@ namespace OnlineWebShop.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUsersIDChanging(int value);
-    partial void OnUsersIDChanged();
+    partial void OnAdminIDChanging(int value);
+    partial void OnAdminIDChanged();
     partial void OnFullNameChanging(string value);
     partial void OnFullNameChanged();
     partial void OnEmailChanging(string value);
@@ -466,28 +707,28 @@ namespace OnlineWebShop.Models
     partial void OnPermissionIDChanged();
     #endregion
 		
-		public User()
+		public AdminAccount()
 		{
 			this._Permission = default(EntityRef<Permission>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsersID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int UsersID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int AdminID
 		{
 			get
 			{
-				return this._UsersID;
+				return this._AdminID;
 			}
 			set
 			{
-				if ((this._UsersID != value))
+				if ((this._AdminID != value))
 				{
-					this.OnUsersIDChanging(value);
+					this.OnAdminIDChanging(value);
 					this.SendPropertyChanging();
-					this._UsersID = value;
-					this.SendPropertyChanged("UsersID");
-					this.OnUsersIDChanged();
+					this._AdminID = value;
+					this.SendPropertyChanged("AdminID");
+					this.OnAdminIDChanged();
 				}
 			}
 		}
@@ -676,7 +917,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_User", Storage="_Permission", ThisKey="PermissionID", OtherKey="PermissionID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_AdminAccount", Storage="_Permission", ThisKey="PermissionID", OtherKey="PermissionID", IsForeignKey=true)]
 		public Permission Permission
 		{
 			get
@@ -693,12 +934,12 @@ namespace OnlineWebShop.Models
 					if ((previousValue != null))
 					{
 						this._Permission.Entity = null;
-						previousValue.Users.Remove(this);
+						previousValue.AdminAccounts.Remove(this);
 					}
 					this._Permission.Entity = value;
 					if ((value != null))
 					{
-						value.Users.Add(this);
+						value.AdminAccounts.Add(this);
 						this._PermissionID = value.PermissionID;
 					}
 					else
@@ -731,7 +972,7 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Catogories")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Catogory")]
 	public partial class Catogory : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -747,13 +988,15 @@ namespace OnlineWebShop.Models
 		
 		private string _CatogoriesName;
 		
-		private System.Nullable<int> _RootCatogories;
-		
 		private System.Nullable<int> _ModifiedBy;
 		
 		private System.Nullable<System.DateTime> _ModifiedAt;
 		
+		private System.Nullable<int> _RootCatogoryID;
+		
 		private EntitySet<Product> _Products;
+		
+		private EntityRef<RootCatogory> _RootCatogory;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -769,17 +1012,18 @@ namespace OnlineWebShop.Models
     partial void OnDeletedChanged();
     partial void OnCatogoriesNameChanging(string value);
     partial void OnCatogoriesNameChanged();
-    partial void OnRootCatogoriesChanging(System.Nullable<int> value);
-    partial void OnRootCatogoriesChanged();
     partial void OnModifiedByChanging(System.Nullable<int> value);
     partial void OnModifiedByChanged();
     partial void OnModifiedAtChanging(System.Nullable<System.DateTime> value);
     partial void OnModifiedAtChanged();
+    partial void OnRootCatogoryIDChanging(System.Nullable<int> value);
+    partial void OnRootCatogoryIDChanged();
     #endregion
 		
 		public Catogory()
 		{
 			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
+			this._RootCatogory = default(EntityRef<RootCatogory>);
 			OnCreated();
 		}
 		
@@ -883,26 +1127,6 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogories", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> RootCatogories
-		{
-			get
-			{
-				return this._RootCatogories;
-			}
-			set
-			{
-				if ((this._RootCatogories != value))
-				{
-					this.OnRootCatogoriesChanging(value);
-					this.SendPropertyChanging();
-					this._RootCatogories = value;
-					this.SendPropertyChanged("RootCatogories");
-					this.OnRootCatogoriesChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<int> ModifiedBy
 		{
@@ -943,6 +1167,30 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> RootCatogoryID
+		{
+			get
+			{
+				return this._RootCatogoryID;
+			}
+			set
+			{
+				if ((this._RootCatogoryID != value))
+				{
+					if (this._RootCatogory.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRootCatogoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._RootCatogoryID = value;
+					this.SendPropertyChanged("RootCatogoryID");
+					this.OnRootCatogoryIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Catogory_Product", Storage="_Products", ThisKey="CatogoriesID", OtherKey="CatogoriesID")]
 		public EntitySet<Product> Products
 		{
@@ -953,6 +1201,40 @@ namespace OnlineWebShop.Models
 			set
 			{
 				this._Products.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_Catogory", Storage="_RootCatogory", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID", IsForeignKey=true)]
+		public RootCatogory RootCatogory
+		{
+			get
+			{
+				return this._RootCatogory.Entity;
+			}
+			set
+			{
+				RootCatogory previousValue = this._RootCatogory.Entity;
+				if (((previousValue != value) 
+							|| (this._RootCatogory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RootCatogory.Entity = null;
+						previousValue.Catogories.Remove(this);
+					}
+					this._RootCatogory.Entity = value;
+					if ((value != null))
+					{
+						value.Catogories.Add(this);
+						this._RootCatogoryID = value.RootCatogoryID;
+					}
+					else
+					{
+						this._RootCatogoryID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("RootCatogory");
+				}
 			}
 		}
 		
@@ -1147,7 +1429,7 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customers")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
 	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1157,7 +1439,7 @@ namespace OnlineWebShop.Models
 		
 		private string _FullName;
 		
-		private System.Nullable<int> _Phone;
+		private string _Phone;
 		
 		private string _Address;
 		
@@ -1191,7 +1473,7 @@ namespace OnlineWebShop.Models
     partial void OnCustomerIDChanged();
     partial void OnFullNameChanging(string value);
     partial void OnFullNameChanged();
-    partial void OnPhoneChanging(System.Nullable<int> value);
+    partial void OnPhoneChanging(string value);
     partial void OnPhoneChanged();
     partial void OnAddressChanging(string value);
     partial void OnAddressChanged();
@@ -1262,8 +1544,8 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> Phone
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(12)", UpdateCheck=UpdateCheck.Never)]
+		public string Phone
 		{
 			get
 			{
@@ -1553,7 +1835,7 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Details")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Detail")]
 	public partial class Detail : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1569,6 +1851,8 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<double> _Total;
 		
+		private System.Nullable<System.DateTime> _DeliveryDate;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1583,6 +1867,8 @@ namespace OnlineWebShop.Models
     partial void OnUnitPriceChanged();
     partial void OnTotalChanging(System.Nullable<double> value);
     partial void OnTotalChanged();
+    partial void OnDeliveryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDeliveryDateChanged();
     #endregion
 		
 		public Detail()
@@ -1686,6 +1972,26 @@ namespace OnlineWebShop.Models
 					this._Total = value;
 					this.SendPropertyChanged("Total");
 					this.OnTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DeliveryDate
+		{
+			get
+			{
+				return this._DeliveryDate;
+			}
+			set
+			{
+				if ((this._DeliveryDate != value))
+				{
+					this.OnDeliveryDateChanging(value);
+					this.SendPropertyChanging();
+					this._DeliveryDate = value;
+					this.SendPropertyChanged("DeliveryDate");
+					this.OnDeliveryDateChanged();
 				}
 			}
 		}
@@ -2359,7 +2665,7 @@ namespace OnlineWebShop.Models
 		
 		private string _PermissionName;
 		
-		private EntitySet<User> _Users;
+		private EntitySet<AdminAccount> _AdminAccounts;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2373,7 +2679,7 @@ namespace OnlineWebShop.Models
 		
 		public Permission()
 		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			this._AdminAccounts = new EntitySet<AdminAccount>(new Action<AdminAccount>(this.attach_AdminAccounts), new Action<AdminAccount>(this.detach_AdminAccounts));
 			OnCreated();
 		}
 		
@@ -2417,16 +2723,16 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_User", Storage="_Users", ThisKey="PermissionID", OtherKey="PermissionID")]
-		public EntitySet<User> Users
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Permission_AdminAccount", Storage="_AdminAccounts", ThisKey="PermissionID", OtherKey="PermissionID")]
+		public EntitySet<AdminAccount> AdminAccounts
 		{
 			get
 			{
-				return this._Users;
+				return this._AdminAccounts;
 			}
 			set
 			{
-				this._Users.Assign(value);
+				this._AdminAccounts.Assign(value);
 			}
 		}
 		
@@ -2450,13 +2756,13 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		private void attach_Users(User entity)
+		private void attach_AdminAccounts(AdminAccount entity)
 		{
 			this.SendPropertyChanging();
 			entity.Permission = this;
 		}
 		
-		private void detach_Users(User entity)
+		private void detach_AdminAccounts(AdminAccount entity)
 		{
 			this.SendPropertyChanging();
 			entity.Permission = null;
@@ -3524,21 +3830,19 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Slider")]
-	public partial class Slider : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RootCatogory")]
+	public partial class RootCatogory : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ImagesID;
+		private int _RootCatogoryID;
 		
-		private string _URL;
-		
-		private string _ImagesLink;
-		
-		private System.Nullable<int> _CreatedBy;
+		private string _RootCatogoryName;
 		
 		private System.Data.Linq.Binary _CreatedAt;
+		
+		private System.Nullable<int> _CreatedBy;
 		
 		private System.Nullable<byte> _Deleted;
 		
@@ -3546,20 +3850,20 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<System.DateTime> _ModifiedAt;
 		
+		private EntitySet<Catogory> _Catogories;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnImagesIDChanging(int value);
-    partial void OnImagesIDChanged();
-    partial void OnURLChanging(string value);
-    partial void OnURLChanged();
-    partial void OnImagesLinkChanging(string value);
-    partial void OnImagesLinkChanged();
-    partial void OnCreatedByChanging(System.Nullable<int> value);
-    partial void OnCreatedByChanged();
+    partial void OnRootCatogoryIDChanging(int value);
+    partial void OnRootCatogoryIDChanged();
+    partial void OnRootCatogoryNameChanging(string value);
+    partial void OnRootCatogoryNameChanged();
     partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
     partial void OnCreatedAtChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
     partial void OnDeletedChanging(System.Nullable<byte> value);
     partial void OnDeletedChanged();
     partial void OnModifiedByChanging(System.Nullable<int> value);
@@ -3568,67 +3872,68 @@ namespace OnlineWebShop.Models
     partial void OnModifiedAtChanged();
     #endregion
 		
-		public Slider()
+		public RootCatogory()
 		{
+			this._Catogories = new EntitySet<Catogory>(new Action<Catogory>(this.attach_Catogories), new Action<Catogory>(this.detach_Catogories));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagesID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int ImagesID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int RootCatogoryID
 		{
 			get
 			{
-				return this._ImagesID;
+				return this._RootCatogoryID;
 			}
 			set
 			{
-				if ((this._ImagesID != value))
+				if ((this._RootCatogoryID != value))
 				{
-					this.OnImagesIDChanging(value);
+					this.OnRootCatogoryIDChanging(value);
 					this.SendPropertyChanging();
-					this._ImagesID = value;
-					this.SendPropertyChanged("ImagesID");
-					this.OnImagesIDChanged();
+					this._RootCatogoryID = value;
+					this.SendPropertyChanged("RootCatogoryID");
+					this.OnRootCatogoryIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string URL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryName", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string RootCatogoryName
 		{
 			get
 			{
-				return this._URL;
+				return this._RootCatogoryName;
 			}
 			set
 			{
-				if ((this._URL != value))
+				if ((this._RootCatogoryName != value))
 				{
-					this.OnURLChanging(value);
+					this.OnRootCatogoryNameChanging(value);
 					this.SendPropertyChanging();
-					this._URL = value;
-					this.SendPropertyChanged("URL");
-					this.OnURLChanged();
+					this._RootCatogoryName = value;
+					this.SendPropertyChanged("RootCatogoryName");
+					this.OnRootCatogoryNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagesLink", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string ImagesLink
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CreatedAt
 		{
 			get
 			{
-				return this._ImagesLink;
+				return this._CreatedAt;
 			}
 			set
 			{
-				if ((this._ImagesLink != value))
+				if ((this._CreatedAt != value))
 				{
-					this.OnImagesLinkChanging(value);
+					this.OnCreatedAtChanging(value);
 					this.SendPropertyChanging();
-					this._ImagesLink = value;
-					this.SendPropertyChanged("ImagesLink");
-					this.OnImagesLinkChanged();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
 				}
 			}
 		}
@@ -3649,26 +3954,6 @@ namespace OnlineWebShop.Models
 					this._CreatedBy = value;
 					this.SendPropertyChanged("CreatedBy");
 					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
 				}
 			}
 		}
@@ -3733,6 +4018,19 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_Catogory", Storage="_Catogories", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
+		public EntitySet<Catogory> Catogories
+		{
+			get
+			{
+				return this._Catogories;
+			}
+			set
+			{
+				this._Catogories.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3751,6 +4049,18 @@ namespace OnlineWebShop.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.RootCatogory = this;
+		}
+		
+		private void detach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.RootCatogory = null;
 		}
 	}
 }

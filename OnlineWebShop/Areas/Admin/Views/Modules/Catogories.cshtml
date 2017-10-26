@@ -1,8 +1,28 @@
-﻿
+﻿@model IEnumerable<OnlineWebShop.Models.Catogory>
 @{
     ViewBag.Title = "Catogories";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<h2>Catogories</h2>
+<div id="page-wrapper">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Mã số</th>
+                <th>Tên loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CatogoriesID</td>
+                    <td>@item.CatogoriesName</td>
+                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditCatogories","Modules",new {id=item.CatogoriesID })">Sửa</a></button>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 

@@ -20,8 +20,8 @@ namespace OnlineWebShop.Controllers
         private List<Product> ListNewProduct(int count)// ham tra ve mot danh sach co thong tin cac san pham nhu ten, gia, ....
         {
             return db.Products.OrderByDescending(x => x.CreatedAt).Take(count).ToList();
-            
-         }
+
+        }
         //private List<Product> ListCatogoriesProduct(int count)
         //{
         //    return db.Products.OrderByDescending(x => x.CatogoriesID).Take(count).ToList();
@@ -34,19 +34,19 @@ namespace OnlineWebShop.Controllers
         //}
         public ActionResult Index(int? page)
         {
-            int pageSize = 8;
+            int pageSize = 12;
             int pageNum = (page ?? 1); //kiểm tra nếu giá trị page = null thì sẽ gán page = 1 bởi vì mặc định người dùng lần đầu vào trang thì họ sẽ ở trang 1.
             var newProduct = ListNewProduct(24);
-            return View(newProduct.ToPagedList(pageNum,pageSize));
+            return View(newProduct.ToPagedList(pageNum, pageSize));
         }
         public ActionResult GearCatogories()
         {
-            var cato = from ca in db.Catogories where ca.RootCatogories == 17 select ca;
+            var cato = from ca in db.Catogories where ca.RootCatogoryID == 1 select ca;
             return PartialView(cato);
         }
         public ActionResult LaptopCatogories()
         {
-            var cato = from ca in db.Catogories where ca.RootCatogories == 18 select ca;
+            var cato = from ca in db.Catogories where ca.RootCatogoryID == 2 select ca;
             return PartialView(cato);
         }
         /// <summary>
@@ -57,7 +57,7 @@ namespace OnlineWebShop.Controllers
         {
             int pageSize = 8;
             int pageNum = (page ?? 1);
-            var procat = from pro in db.Products where pro.CatogoriesID==id select pro;
+            var procat = (from pro in db.Products where pro.CatogoriesID == id select pro).ToList();
             return View(procat.ToPagedList(pageNum, pageSize));
         }
         public ActionResult Details(int id)
@@ -87,22 +87,24 @@ namespace OnlineWebShop.Controllers
             var pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
             return PartialView(pro);
         }
-        public ActionResult SortByProducer(int id,int? page)
+        public ActionResult SortByProducer(int id, int? page)
         {
             int pageSize = 8;
             int pageNum = (page ?? 1);
-            var prod = from nsx in db.Products where nsx.ProducerID == id select nsx; 
+            var prod = (from nsx in db.Products where nsx.ProducerID == id select nsx).ToList();
             //var prod= db.Products.Select(x=>x.ProducerID==id);
             return View(prod.ToPagedList(pageNum, pageSize));
         }
-        public ActionResult SearchingwName(string searchString)
+        public ActionResult SearchingwName(string searchString, int? page)
         {
             //var product = from sp in db.Products select sp.Name;
             //var cat = db.Catogories.Where(x => x.CatogoriesName.Contains(searchString));
             //var producer = db.Producers.Where(x => x.Name.Contains(searchString));
             //var links = links.Where(l => l.First() == '/' || l.First() == '//').ToList();
-            var product = db.Products.Where(x => x.Name.Contains(searchString));
-            return View(product.ToList());
+            int pageSize = 5;
+            int pageNum = (page ?? 1);
+            var product =(from p in db.Products where p.Name.Contains(searchString) select p).ToList();
+            return View(product.ToPagedList(pageNum, pageSize));
         }
         //public ActionResult SearchingwProducer(string searchString)
         //{
@@ -128,6 +130,11 @@ namespace OnlineWebShop.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Not yet
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult News(int id )
         {
             var news = db.News.SingleOrDefault(x => x.NewsID == id);
@@ -140,8 +147,14 @@ namespace OnlineWebShop.Controllers
         }
         public ActionResult RelatedProductCatogory(int id)
         {
-            var product = db.Products.Where(x => x.CatogoriesID == id).Take(6);
+            var rand = new Random();
+            var product = db.Products.Where(x => x.CatogoriesID == id).Take(4);
             return PartialView(product);
+        }
+        public ActionResult CatogoriesPartial()
+        {
+            var cat = db.Catogories;
+            return PartialView(cat);
         }
     }
 }

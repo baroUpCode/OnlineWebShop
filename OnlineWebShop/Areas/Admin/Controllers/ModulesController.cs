@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OnlineWebShop.Models;
+using PagedList;
+using System.IO;
 
 namespace OnlineWebShop.Areas.Admin.Controllers
 {
@@ -16,9 +18,16 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Products()
+         public ActionResult TableData()
         {
-            return View(db.Products.ToList());
+            var user = db.AdminAccounts;
+            return PartialView(user);
+    }
+    public ActionResult Products(int? page)
+        {
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(db.Products.ToList().OrderBy(x=>x.ProductID).ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditProduct(int id)
         {
@@ -38,12 +47,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 pro.Price = Convert.ToDecimal(f["productPrice"]);
                 pro.CatogoriesID = Convert.ToInt32(f["productCatogories"]);
                 pro.ProducerID = Convert.ToInt32(f["productProducer"]);
-                db.Products.InsertOnSubmit(pro);
+                pro.Description = Request.Form["productDescription"];
                 db.SubmitChanges();
-                return RedirectToAction("EditProduct", "Modules");
+                return RedirectToAction("Products", "Modules");
             }
             else
-                return RedirectToAction("Product", "Modules");
+                return RedirectToAction("Products", "Modules");
         }
         public ActionResult DeleteProduct(int id)
         {
@@ -58,11 +67,31 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult InsertProduct(FormCollection f)
+        [ValidateInput(false)]
+        public ActionResult InsertProduct(FormCollection f,HttpPostedFileBase fileUpload)
         {
             Product pro = new Product();
+            if (fileUpload == null)
+            {
+                ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
+                return View();
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var fileName = Path.GetFileName(fileUpload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/proImage"), fileName);
+                    if (System.IO.File.Exists(path))
+                        ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                    else
+                    {
+                        fileUpload.SaveAs(path);
+                    }
+                    pro.ProductImages = fileName;
+                }
+            }
             pro.Name = f["proName"];
-            pro.ProductImages = f["proImage"];
             pro.Quantity = Convert.ToInt32(f["proQuantity"]);
             pro.Warranty = Convert.ToInt32(f["proWarranty"]);
             pro.Description = f["proDes"];
@@ -92,8 +121,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             
             Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
             cat.CatogoriesName = f["catName"];
-            cat.RootCatogories = Convert.ToInt32(f["catRoot"]);
-            db.Catogories.InsertOnSubmit(cat);
+            cat.RootCatogoryID = Convert.ToInt32(f["catRoot"]);
             db.SubmitChanges();
             return RedirectToAction("Catogories","Modules");
         }
@@ -106,7 +134,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             Catogory cat = new Catogory();
             cat.CatogoriesName = f["catName"];
-            cat.RootCatogories = Convert.ToInt32(f["catRoot"]);
+            cat.RootCatogoryID = Convert.ToInt32(f["catRoot"]);
             db.Catogories.InsertOnSubmit(cat);
             db.SubmitChanges();
             return RedirectToAction("InsertCatogories", "Modules");
@@ -117,6 +145,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.Catogories.DeleteOnSubmit(cat);
             db.SubmitChanges();
             return RedirectToAction("Catogories", "Modules");
+        }
+        public ActionResult CatogoriesList()
+        {
+            List<Catogory> cat = db.Catogories.ToList();
+            SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName");
+            ViewBag.CatList = catList;
+            return PartialView(ViewBag.CatList);
         }
         /// <summary>
         /// Module Producer
@@ -138,10 +173,9 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
             if (pro != null)
             {
-                pro.Name = f["proName"];
-                db.Producers.InsertOnSubmit(pro);
+                pro.Name = f["producerName"];
                 db.SubmitChanges();
-                return RedirectToAction("EditProducer", "Modules");
+                return RedirectToAction("Producer", "Modules");
             }
             else
                 return RedirectToAction("Producer", "Modules");
@@ -167,6 +201,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return this.InsertProducer();
         }
+        public ActionResult ProducerList()
+        {
+            List<Producer> producer = db.Producers.ToList();
+            SelectList producerList = new SelectList(producer, "ProducerID", "Name");
+            ViewBag.ProList = producerList;
+            return PartialView(ViewBag.ProList);
+        }
         /// <summary>
         /// Module News
         /// Edit-Delete-Insert 
@@ -190,7 +231,6 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 news.Content = f["newContent"];
                 news.Images = f["newsImage"].ToString();
                 news.CatogoriesID = Convert.ToInt32(f["newCatID"]);
-                db.News.InsertOnSubmit(news);
                 db.SubmitChanges();
                 return RedirectToAction("EditCustomer", "Modules");
             }
@@ -243,8 +283,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 cus.FullName = f["cusName"];
                 cus.Address = f["cusAddress"];
                 cus.BirthDay = Convert.ToDateTime(f["cusBirthday"]);
-                cus.Phone = Convert.ToInt32(f["cusPhone"]);
-                db.Customers.InsertOnSubmit(cus);
+                cus.Phone = f["cusPhone"];
                 db.SubmitChanges();
                 return RedirectToAction("Customer", "Modules");
             }
@@ -257,7 +296,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
             db.Customers.DeleteOnSubmit(cus);
             db.SubmitChanges();
-            return View();
+            return RedirectToAction("Customers", "Modules");
         }
         public ActionResult InsertCustomer()
         {
@@ -266,59 +305,125 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult InsertCustomer(FormCollection f)
         {
-            Customer cus = new Customer();
-            cus.FullName = f["cusName"];
-            cus.Email = f["cusEmail"];
-            cus.Phone = Convert.ToInt32(f["cusPhone"]);
-            cus.Pass = f["cusPass"];
-            cus.Province = f["cusProvince"];
-            db.Customers.InsertOnSubmit(cus);
-            db.SubmitChanges();
-            return this.InsertCustomer();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Customer cus = new Customer();
+                    cus.FullName = f["cusName"];
+                    cus.Email = f["cusEmail"];
+                    cus.Phone = f["cusPhone"];
+                    cus.Pass = f["cusPass"];
+                    cus.Province = f["cusProvince"];
+                    db.Customers.InsertOnSubmit(cus);
+                    db.SubmitChanges();
+                    return RedirectToAction("Customers", "Modules");
+                }
+                ViewBag.Error = "Thông tin không được để trống";
+                return View(ViewBag.Error,f);
+            }
+            catch
+            {
+                return View();
+            }
         }
         /// <summary>
         /// Modules Sliders
         /// </summary>
         /// <returns></returns>
-        public ActionResult Sliders()
+        //public ActionResult Sliders()
+        //{
+        //    return View(db.Sliders.ToList());
+        //}
+        //public ActionResult EditSlider(int id )
+        //{
+        //    Slider sli = db.Sliders.SingleOrDefault(x => x.ImagesID == id);
+        //    return View(sli);
+        //}
+        //[HttpPost]
+        //public ActionResult EditSlider(FormCollection f,int id)
+        //{
+        //    Slider sli = db.Sliders.SingleOrDefault(x => x.ImagesID == id);
+        //    sli.ImagesLink = f["imageLink"];
+        //    sli.URL = f["imageURL"];
+        //    db.Sliders.InsertOnSubmit(sli);
+        //    db.SubmitChanges();
+        //    return RedirectToAction("Slider", "Modules");
+        //}
+        //public ActionResult DeleteSlider(int id)
+        //{
+        //    Slider sli = db.Sliders.SingleOrDefault(x=>x.ImagesID==id);
+        //    db.Sliders.DeleteOnSubmit(sli);
+        //    db.SubmitChanges();
+        //    return View();
+        //}
+        //public ActionResult InsertSlider()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult InsertSlider(FormCollection f)
+        //{
+        //    Slider sli = new Slider();
+        //    sli.ImagesLink = f["imageLink"];
+        //    sli.URL = f["imageUrl"];
+        //    db.Sliders.InsertOnSubmit(sli);
+        //    db.SubmitChanges();
+        //    return this.InsertSlider();
+        //}
+
+        public ActionResult InsertUser()
         {
-            return View(db.Sliders.ToList());
-        }
-        public ActionResult EditSlider(int id )
-        {
-            Slider sli = db.Sliders.SingleOrDefault(x => x.ImagesID == id);
-            return View(sli);
+            return RedirectToAction("Index", "Admin");
         }
         [HttpPost]
-        public ActionResult EditSlider(FormCollection f,int id)
+        public ActionResult InsertUser(FormCollection f)
         {
-            Slider sli = db.Sliders.SingleOrDefault(x => x.ImagesID == id);
-            sli.ImagesLink = f["imageLink"];
-            sli.URL = f["imageURL"];
-            db.Sliders.InsertOnSubmit(sli);
+            AdminAccount u = new AdminAccount();
+            u.Email = f["email"];
+            u.FullName = f["nameUser"];
+            u.PermissionID = Convert.ToByte(f["permissionUser"]);
+            u.Pass = f["passUser"];
+            db.AdminAccounts.InsertOnSubmit(u);
             db.SubmitChanges();
-            return RedirectToAction("Slider", "Modules");
+            return this.InsertUser();
         }
-        public ActionResult DeleteSlider(int id)
+        public ActionResult EditUser(int id )
         {
-            Slider sli = db.Sliders.SingleOrDefault(x=>x.ImagesID==id);
-            db.Sliders.DeleteOnSubmit(sli);
-            db.SubmitChanges();
-            return View();
+            var admin = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
+           
+            return View(admin);
         }
-        public ActionResult InsertSlider()
+        /// <summary>
+        /// Hàm lấy dữ liệu PermissionID từ DB để trả về HTML.DropDownLis
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PermissionList()
         {
-            return View();
+            List<Permission> per = db.Permissions.ToList();
+            SelectList perList = new SelectList(per, "PermissionID", "PermissionName");//Tạo một biến đối tượng kiểu SelectList
+            //với tham số truyền vào là Danh sách thông tin Permission lấy được, lấy giá trị option là ID và tên hiển thị là PermissionName
+            ViewBag.PermissionList = perList;
+            return PartialView(ViewBag.PermissionList);
         }
         [HttpPost]
-        public ActionResult InsertSlider(FormCollection f)
+        public ActionResult EditUser(FormCollection f, int id)
         {
-            Slider sli = new Slider();
-            sli.ImagesLink = f["imageLink"];
-            sli.URL = f["imageUrl"];
-            db.Sliders.InsertOnSubmit(sli);
+            List<AdminAccount> perid = new List<AdminAccount>();
+            var u = db.AdminAccounts.FirstOrDefault(x => x.AdminID == id);
+            u.FullName = f["nameUser"];
+            u.PermissionID = Convert.ToByte(f["permissionUser"]);
+            u.Email = f["email"];
             db.SubmitChanges();
-            return this.InsertSlider();
+            return RedirectToAction("Index","Admin");
+        }
+
+        public ActionResult DeleteUser(int id)
+        {
+            var u = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
+            db.AdminAccounts.DeleteOnSubmit(u);
+            db.SubmitChanges();
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

@@ -1,4 +1,21 @@
-$(function() {
+$('.link_modal_login').click(function () {
+    $(this).toggleClass("openClick")
+    if ($(this).hasClass("openClick")) {
+        $(".modal_outside_login").fadeIn();
+        $(".border_modal_login").animate({ "opacity": "0", "width": "0" }, 100).animate({ "opacity": "1", "width": "60%" }, 500);
+        $(".modal_contain_login").animate({ "opacity": "0", "height": "0" }, 100).animate({ "opacity": "1", "height": "100%" }, 500);
+        $('.modal_outside_signup').fadeOut();
+    }
+    else {
+        setTimeout(function () {
+            $(".modal_outside_login").fadeOut();
+        }, 300);
+        $(".border_modal_login").animate({ "opacity": "1", "width": "60%" }, 100).animate({ "opacity": "0", "width": "0" }, 500);
+        $(".modal_contain_login").animate({ "opacity": "1", "height": "100%" }, 100).animate({ "opacity": "0", "height": "0" }, 500);
+        $('.link_modal_login').removeClass("openClick");
+    }
+});
+$(function () {
     $('#side-menu').metisMenu();
 });
 

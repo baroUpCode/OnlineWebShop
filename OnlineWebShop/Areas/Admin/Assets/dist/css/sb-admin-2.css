@@ -123,6 +123,16 @@ body {
 .btn-success.btn-outline {
   color: #5cb85c;
 }
+.btn-success {
+    font-size: 35px;
+}
+.btn-danger {
+    font-size: 35px;
+}
+.btn-warning {
+    font-size: 35px;
+}
+
 .btn-info.btn-outline {
   color: #5bc0de;
 }
@@ -131,6 +141,9 @@ body {
 }
 .btn-danger.btn-outline {
   color: #d9534f;
+}
+.btn-table{
+    text-align:center;
 }
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
@@ -214,7 +227,7 @@ table.dataTable thead .sorting:after {
   height: 50px;
   padding: 10px 16px;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.33;
 }
 .btn-circle.btn-xl {

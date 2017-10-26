@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "InformCustomer";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="col-md-3">
+                    @using (Html.BeginForm("OrderInform", "ShoppingCart"))
+                    {
+                        <div class="col-md-12">
+                            <h3>Thông tin đặt hàng</h3>
+                        </div>
+                        <div class="address">
+                            <span>Họ và tên</span>
+                            <input type="text" name="Name">
+                        </div>
+                        <div class="address">
+                            <span>Địa chỉ</span>
+                            <input type="text" name="Address">
+                        </div>
+                        <div class="address">
+                            <span>Ngày giao</span>
+                            <input type="date" name="deliveryDate">
+                        </div>
+                        <div class="address">
+                            <span>Số điện thoại</span>
+                            <input type="number" name="Phone">
+                        </div>
+                        <div class="address">
+                            <input type="submit" value="Xác nhận thanh toán">
+                        </div>
+                    }
+    <div class="clearfix"> </div>
+</div>
+

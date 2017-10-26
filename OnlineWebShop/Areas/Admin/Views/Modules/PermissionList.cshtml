@@ -1,0 +1,5 @@
+﻿<h5>Quyền hạn</h5>
+@*<input type="text" name="permissionUser" value="@Model.PermissionID" id="pwd[1]" aria-required="true" class="input"></input>*@
+@*<div>@Html.DropDownListFor(model => model.PermissionID,new SelectList((IEnumerable<Permission>)Model))</div>*@
+@Html.DropDownList("permissionUser",  (IEnumerable<SelectListItem>)ViewBag.PermissionList, new { @class = "form-control" })
+

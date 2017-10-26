@@ -1,6 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--CKEditor-->
+    <script src="~/Areas/Admin/Assets/tinymce/js/tinymce/tinymce.min.js"></script>
+
+    <!--End CKEditor-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +17,7 @@
     <link href="~/Areas/Admin/Assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="~/Areas/Admin/Assets/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Assets/dist/css/common.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
     <link href="~/Areas/Admin/Assets/vendor/morrisjs/morris.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -23,6 +28,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Assets/js/jquery-1.11.0.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="~/Assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+   
 </head>
 <body>
     <div id="wrapper">
@@ -233,25 +245,22 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="@Url.Action("Index","Admin")"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="@Url.Action("Index","Admin")"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Sliders","Modules")"><i class="fa fa-table fa-fw"></i> Sliders</a>
+                            <a href="@Url.Action("Products","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý sản phẩm</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Products","Modules")"><i class="fa fa-edit fa-fw"></i> Product</a>
+                            <a href="@Url.Action("Catogories","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý loại sản phẩm</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Catogories","Modules")"><i class="fa fa-edit fa-fw"></i> Catogories</a>
+                            <a href="@Url.Action("Producer","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý nhà sản xuất</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Producer","Modules")"><i class="fa fa-edit fa-fw"></i> Producer</a>
+                            <a href="@Url.Action("News","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý tin tức</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("News","Modules")"><i class="fa fa-edit fa-fw"></i> News</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Customers","Modules")"><i class="fa fa-edit fa-fw"></i> Customers</a>
+                            <a href="@Url.Action("Customers","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý khách hàng</a>
                         </li>
 
                        
@@ -277,5 +286,6 @@
     <script src="~/Areas/Admin/Assets/data/morris-data.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="~/Areas/Admin/Assets/dist/js/sb-admin-2.js"></script>
+    <script src="~/Assets/js/style.js"></script>
 </body>
 </html>

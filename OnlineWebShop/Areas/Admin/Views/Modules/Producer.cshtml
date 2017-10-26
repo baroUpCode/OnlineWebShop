@@ -1,8 +1,27 @@
-﻿
+﻿@model IEnumerable<OnlineWebShop.Models.Producer>
 @{
     ViewBag.Title = "Producer";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<h2>Producer</h2>
+<div id="page-wrapper">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Mã số</th>
+                <th>Tên nhà sản xuất</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProducerID</td>
+                    <td>@item.Name</td>
+                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditProducer","Modules",new {id=item.ProducerID })">Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteProducer","Modules",new {id=item.ProducerID })">Xóa</a></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 

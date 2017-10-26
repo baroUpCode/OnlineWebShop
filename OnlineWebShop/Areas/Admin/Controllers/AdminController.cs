@@ -13,7 +13,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
-            User u = (User)Session["AdminAccount"];
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
             if (u != null)
             {
                 return View();
@@ -39,7 +39,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             }
             else
             {
-                User u = db.Users.SingleOrDefault(x => x.Email == Email && x.Pass == pass);
+                AdminAccount u = db.AdminAccounts.SingleOrDefault(x => x.Email == Email && x.Pass == pass);
                 if (u != null)
                 {
                     Session["AdminAccount"] = u;
@@ -67,12 +67,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UserProfile(int id,FormCollection f)
         {
-            User user = db.Users.SingleOrDefault(x => x.UsersID == id);
+            AdminAccount user = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
             user.FullName = f["userName"];
             
             return RedirectToAction("UserProfile", "Admin");
         }
-      
-
+        //public ActionResult TableData()
+        //{
+        //    var user = db.Users;
+        //    return PartialView(user);
+        //}
     }
 }

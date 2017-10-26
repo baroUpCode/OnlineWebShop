@@ -4,10 +4,20 @@
     ViewBag.Title = "OrderInform";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                <li><a href="@Url.Action("Cart","ShoppingCart")">Giỏ Hàng</a></li>
+                <li class="active">Thanh Toán</li>
+            </ol>
+        </div>
+    </div>
+</div>
 @*@if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
 {}*@
-    <h2>Thông tin đặt hàng </h2>
-@if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
+@*@if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
 {
     //using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     //{
@@ -26,6 +36,12 @@
                 <td>Địa chỉ:</td>
                 <td>
                     @cus.Address
+                </td>
+            </tr>
+            <tr>
+                <td>Ngay Giao:</td>
+                <td>
+                    <input type="date" name="deliveryDate" />
                 </td>
             </tr>
                 <tr>
@@ -59,6 +75,12 @@ else
                 </td>
             </tr>
             <tr>
+                <td>Ngay Giao:</td>
+                <td>
+                    <input type="date" name="deliveryDate" />
+                </td>
+            </tr>
+            <tr>
                 <td>Số điện thoại:</td>
                 <td>
                     @Html.TextBox("Phone")
@@ -69,41 +91,131 @@ else
                 </tr>
     }
         </table>
+}*@
+
+<!--end-breadcrumbs-->
+<!--start-ckeckout-->
+@using (Html.BeginForm("OrderInform", "ShoppingCart"))
+{
+<div class="container">
+    <div class="col-md-3">
+      
+            <div class="col-md-12">
+               <h3>Thông tin đặt hàng</h3>
+            </div>
+                        <div class="address">
+                            <span>Họ và tên</span>
+                            <input type="text" name="Name">
+                        </div>
+                        <div class="address">
+                            <span>Địa chỉ</span>
+                            <input type="text" name="Address">
+                        </div>
+                        <div class="address">
+                            <span>Ngày giao</span>
+                            <input type="date" name="deliveryDate">
+                        </div>
+                        <div class="address">
+                            <span>Số điện thoại</span>
+                            <input type="tel" name="Phone">
+                        </div>
+                        <div class="address">
+                            <input type="submit" value="Xác nhận thanh toán">
+                        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="col-md-7">
+        <!--Thanh toan truc tuyen-->
+        <div class="col-md-12">Thanh toan truc tuyen</div>
+        <!--End thanh toan truc tuyen-->
+        <!--Thong tin gio hang-->
+        <div class="col-md-12">
+            <div class="ckeckout">
+                <div class="container">
+                    <div class="ckeckout-top">
+                        <div class=" cart-items heading">
+                            <h3>Giỏ hàng của tôi (@String.Format("{0:0,0}", @ViewBag.Total))</h3>
+                            <script>
+                    $(document).ready(function (c) {
+                        $('.close1').on('click', function (c) {
+                            $('.cart-header').fadeOut('slow', function (c) {
+                                $('.cart-header').remove();
+                            });
+                        });
+                    });
+                            </script>
+                            <script>
+                    $(document).ready(function (c) {
+                        $('.close2').on('click', function (c) {
+                            $('.cart-header1').fadeOut('slow', function (c) {
+                                $('.cart-header1').remove();
+                            });
+                        });
+                    });
+                            </script>
+                            <script>
+                    $(document).ready(function (c) {
+                        $('.close3').on('click', function (c) {
+                            $('.cart-header2').fadeOut('slow', function (c) {
+                                $('.cart-header2').remove();
+                            });
+                        });
+                    });
+                            </script>
+
+                            <div class="in-check">
+                                <ul class="unit">
+                                    <li></li>
+                                    <li><span>Hình ảnh</span></li>
+                                    <li><span>Tên sản phẩm</span></li>
+                                    <li><span>Số lượng</span></li>
+                                    <li><span>Đơn giá</span></li>
+                                    <li><span>Thành tiền</span></li>
+                                    @*<li><span>Tình trạng</span></li>*@
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                @foreach (var item in Model)
+                                {
+                                    <ul class="cart-header">
+                                        <li>
+                                            <a href="@Url.Action("DeleteProductCart", "ShoppingCart", new { proid = item._productID })">
+                                                <div class="close1"> </div>
+                                            </a>
+                                        </li>
+                                        <li class="ring-in">
+                                            <a href="@Url.Action("Details", "Home", new { id = item._productID })"><img src="~/Assets/images/@item._productImages" class="img-responsive" alt=""></a>
+                                        </li>
+                                        <li><a href="@Url.Action("Details", "Home", new { id = item._productID })"><span>@item._productName</span></a></li>
+                                        @using (Html.BeginForm("UpdateAmount", "ShoppingCart", new { id = item._productID }))
+                                        {
+                                            <li><span><input type="number" min="1" name="amount" value="@item._quantity" /><input type="submit" value="Cập Nhật" /></span></li>
+                                            <li><span>@String.Format("{0:0,0}", item._unitPrice) VND </span></li>
+                                            <li ><span>@String.Format("{0:0,0}", item._total) VND</span></li>
+
+                                        }
+                                        @*if (item._status == )
+                                            {
+                                                <li><span>Còn hàng</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li><span>Hết hàng</span></li>
+                                            }*@
+
+                                        @*<li><a href="@Url.Action("Details", "Home", new { id = item._productID })"><strong>Chi tiết sản phẩm</strong></a></li>*@
+                                        <div class="clearfix"></div>
+                                    </ul>
+                                }
+                                <div colspan="6" style="text-align:right" name="cartTotal">Tổng tiền : @String.Format("{0:0,0}", @ViewBag.Total) VND</div>
+                                <div colspan="6" style="text-align:right">@Html.ActionLink("Xóa giỏ hàng", "DeleteCart", "ShoppingCart")</div>
+                                <div colspan="6" style="text-align:right">@Html.ActionLink("Tiếp tục mua hàng", "Index", "Home")</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Thong tin gio hang-->
+    </div>
+</div>
 }
-<table>
-    <h2>Thông tin giỏ hàng </h2>
-        <tr>
-            <td width="50" style="text-align:center">Hình ảnh</td>
-            <td width="100" style="text-align:center">Tên sản phẩm</td>
-            <td width="100" style="text-align:center">Đơn giá</td>
-            <td width="60" style="text-align:center">Số lượng</td>
-            <td width="100" style="text-align:center">Thành tiền</td>
-        </tr>
-        @foreach (var item in Model)
-            {
-            <tr>
-                <td><img src="~/Assets/img/@item._productImages" /></td>
-                <td width="50">@item._productName</td>
-                @using (Html.BeginForm("UpdateAmount", "ShoppingCart", new { id = item._productID }))
-                {
-                    <td><input type="number" min="1" name="amount" value="@item._quantity" style="background-color:blue" /></td>
-                        <td width="80">@String.Format("{0:0,0}", item._unitPrice) VND</td>
-                        <td width="80">@String.Format("{0:0,0}", item._total) VND</td>
-                        <td><input type="submit" value="Cập Nhật" /></td>
-                }
-
-
-                <td style="text-align:center">@Html.ActionLink("Xóa", "DeleteProductCart", "ShoppingCart", new { proid = item._productID }, null)</td>
-
-                <td width="100" style="text-align:center"><a href="@Url.Action("Details", "Home", new { id = item._productID })"><strong>Chi tiết sản phẩm</strong></a></td>
-            </tr>
-        }
-        <tr>
-            <td colspan="6" style="text-align:right">Tổng tiền : @String.Format("{0:0,0}", @ViewBag.Total) VND</td>
-        </tr>
-        <tr><td colspan="6" style="text-align:right">@Html.ActionLink("Xóa giỏ hàng", "DeleteCart", "ShoppingCart")</td></tr>
-        <tr><td colspan="6" style="text-align:right"></td></tr>
-    </table>
-
-
-

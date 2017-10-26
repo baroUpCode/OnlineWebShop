@@ -1,0 +1,46 @@
+﻿@model OnlineWebShop.Models.Product
+@{
+    ViewBag.Title = "EditProducer";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="modal_outside_login" id="modal">
+        <div class="border_modal_login">
+            <div class="modal_contain_login">
+                @using (Html.BeginForm("EditProduct", "Modules", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true)
+                    <h1>
+                        <span class="text_login">Cập nhật thông tin sản phẩm</span>
+                    </h1>
+                    <label class="email_group">
+                        <h5>Hình ảnh:</h5>
+                        <div class="img" style="width: 500px; height: 500px;">
+                            <img src="~/Assets/images/@Model.ProductImages" style="width: 100%;height: auto;"/>
+                        </div>
+                        <input type="file" name="productImages" id="pwd[1]" aria-required="true" class="input"></input>
+                        <h5>Tên sản phẩm:</h5>
+                        <input type="text" name="productName" value="@Model.Name" id="pwd[1]" aria-required="true" class="input"></input>
+                        @Html.Action("CatogoriesList", "Modules")
+                        @Html.Action("ProducerList", "Modules")
+                        <h5>Thời gian bảo hành:</h5>
+                        <input type="text" name="productWarranty" value="@Model.Warranty" id="email[1]" aria-required="true" class="input" ></input>
+                        <h5>Số lượng</h5>
+                        <input type="text" name="productQuantity" value="@Model.Quantity" id="email[1]" aria-required="true" class="input"></input>
+                        <!--CKEDITOR-->
+                        <div class="form-group">
+                        <h5>Mô tả:</h5>
+                        @*<input type="text" name="productDescription" value="@Model.Description" id="email[1]" aria-required="true" class="input" ></input>*@
+                        <textarea name="productDescription" id="description" rows="10" cols="80"></textarea>
+                        <script>tinymce.init({ selector: 'textarea' });</script>
+                        <h5>Giá:</h5>
+                        <input type="text" name="productPrice" value="@Model.Price" id="email[1]" aria-required="true" class="input" @Model.Description></input>
+                    </label>
+                    <input type="submit" value="Sửa thông tin">
+                }
+                <div><a href="@Url.Action("Products","Modules")">Back To Product List</a></div>
+            </div>
+        </div>
+    </div>
+</div>
