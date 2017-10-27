@@ -161,39 +161,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
     @RenderBody()
-    <div class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="col-md-3 footer-left">
-                    <h3>Về chúng tôi</h3>
-                    <ul>
-                        <li><a href="@Url.Action("AboutUs","Home")">Vì sao chọn chúng tôi?</a></li>
-                    </ul>
+    <hr />
+        <div class="footer">
+            <div class="container">
+                <div class="footer-top">
+                    <div class="col-md-4 footer-left">
+                        <h3>Về chúng tôi</h3>
+                        <ul>
+                            <li><a href="@Url.Action("AboutUs","Home")">Vì sao chọn chúng tôi?</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 footer-left">
+                        <h3>Dịch vụ khách hàng</h3>
+                        <ul>
+                            <li><a href="@Url.Action("Contact","Home")">Liên hệ chúng tôi</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 footer-left">
+                        <h3>Thông tin shop</h3>
+                        <ul>
+                            <li>Địa chỉ: <a style="color:red" >475 Điện Biên Phủ, phường 25, quận Bình Thạnh, TP.HCM</a></li>
+                            <li>Điện thoại: <a style="color:red">0912345678</a></li>
+                            <li>Email: <a style="color:red">info@bbashop.vn</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"> </div>
                 </div>
-                <div class="col-md-3 footer-left">
-                    <h3>Dịch vụ khách hàng</h3>
-                    <ul>
-                        <li><a href="@Url.Action("Contact","Home")">Liên hệ chúng tôi</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 footer-left">
-                    <h3>Thông tin shop</h3>
-                    <ul>
-                        <li>Địa chỉ: <a style="color:red">475 Điện Biên Phủ, phường 25, quận Bình Thạnh, TP.HCM</a></li>
-                        <li>Điện thoại: <a style="color:red">0912345678</a></li>
-                        <li>Email: <a style="color:red">info@bbashop.vn</a></li>
-                    </ul>
-                </div>
-                <div class="clearfix"> </div>
             </div>
         </div>
-    </div>
     <!--end-footer-->
     <!--end-footer-text-->
-    <div class="footer-text">
-        <div class="container">
-            <div class="footer-main">
-                <p class="footer-class">© 2017 BBA SHOP | Design by  <a href="http://w3layouts.com/" target="_blank">BBA SHOP</a> </p>
+    <div class="col-md-12">
+        <div class="footer-text">
+            <div class="container">
+                <div class="footer-main">
+                    <p class="footer-class">© 2017 BBA SHOP | Design by  <a href="@Url.Action("Index","Home")" target="_blank">BBA SHOP</a> </p>
+                </div>
             </div>
         </div>
         <script type="text/javascript">
