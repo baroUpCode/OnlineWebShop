@@ -3,7 +3,18 @@
     ViewBag.Title = "OrderSuccess";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-
-<h2>Đặt hàng thành công, nhân viên sẽ liên hệ với bạn qua số điện thoại được cung cấp để xác nhận đơn hàng</h2>
-<p>@Html.ActionLink("Trở về trang chủ","Index","Home")</p>
+<div class="container container-contact">
+    <div class="row">
+        <div class="col-md-12 text-center ">
+            <div id="content" class="whyus">
+                <div>
+                </div>
+                <h2>Đặt hàng thành công, nhân viên sẽ liên hệ với bạn qua số điện thoại được cung cấp để xác nhận đơn hàng</h2>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="col-md-12">
+    <h3>@Html.ActionLink("Trở về trang chủ", "Index", "Home")</h3>
+</div>
 

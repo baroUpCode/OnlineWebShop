@@ -105,6 +105,9 @@ $(window).load(function() {
                             <div class="single-but item_add">
                                 @*<p><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = Model.ProductID, url= @Request.Url.ToString()})" class="btn btn-success" role="button">Thêm giỏ hàng</a></p>*@
                                 <a href="@Url.Action("InsertCart","ShoppingCart",new { proid = Model.ProductID, url= @Request.Url.ToString()})"><input type="submit" value="Thêm vào giỏ hàng" /></a>
+                                </div>
+                            <div class="single-but item_add">
+                                <a href="@Model.OnlinePay"><img src="http://www.baokim.vn/developers/uploads/baokim_btn/thanhtoan-l.png" alt="Thanh toán an toàn với Bảo Kim !" border="0"></a>
                             </div>
                         </div>
                     </div>
