@@ -4,9 +4,9 @@
 @foreach (var item in Model)
 {
         <div class="col-md-3 product-left single-left" >
-            <div class="p-one simpleCart_shelfItem">
+            <div class="p-one simpleCart_shelfItem" style="width:200px;height:500px">
                 <a href="@Url.Action("Details", "Home", new { id = item.ProductID }, null)">
-                    <img src="~/Assets/images/@item.ProductImages" alt="@item.Name" />
+                    <img src="~/Assets/images/@item.ProductImages" alt="@item.Name" style="height:200px" />
                     <div class="mask mask1">
                     </div>
                     <h4>@item.Name</h4>

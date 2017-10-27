@@ -5,44 +5,6 @@
     ViewBag.Title = "ProductsCatogories";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-@*<div class="shoes">
-        <div class="container">
-            @foreach (var item in Model)
-            {
-                <div class="product-one">
-                    <div class="col-md-3 product-left">
-                        <div class="p-one simpleCart_shelfItem" style="height:500px">
-                            <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
-                                <img src="/Assets/images/@item.ProductImages" alt="" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                                <h4>@item.Name</h4>
-                                <p><i></i> <span class=" item_price">@String.Format("{0:0,0}", @item.Price) VND</span></p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            }
-            <div class="clearfix"> </div>
-        </div>
-        <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SortByCatogories", new { page = page }))</div>
-    </div>*@
-@*@foreach (var item in Model)
-{
-    <div class="col-md-3 product-left">
-        <div class="p-one simpleCart_shelfItem">
-            <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
-                <img src="/Assets/images/@item.ProductImages" alt="" />
-                <div class="mask">
-                    <span>Quick View</span>
-                </div>
-                <h4>@item.Name</h4>
-        <p><i></i> <span class=" item_price">@String.Format("{0:0,0}", @item.Price) VND</span></p>
-        </a>
-    </div>
-    </div>
-}*@
 <div class="shoes">
     <div class="container">
         <div class="product-one clearfix">
@@ -51,10 +13,10 @@
                 <div class="col-md-9 group-right">
                     @foreach (var item in Model)
                     {
-                        <div class="col-md-3 product-left">
+                        <div class="col-md-3 product-left" style="width:200px;height:500px">
                             <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
                                 <div class="p-one simpleCart_shelfItem">
-                                    <img src="/Assets/images/@item.ProductImages" alt="" />
+                                    <img src="/Assets/images/@item.ProductImages" alt="@item.Name" style="height:200px"/>
                                     <div class="mask">
                                     </div>
 

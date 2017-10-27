@@ -123,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="top-header-main">
                             <div class="col-md-4 top-header-left">
                                 <div class="search-bar">
-                                    @using (Html.BeginForm ("SearchingwName", "Home", FormMethod.Get))
+                                    @using (Html.BeginForm ("SearchingwName", "Home", FormMethod.Post))
                                     {
                                         <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
                                         <input type="submit" value="" >

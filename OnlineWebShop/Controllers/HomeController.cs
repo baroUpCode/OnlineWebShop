@@ -22,16 +22,6 @@ namespace OnlineWebShop.Controllers
             return db.Products.OrderByDescending(x => x.CreatedAt).Take(count).ToList();
 
         }
-        //private List<Product> ListCatogoriesProduct(int count)
-        //{
-        //    return db.Products.OrderByDescending(x => x.CatogoriesID).Take(count).ToList();
-
-        //}
-        //private List<Product> ListProducerProduct(int count)
-        //{
-        //    return db.Products.OrderByDescending(x => x.ProducerID).Take(count).ToList();
-
-        //}
         public ActionResult Index(int? page)
         {
             int pageSize = 12;
@@ -95,16 +85,22 @@ namespace OnlineWebShop.Controllers
             //var prod= db.Products.Select(x=>x.ProducerID==id);
             return View(prod.ToPagedList(pageNum, pageSize));
         }
-        public ActionResult SearchingwName(string searchString, int? page)
+        [HttpPost]
+        public ActionResult SearchingwName(FormCollection f)
+        {
+            var product = (from p in db.Products where p.Name.Contains(f["searchString"]) || p.Catogory.CatogoriesName.Contains(f["searchString"]) || p.Producer.Name.Contains(f["searchString"]) select p).ToList();
+            return View(product);
+        }
+        public ActionResult SearchingwName(/*string searchString, int? page*/)
         {
             //var product = from sp in db.Products select sp.Name;
             //var cat = db.Catogories.Where(x => x.CatogoriesName.Contains(searchString));
             //var producer = db.Producers.Where(x => x.Name.Contains(searchString));
             //var links = links.Where(l => l.First() == '/' || l.First() == '//').ToList();
-            int pageSize = 5;
-            int pageNum = (page ?? 1);
-            var product =(from p in db.Products where p.Name.Contains(searchString) select p).ToList();
-            return View(product.ToPagedList(pageNum, pageSize));
+            //int pageSize = 5;
+            //int pageNum = (page ?? 1);
+            //var product =(from p in db.Products where p.Name.Contains(searchString) select p).ToList();
+            return View(/*product.ToPagedList(pageNum, pageSize)*/);
         }
         //public ActionResult SearchingwProducer(string searchString)
         //{
@@ -148,7 +144,7 @@ namespace OnlineWebShop.Controllers
         public ActionResult RelatedProductCatogory(int id)
         {
             var rand = new Random();
-            var product = db.Products.Where(x => x.CatogoriesID == id).Take(4);
+            var product = db.Products.Where(x => x.CatogoriesID == id).OrderByDescending(x=>x.CreatedAt).Take(4);
             return PartialView(product);
         }
         public ActionResult CatogoriesPartial()

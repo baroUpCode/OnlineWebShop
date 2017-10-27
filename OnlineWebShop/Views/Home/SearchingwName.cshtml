@@ -1,31 +1,13 @@
-﻿@using OnlineWebShop.Models
+﻿@*@using OnlineWebShop.Models
 @using PagedList.Mvc;
-@model PagedList.PagedList<Product>
+@model PagedList.PagedList<Product>*@
+@model IEnumerable<OnlineWebShop.Models.Product>
 @{
     ViewBag.Title = "SearchingwName";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <h2>Kết quả tìm kiếm :</h2>
-    @*<table>
-        <tr>
-            <td>Tên sản phẩm</td>
-            <td width="100px">Hình Ảnh</td>
-            <td>Giá sản phẩm</td>
-            <td></td>
-            <td></td>
-        </tr>
-@foreach (var item in Model)
-{
-        <tr>
-        <td>@item.Name</td>
-        <td><img src="~/Assets/img/@item.ProductImages" /></td>
-        <td>@String.Format("{0:0,0}", @item.Price) VND</td>
-        <td>@Html.ActionLink("Xem chi tiết","Details","Home",new {id=item.ProductID },null)</td>
-            <td><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = item.ProductID, url= @Request.Url.ToString()})" class="btn btn-success" role="button">Thêm giỏ hàng</a></td>
-        </tr>
-}
-    </table>*@
 <div class="shoes">
     <div class="container">
         <div class="product-one clearfix">
@@ -33,13 +15,12 @@
                 <div class="col-md-9 group-right">
                     @foreach (var item in Model)
                     {
-                        <div class="col-md-3 product-left">
+                        <div class="col-md-3 product-left" style="width:200px;height:500px">
                             <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
                                 <div class="p-one simpleCart_shelfItem">
-                                    <img src="/Assets/images/@item.ProductImages" alt="" />
+                                    <img src="/Assets/images/@item.ProductImages" alt="@item.Name" style="height:200px" />
                                     <div class="mask">
                                     </div>
-
                                     <h4 class="h4-title">@item.Name</h4>
                                     <p><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = item.ProductID, url= @Request.Url.ToString()})"><i></i></a> <span class=" item_price">@String.Format("{0:0,0}", @item.Price) VND</span></p>
                                     @*<div class="single-but item_add">
@@ -51,7 +32,7 @@
                     }
                 </div>
             </div>
-            <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SearchingwName", new {page = page }))</div>
+            @*<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SearchingwName", new {page = page }))</div>*@
         </div>
     </div>
 </div>
