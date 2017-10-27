@@ -33,9 +33,9 @@ namespace OnlineWebShop.Models
     partial void InsertAbout(About instance);
     partial void UpdateAbout(About instance);
     partial void DeleteAbout(About instance);
-    partial void InsertSlider(Slider instance);
-    partial void UpdateSlider(Slider instance);
-    partial void DeleteSlider(Slider instance);
+    partial void InsertRootCatogory(RootCatogory instance);
+    partial void UpdateRootCatogory(RootCatogory instance);
+    partial void DeleteRootCatogory(RootCatogory instance);
     partial void InsertAdminAccount(AdminAccount instance);
     partial void UpdateAdminAccount(AdminAccount instance);
     partial void DeleteAdminAccount(AdminAccount instance);
@@ -69,9 +69,6 @@ namespace OnlineWebShop.Models
     partial void InsertReciever(Reciever instance);
     partial void UpdateReciever(Reciever instance);
     partial void DeleteReciever(Reciever instance);
-    partial void InsertRootCatogory(RootCatogory instance);
-    partial void UpdateRootCatogory(RootCatogory instance);
-    partial void DeleteRootCatogory(RootCatogory instance);
     #endregion
 		
 		public dbOnlineWebShopDataContext() : 
@@ -112,11 +109,11 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Slider> Sliders
+		public System.Data.Linq.Table<RootCatogory> RootCatogories
 		{
 			get
 			{
-				return this.GetTable<Slider>();
+				return this.GetTable<RootCatogory>();
 			}
 		}
 		
@@ -205,14 +202,6 @@ namespace OnlineWebShop.Models
 			get
 			{
 				return this.GetTable<Reciever>();
-			}
-		}
-		
-		public System.Data.Linq.Table<RootCatogory> RootCatogories
-		{
-			get
-			{
-				return this.GetTable<RootCatogory>();
 			}
 		}
 	}
@@ -423,21 +412,19 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Slider")]
-	public partial class Slider : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RootCatogory")]
+	public partial class RootCatogory : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ImagesID;
+		private int _RootCatogoryID;
 		
-		private string _URL;
-		
-		private string _ImagesLink;
-		
-		private System.Nullable<int> _CreatedBy;
+		private string _RootCatogoryName;
 		
 		private System.Data.Linq.Binary _CreatedAt;
+		
+		private System.Nullable<int> _CreatedBy;
 		
 		private System.Nullable<byte> _Deleted;
 		
@@ -445,20 +432,20 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<System.DateTime> _ModifiedAt;
 		
+		private EntitySet<Catogory> _Catogories;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnImagesIDChanging(int value);
-    partial void OnImagesIDChanged();
-    partial void OnURLChanging(string value);
-    partial void OnURLChanged();
-    partial void OnImagesLinkChanging(string value);
-    partial void OnImagesLinkChanged();
-    partial void OnCreatedByChanging(System.Nullable<int> value);
-    partial void OnCreatedByChanged();
+    partial void OnRootCatogoryIDChanging(int value);
+    partial void OnRootCatogoryIDChanged();
+    partial void OnRootCatogoryNameChanging(string value);
+    partial void OnRootCatogoryNameChanged();
     partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
     partial void OnCreatedAtChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
     partial void OnDeletedChanging(System.Nullable<byte> value);
     partial void OnDeletedChanged();
     partial void OnModifiedByChanging(System.Nullable<int> value);
@@ -467,67 +454,68 @@ namespace OnlineWebShop.Models
     partial void OnModifiedAtChanged();
     #endregion
 		
-		public Slider()
+		public RootCatogory()
 		{
+			this._Catogories = new EntitySet<Catogory>(new Action<Catogory>(this.attach_Catogories), new Action<Catogory>(this.detach_Catogories));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagesID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int ImagesID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int RootCatogoryID
 		{
 			get
 			{
-				return this._ImagesID;
+				return this._RootCatogoryID;
 			}
 			set
 			{
-				if ((this._ImagesID != value))
+				if ((this._RootCatogoryID != value))
 				{
-					this.OnImagesIDChanging(value);
+					this.OnRootCatogoryIDChanging(value);
 					this.SendPropertyChanging();
-					this._ImagesID = value;
-					this.SendPropertyChanged("ImagesID");
-					this.OnImagesIDChanged();
+					this._RootCatogoryID = value;
+					this.SendPropertyChanged("RootCatogoryID");
+					this.OnRootCatogoryIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string URL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryName", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string RootCatogoryName
 		{
 			get
 			{
-				return this._URL;
+				return this._RootCatogoryName;
 			}
 			set
 			{
-				if ((this._URL != value))
+				if ((this._RootCatogoryName != value))
 				{
-					this.OnURLChanging(value);
+					this.OnRootCatogoryNameChanging(value);
 					this.SendPropertyChanging();
-					this._URL = value;
-					this.SendPropertyChanged("URL");
-					this.OnURLChanged();
+					this._RootCatogoryName = value;
+					this.SendPropertyChanged("RootCatogoryName");
+					this.OnRootCatogoryNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagesLink", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string ImagesLink
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CreatedAt
 		{
 			get
 			{
-				return this._ImagesLink;
+				return this._CreatedAt;
 			}
 			set
 			{
-				if ((this._ImagesLink != value))
+				if ((this._CreatedAt != value))
 				{
-					this.OnImagesLinkChanging(value);
+					this.OnCreatedAtChanging(value);
 					this.SendPropertyChanging();
-					this._ImagesLink = value;
-					this.SendPropertyChanged("ImagesLink");
-					this.OnImagesLinkChanged();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
 				}
 			}
 		}
@@ -548,26 +536,6 @@ namespace OnlineWebShop.Models
 					this._CreatedBy = value;
 					this.SendPropertyChanged("CreatedBy");
 					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
 				}
 			}
 		}
@@ -632,6 +600,19 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_Catogory", Storage="_Catogories", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
+		public EntitySet<Catogory> Catogories
+		{
+			get
+			{
+				return this._Catogories;
+			}
+			set
+			{
+				this._Catogories.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -650,6 +631,18 @@ namespace OnlineWebShop.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.RootCatogory = this;
+		}
+		
+		private void detach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.RootCatogory = null;
 		}
 	}
 	
@@ -3043,6 +3036,8 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<int> _CatogoriesID;
 		
+		private string _OnlinePay;
+		
 		private EntityRef<Catogory> _Catogory;
 		
 		private EntityRef<Producer> _Producer;
@@ -3085,6 +3080,8 @@ namespace OnlineWebShop.Models
     partial void OnDetailsChanged();
     partial void OnCatogoriesIDChanging(System.Nullable<int> value);
     partial void OnCatogoriesIDChanged();
+    partial void OnOnlinePayChanging(string value);
+    partial void OnOnlinePayChanged();
     #endregion
 		
 		public Product()
@@ -3438,6 +3435,26 @@ namespace OnlineWebShop.Models
 					this._CatogoriesID = value;
 					this.SendPropertyChanged("CatogoriesID");
 					this.OnCatogoriesIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnlinePay", DbType="NVarChar(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public string OnlinePay
+		{
+			get
+			{
+				return this._OnlinePay;
+			}
+			set
+			{
+				if ((this._OnlinePay != value))
+				{
+					this.OnOnlinePayChanging(value);
+					this.SendPropertyChanging();
+					this._OnlinePay = value;
+					this.SendPropertyChanged("OnlinePay");
+					this.OnOnlinePayChanged();
 				}
 			}
 		}
@@ -3827,240 +3844,6 @@ namespace OnlineWebShop.Models
 		{
 			this.SendPropertyChanging();
 			entity.Reciever = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RootCatogory")]
-	public partial class RootCatogory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RootCatogoryID;
-		
-		private string _RootCatogoryName;
-		
-		private System.Data.Linq.Binary _CreatedAt;
-		
-		private System.Nullable<int> _CreatedBy;
-		
-		private System.Nullable<byte> _Deleted;
-		
-		private System.Nullable<int> _ModifiedBy;
-		
-		private System.Nullable<System.DateTime> _ModifiedAt;
-		
-		private EntitySet<Catogory> _Catogories;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRootCatogoryIDChanging(int value);
-    partial void OnRootCatogoryIDChanged();
-    partial void OnRootCatogoryNameChanging(string value);
-    partial void OnRootCatogoryNameChanged();
-    partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
-    partial void OnCreatedAtChanged();
-    partial void OnCreatedByChanging(System.Nullable<int> value);
-    partial void OnCreatedByChanged();
-    partial void OnDeletedChanging(System.Nullable<byte> value);
-    partial void OnDeletedChanged();
-    partial void OnModifiedByChanging(System.Nullable<int> value);
-    partial void OnModifiedByChanged();
-    partial void OnModifiedAtChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedAtChanged();
-    #endregion
-		
-		public RootCatogory()
-		{
-			this._Catogories = new EntitySet<Catogory>(new Action<Catogory>(this.attach_Catogories), new Action<Catogory>(this.detach_Catogories));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int RootCatogoryID
-		{
-			get
-			{
-				return this._RootCatogoryID;
-			}
-			set
-			{
-				if ((this._RootCatogoryID != value))
-				{
-					this.OnRootCatogoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._RootCatogoryID = value;
-					this.SendPropertyChanged("RootCatogoryID");
-					this.OnRootCatogoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryName", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string RootCatogoryName
-		{
-			get
-			{
-				return this._RootCatogoryName;
-			}
-			set
-			{
-				if ((this._RootCatogoryName != value))
-				{
-					this.OnRootCatogoryNameChanging(value);
-					this.SendPropertyChanging();
-					this._RootCatogoryName = value;
-					this.SendPropertyChanged("RootCatogoryName");
-					this.OnRootCatogoryNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> CreatedBy
-		{
-			get
-			{
-				return this._CreatedBy;
-			}
-			set
-			{
-				if ((this._CreatedBy != value))
-				{
-					this.OnCreatedByChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<byte> Deleted
-		{
-			get
-			{
-				return this._Deleted;
-			}
-			set
-			{
-				if ((this._Deleted != value))
-				{
-					this.OnDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> ModifiedBy
-		{
-			get
-			{
-				return this._ModifiedBy;
-			}
-			set
-			{
-				if ((this._ModifiedBy != value))
-				{
-					this.OnModifiedByChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedBy = value;
-					this.SendPropertyChanged("ModifiedBy");
-					this.OnModifiedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> ModifiedAt
-		{
-			get
-			{
-				return this._ModifiedAt;
-			}
-			set
-			{
-				if ((this._ModifiedAt != value))
-				{
-					this.OnModifiedAtChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedAt = value;
-					this.SendPropertyChanged("ModifiedAt");
-					this.OnModifiedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_Catogory", Storage="_Catogories", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
-		public EntitySet<Catogory> Catogories
-		{
-			get
-			{
-				return this._Catogories;
-			}
-			set
-			{
-				this._Catogories.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Catogories(Catogory entity)
-		{
-			this.SendPropertyChanging();
-			entity.RootCatogory = this;
-		}
-		
-		private void detach_Catogories(Catogory entity)
-		{
-			this.SendPropertyChanging();
-			entity.RootCatogory = null;
 		}
 	}
 }
