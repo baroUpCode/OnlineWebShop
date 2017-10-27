@@ -58,9 +58,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         }
                         else
                         {
-                            @*<li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
-                        <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
-                        </ul>*@
                             <li><a href="#" class="link_modal_login"><span><i class="fa fa-sign-in" aria-hidden="true"></i></span>Đăng nhập</a></li>
 
                     <!-- Login Modal -->
@@ -124,24 +121,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="container">
                         <div class="top-header-main">
-                            @*<ul>
-                        @if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
-                        {
-
-                            using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                            {
-                                <li><a>@Session["AccountName"]</a></li>
-                                <li><a href="@Url.Action("LogOut","User")">Logout</a></li>
-
-                            }
-                        }
-                        else
-                        {
-                            <li><a href="@Url.Action("Login", "User")">Đăng Nhập</a></li>
-
-                        }
-                        <li><a href="@Url.Action("Register", "User")">Đăng Ký</a></li>
-                    </ul>*@
                             <div class="col-md-4 top-header-left">
                                 <div class="search-bar">
                                     @using (Html.BeginForm ("SearchingwName", "Home", FormMethod.Get))
@@ -154,19 +133,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="col-md-4 top-header-middle">
                                 <a href="@Url.Action("Index", "Home")">BBA <span>SHOP</span></a>
                             </div>
-                            <!--Cart-->
-                            @*<div class="col-md-4 top-header-right">
-                        <div class="cart box_1">
-                            <a href="checkout.html">
-                                    <div class="total">
-                                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-                                    </div>
-                                    <img src="~/Assets/images/cart-1.png" alt="" />
-                            </a>
-                            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>*@
                             @Html.Action("CartPartial", "ShoppingCart")
                             <!--EndCart-->
                             <div class="clearfix"></div>
@@ -197,45 +163,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="footer-top">
                 <div class="col-md-3 footer-left">
-                    <h3>ABOUT US</h3>
+                    <h3>Về chúng tôi</h3>
                     <ul>
-                        <li><a href="#">Who We Are</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">Our Sites</a></li>
-                        <li><a href="#">In The News</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Carrers</a></li>
+                        <li><a href="@Url.Action("AboutUs","Home")">Vì sao chọn chúng tôi?</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 footer-left">
-                    <h3>YOUR ACCOUNT</h3>
+                    <h3>Dịch vụ khách hàng</h3>
                     <ul>
-                        <li><a href="account.html">Your Account</a></li>
-                        <li><a href="#">Personal Information</a></li>
-                        <li><a href="contact.html">Addresses</a></li>
-                        <li><a href="#">Discount</a></li>
-                        <li><a href="#">Track your order</a></li>
+                        <li><a href="@Url.Action("Contact","Home")">Liên hệ chúng tôi</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 footer-left">
-                    <h3>CUSTOMER SERVICES</h3>
+                    <h3>Thông tin shop</h3>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Cancellation</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Bulk Orders</a></li>
-                        <li><a href="#">Buying Guides</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 footer-left">
-                    <h3>CATEGORIES</h3>
-                    <ul>
-                        <li><a href="#">Sports Shoes</a></li>
-                        <li><a href="#">Casual Shoes</a></li>
-                        <li><a href="#">Formal Shoes</a></li>
-                        <li><a href="#">Party Shoes</a></li>
-                        <li><a href="#">Ethnic</a></li>
+                        <li>Địa chỉ: <a style="color:red">475 Điện Biên Phủ, phường 25, quận Bình Thạnh, TP.HCM</a></li>
+                        <li>Điện thoại: <a style="color:red">0912345678</a></li>
+                        <li>Email: <a style="color:red">info@bbashop.vn</a></li>
                     </ul>
                 </div>
                 <div class="clearfix"> </div>

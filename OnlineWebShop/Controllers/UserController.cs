@@ -37,7 +37,6 @@ namespace OnlineWebShop.Controllers
             var phone = form["Phone"];
             var address = form["Address"];
             var pass = form["Pass"];
-            var repass = form["Repass"];
             //{
             //    ViewData["Loi1"] = "Vui lòng nhập họ và tên";
             //}
@@ -83,29 +82,28 @@ namespace OnlineWebShop.Controllers
         {
             var Email = form["email"];
             var Pass = form["pass"];
-            if (String.IsNullOrEmpty(Email))
+            //if (String.IsNullOrEmpty(Email))
+            //{
+            //    ViewData["Error1"] = "Vui lòng nhập Email";
+            //}
+            //else if (String.IsNullOrEmpty(Pass))
+            //{
+            //    ViewData["Error2"] = "Vui lòng nhập mật khẩu";
+            //}
+            //else
+            //{
+            Customer cus = db.Customers.SingleOrDefault(x => x.Email == Email && x.Pass == Pass);
+            if (cus != null)
             {
-                ViewData["Error1"] = "Vui lòng nhập Email";
-            }
-            else if (String.IsNullOrEmpty(Pass))
-            {
-                ViewData["Error2"] = "Vui lòng nhập mật khẩu";
+                Session["AccountCustomer"] = cus;
+                Session["AccountName"] = cus.Email;
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                Customer cus = db.Customers.SingleOrDefault(x => x.Email == Email && x.Pass == Pass);
-                if (cus != null)
-                {
-                    Session["AccountCustomer"] = cus;
-                    Session["AccountName"] = cus.Email;
-
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.Mess = "Đăng nhập không thành công";
-                    return View();
-                }
+                ViewBag.Mess = "Đăng nhập không thành công";
+                return View();
             }
             return View();
         }
