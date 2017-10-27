@@ -1,166 +1,63 @@
 ﻿@model IEnumerable<OnlineWebShop.Models.AdminAccount>
-<div class="btn-table">
-    <button type="button" class="btn btn-success">Tạo mới nhân viên</button>
-    <div class="modal_outside_login" id="modal">
-        <div class="border_modal_login">
-            <div class="modal_contain_login">
-                @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
+    @if (Convert.ToString(Session["PermissionID"]) == "1")
+    {
+<div class="col-md-12"><button type="button" class="btn btn-success"><a href=" @Url.Action("InsertUser", "Modules")">Thêm mới</a></button></div>
+<div class="col-md-12">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Mã số</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Quyền hạn</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                    @Html.ValidationSummary(true)
-                    <h1>
-                        <span class="text_login">Thêm nhân viên</span>
-                    </h1>
-                        <label class="email_group">
-                            <h5>Họ và tên:</h5>
-                            <input type="text" name="nameUser" placeholder="Họ và tên" id="pwd[1]" aria-required="true" class="input"></input>
-                            <h5>Quyền hạn</h5>
-                            <input type="text" name="permissionUser" placeholder="Mã quyền hạn" id="pwd[1]" aria-required="true" class="input"></input>
-                            <h5>Email:</h5>
-                            <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input"></input>
-                            <h5>Password</h5>
-                            <input type="password" name="passUser" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input"></input>
-                        </label>
-                        <input type="submit" value="Thêm mới">
-                }
-            </div>
-        </div>
-    </div>
-</div>
 
-<table class="table table-bordered table-hover table-striped">
-    <thead>
-        <tr>
-            <th>Mã số</th>
-            <th>Họ và tên</th>
-            <th>Email</th>
-            <th>Quyền hạn</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>@item.AdminID</td>
-            <td>@item.FullName</td>
-            <td>@item.Email</td>
-            <td>@item.Permission.PermissionName</td>
-            <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditUser","Modules",new {id=item.AdminID })">Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteUser","Modules",new {id=item.AdminID })">Xóa</a></button></td>
-        </tr>
-        }
-        @*<tr>
-            <td>3325</td>
-            <td>10/21/2013</td>
-            <td>3:20 PM</td>
-            <td>$234.34</td>
-        </tr>
-        <tr>
-            <td>3324</td>
-            <td>10/21/2013</td>
-            <td>3:03 PM</td>
-            <td>$724.17</td>
-        </tr>
-        <tr>
-            <td>3323</td>
-            <td>10/21/2013</td>
-            <td>3:00 PM</td>
-            <td>$23.71</td>
-        </tr>
-        <tr>
-            <td>3322</td>
-            <td>10/21/2013</td>
-            <td>2:49 PM</td>
-            <td>$8345.23</td>
-        </tr>
-        <tr>
-            <td>3321</td>
-            <td>10/21/2013</td>
-            <td>2:23 PM</td>
-            <td>$245.12</td>
-        </tr>
-        <tr>
-            <td>3320</td>
-            <td>10/21/2013</td>
-            <td>2:15 PM</td>
-            <td>$5663.54</td>
-        </tr>
-        <tr>
-            <td>3319</td>
-            <td>10/21/2013</td>
-            <td>2:13 PM</td>
-            <td>$943.45</td>
-        </tr>*@
-    </tbody>
-</table>
-
-
-@*<div class="modal_outside_login" id="modal" class="col-md-4 group-left">
-        <div class="border_modal_login">
-            <div class="modal_contain_login">
-                @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
-            {
-                    <h1>
-                        <span class="text_login">Thêm nhân viên</span>
-                    </h1>
-                    <label class="email_group">
-                        <h5>Họ và tên:</h5>
-                        <input type="text" name="nameUser" placeholder="Họ và tên" id="pwd[1]" aria-required="true" class="input"></input>
-                        <h5>Quyền hạn</h5>
-                        <input type="text" name="permissionUser" placeholder="Mã quyền hạn" id="pwd[1]" aria-required="true" class="input"></input>
-                        <h5>Email:</h5>
-                        <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input"></input>
-                        <h5>Password</h5>
-                        <input type="password" name="passUser" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input"></input>
-                    </label>
-                    <input type="submit" value="Thêm mới">
-                }
-            </div>
-        </div>
-    </div>
-<div class="modal_outside_login" id="modal" class="col-md-4 group-left">
-        <div class="border_modal_login">
-            <div class="modal_contain_login">
-                @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
-            {
-                    <h1>
-                        <span class="text_login">Thêm nhân viên</span>
-                    </h1>
-                    <label class="email_group">
-                        <h5>Họ và tên:</h5>
-                        <input type="text" name="nameUser" placeholder="Họ và tên" id="pwd[1]" aria-required="true" class="input"></input>
-                        <h5>Quyền hạn</h5>
-                        <input type="text" name="permissionUser" placeholder="Mã quyền hạn" id="pwd[1]" aria-required="true" class="input"></input>
-                        <h5>Email:</h5>
-                        <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input"></input>
-                        <h5>Password</h5>
-                        <input type="password" name="passUser" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input"></input>
-                    </label>
-                    <input type="submit" value="Thêm mới">
-                }
-            </div>
-        </div>
-    </div>*@
-@*<div cla
-    ss="modal_outside_login" id="modal">
-    <div class="border_modal_login">
-        <div class="modal_contain_login">
-            @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
-            {
-                <h1>
-                    <span class="text_login">Thêm nhân viên</span>
-                </h1>*@
-                @*@using (Html.BeginForm("Login", "User", FormMethod.Post))
-                    {*@
-                @*<label class="email_group">
-                    <h5>Họ và tên:</h5>
-                    <input type="text" name="nameUser" placeholder="Họ và tên" id="pwd[1]" aria-required="true" class="input"></input>
-                    <h5>Quyền hạn</h5>
-                    <input type="text" name="permissionUser" placeholder="Mã quyền hạn" id="pwd[1]" aria-required="true" class="input"></input>
-                    <h5>Email:</h5>
-                    <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input"></input>
-                </label>
-                <input type="submit" class="btn_login" value="Thêm mới"> 
+                <tr>
+                    <td>@item.AdminID</td>
+                    <td>@item.FullName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Permission.PermissionName</td>
+                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditUser", "Modules", new { id = item.AdminID })" >Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteUser", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
+                </tr>
             }
-        </div>
+
+        </tbody>
+    </table>
     </div>
-</div>*@
+    }
+    else
+    {
+        <div class="col-md-12"><button type="button" class="btn btn-success" disabled><a href=" @Url.Action("InsertUser", "Modules")">Thêm mới</a></button></div>
+        <div class="col-md-12">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Mã số</th>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th>Quyền hạn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.AdminID</td>
+                            <td>@item.FullName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Permission.PermissionName</td>
+                                <td><button type="button" class="btn btn-warning" disabled><a href=" @Url.Action("EditUser", "Modules", new { id = item.AdminID })">Sửa</a></button> | <button type="button" class="btn btn-danger" disabled><a href=" @Url.Action("DeleteUser", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }

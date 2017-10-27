@@ -16,6 +16,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             AdminAccount u = (AdminAccount)Session["AdminAccount"];
             if (u != null)
             {
+                Session["PermissionID"] = u.PermissionID;
                 return View();
             }
             else
@@ -59,19 +60,19 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             Session.Abandon();
             return RedirectToAction("Login", "Admin");
         }
-        public ActionResult UserProfile()
-        { 
+        //public ActionResult UserProfile()
+        //{ 
 
-            return View();
-        }
-        [HttpPost]
-        public ActionResult UserProfile(int id,FormCollection f)
-        {
-            AdminAccount user = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
-            user.FullName = f["userName"];
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult UserProfile(int id,FormCollection f)
+        //{
+        //    AdminAccount user = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
+        //    user.FullName = f["userName"];
             
-            return RedirectToAction("UserProfile", "Admin");
-        }
+        //    return RedirectToAction("UserProfile", "Admin");
+        //}
         //public ActionResult TableData()
         //{
         //    var user = db.Users;

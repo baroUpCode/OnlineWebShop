@@ -524,6 +524,7 @@
     <Content Include="Areas\Admin\Assets\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Areas\Admin\Assets\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Areas\Admin\Views\Modules\InsertCustomer.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertUser.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

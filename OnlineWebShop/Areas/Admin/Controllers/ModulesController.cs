@@ -22,7 +22,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             var user = db.AdminAccounts;
             return PartialView(user);
-    }
+        }
     public ActionResult Products(int? page)
         {
             int pageSize = 8;
@@ -195,6 +195,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult InsertProducer(FormCollection f)
         {
+           
             Producer pro = new Producer();
             pro.Name = f["proName"];
             db.Producers.InsertOnSubmit(pro);
@@ -327,66 +328,21 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 return View();
             }
         }
-        /// <summary>
-        /// Modules Sliders
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult Sliders()
-        //{
-        //    return View(db.Sliders.ToList());
-        //}
-        //public ActionResult EditSlider(int id )
-        //{
-        //    Slider sli = db.Sliders.SingleOrDefault(x => x.ImagesID == id);
-        //    return View(sli);
-        //}
-        //[HttpPost]
-        //public ActionResult EditSlider(FormCollection f,int id)
-        //{
-        //    Slider sli = db.Sliders.SingleOrDefault(x => x.ImagesID == id);
-        //    sli.ImagesLink = f["imageLink"];
-        //    sli.URL = f["imageURL"];
-        //    db.Sliders.InsertOnSubmit(sli);
-        //    db.SubmitChanges();
-        //    return RedirectToAction("Slider", "Modules");
-        //}
-        //public ActionResult DeleteSlider(int id)
-        //{
-        //    Slider sli = db.Sliders.SingleOrDefault(x=>x.ImagesID==id);
-        //    db.Sliders.DeleteOnSubmit(sli);
-        //    db.SubmitChanges();
-        //    return View();
-        //}
-        //public ActionResult InsertSlider()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult InsertSlider(FormCollection f)
-        //{
-        //    Slider sli = new Slider();
-        //    sli.ImagesLink = f["imageLink"];
-        //    sli.URL = f["imageUrl"];
-        //    db.Sliders.InsertOnSubmit(sli);
-        //    db.SubmitChanges();
-        //    return this.InsertSlider();
-        //}
-
         public ActionResult InsertUser()
         {
-            return RedirectToAction("Index", "Admin");
+            return View();
         }
         [HttpPost]
         public ActionResult InsertUser(FormCollection f)
         {
             AdminAccount u = new AdminAccount();
             u.Email = f["email"];
-            u.FullName = f["nameUser"];
+            u.FullName = f["name"];
             u.PermissionID = Convert.ToByte(f["permissionUser"]);
             u.Pass = f["passUser"];
             db.AdminAccounts.InsertOnSubmit(u);
             db.SubmitChanges();
-            return this.InsertUser();
+            return RedirectToAction("Index", "Admin");
         }
         public ActionResult EditUser(int id )
         {

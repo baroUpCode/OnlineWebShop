@@ -5,6 +5,28 @@
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 <div id="page-wrapper">
+    <div id="page-wrapper">
+
+        @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
+            {
+            @Html.ValidationSummary(true)
+            <h1>
+                <span class="text_login">Thêm mới khách hàng</span>
+            </h1>
+                <label class="email_group">
+                    <h5>Họ và tên:</h5>
+                    <input type="text" name="name" placeholder="Họ và tên" id="email[1]" aria-required="true" class="input" required title="Vui lòng nhập họ và tên" />
+                    <h5>Email:</h5>
+                    <input type="email" name="email" placeholder="Email" id="email[1]" class="input" required pattern=".{9,}" title="Vui lòng nhập đúng email" />
+                    <h5>Password:</h5>
+                    <input type="password" name="pass" placeholder="Mật khẩu" id="pwd[1]" class="input" required pattern=".{6,}" title="Mật khẩu phải hơn 6 ký tự" />
+                    @Html.Action("PermissionList", "Modules")
+                </label>
+                    <input type="submit" class="btn_login" value="Thêm mới">
+        }
+    </div>
+
+    <!--Old form-->
     <h2>Tạo mới khách hàng</h2>
 
     @using (Html.BeginForm("InsertCustomer","Modules"))
