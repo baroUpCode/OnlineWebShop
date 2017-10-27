@@ -68,14 +68,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             {
                                                 <h1>
                                                     <span class="text_login">ĐĂNG NHẬP</span>
+                                                    
                                                 </h1>
+                                                <p>@ViewBag.Mess</p>
                                                 @*@using (Html.BeginForm("Login", "User", FormMethod.Post))
                                             {*@
                                                 <label class="email_group">
                                                     <h5>Email:</h5>
-                                                    <input type="text" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input" required></input>
+                                                    <input type="email" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input" required title="Vui lòng nhập email"></input>
                                                     <h5>Password:</h5>
-                                                    <input type="password" name="pass" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input" required></input>
+                                                    <input type="password" name="pass" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input" required title="Vui lòng nhập mật khẩu"></input>
                                                 </label>
                                                 <input type="submit" class="btn_login" value="Đăng nhập">
                                                 <p>Chưa có tài khoản thì bấm vô <a href="@Url.Action("Register", "User")" class="link_signup link_modal_signup">Đăng Ký</a></p>

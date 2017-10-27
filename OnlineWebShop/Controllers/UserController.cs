@@ -72,11 +72,10 @@ namespace OnlineWebShop.Controllers
                 db.SubmitChanges();// Cap nhat lai DB tu Models
             return View();
         }
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View();
-        }
+        //public ActionResult Login()
+        //{
+        //    return PartialView();
+        //}
         [HttpPost]
         public ActionResult Login(FormCollection form)
         {
@@ -97,15 +96,10 @@ namespace OnlineWebShop.Controllers
             {
                 Session["AccountCustomer"] = cus;
                 Session["AccountName"] = cus.Email;
-
                 return RedirectToAction("Index", "Home");
             }
             else
-            {
-                ViewBag.Mess = "Đăng nhập không thành công";
-                return View();
-            }
-            return View();
+                return RedirectToAction("Register", "User");
         }
         public ActionResult LogOut()
         {
