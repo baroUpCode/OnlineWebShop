@@ -99,37 +99,41 @@ else
 {
 <div class="container">
     <div class="col-md-3">
-      
             <div class="col-md-12">
                <h3>Thông tin đặt hàng</h3>
             </div>
-                        <div class="address">
-                            <span>Họ và tên</span>
-                            <input type="text" name="Name">
-                        </div>
-                        <div class="address">
-                            <span>Địa chỉ</span>
-                            <input type="text" name="Address">
-                        </div>
-                        <div class="address">
-                            <span>Ngày giao</span>
-                            <input type="date" name="deliveryDate">
-                        </div>
-                        <div class="address">
-                            <span>Số điện thoại</span>
-                            <input type="tel" name="Phone">
-                        </div>
-                        <div class="address">
-                            <input type="submit" value="Xác nhận thanh toán">
-                        </div>
+        <div class="address">
+            <span>Họ và tên</span>
+            <input type="text" name="Name" required title="Vui lòng nhập họ và tên" pattern=".{4,}">
+        </div>
+        <div class="address">
+            <span>Email</span>
+            <input type="email" name="Email" required max="100">
+        </div>
+        <div class="address">
+            <span>Địa chỉ</span>
+            <input type="text" name="Address" required>
+        </div>
+        <div class="address">
+            <span>Điện thoại</span>
+            <!--thong tin form Phone co kieu mau pattern la so tu 0->9, it nhat 10 va nhieu nhat 12 so-->
+            <input type="tel" name="Phone" min="9" required pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại">
+        </div>
+        <div class="address">
+            <span>Ngày giao</span>
+            <input type="date" name="deliveryDate" required>
+        </div>
+        @*<div class="address">
+            <span> Xác nhận mật khẩu</span>
+            <input type="password" name="Passconfirm" required  >
+        </div>*@
+        <div class="address new">
+            <input type="submit" value="submit">
+        </div>
         <div class="clearfix"> </div>
     </div>
     <div class="col-md-7">
-        <!--Thanh toan truc tuyen-->
-        <div class="col-md-12">Thanh toan truc tuyen</div>
-        <!--End thanh toan truc tuyen-->
-        <!--Thong tin gio hang-->
-        <div class="col-md-12">
+        @*<div class="col-md-12">*@
             <div class="ckeckout">
                 <div class="container">
                     <div class="ckeckout-top">
@@ -217,5 +221,4 @@ else
         </div>
         <!--End Thong tin gio hang-->
     </div>
-</div>
 }

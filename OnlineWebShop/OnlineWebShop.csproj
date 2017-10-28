@@ -511,9 +511,7 @@
     <Content Include="Areas\Admin\Views\Modules\PopupAddUser.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\PermissionList.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\CatogoriesList.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditProducer.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\ProducerList.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditProduct.cshtml" />
     <Content Include="Areas\Admin\Assets\tinymce\js\tinymce\langs\readme.md" />
     <Content Include="Areas\Admin\Assets\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
@@ -525,6 +523,7 @@
     <Content Include="Areas\Admin\Assets\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Areas\Admin\Views\Modules\InsertUser.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditCustomer.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertProduct.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

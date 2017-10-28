@@ -17,19 +17,21 @@
                     <label class="email_group">
                         <h5>Hình ảnh:</h5>
                         <div class="img" style="width: 500px; height: 500px;">
-                            <img src="~/Assets/images/@Model.ProductImages" style="width: 100%;height: auto;"/>
+                            <img src="@Url.Content("~/Assets/Images/" + Model.ProductImages)" style="width: 100%;height: auto;"/>
+                            <h5>@Model.ProductImages </h5>
+                            <h5>@ViewBag.Mess</h5>
                         </div>
-                        <input type="file" name="productImages" id="pwd[1]" aria-required="true" class="input"></input>
+                        <input type="file" name="productImages"/>
                         <h5>Tên sản phẩm:</h5>
-                        <input type="text" name="productName" value="@Model.Name" aria-required="true" id="pwd[1]" required class="input" ></input>
+                        <input type="text" name="productName" value="@Model.Name" aria-required="true" id="pwd[1]" required class="input" />
                         <h5>Loại sản phẩm:</h5>
                         @Html.DropDownList("productCatogories", (IEnumerable<SelectListItem>)ViewBag.CatList, new { @class = "form-control" })
                         <h5>Nhà sản xuất</h5>
                         @Html.DropDownList("productProducer",(IEnumerable<SelectListItem>)ViewBag.ProList, new { @class = "form-control"})
                         <h5>Thời gian bảo hành:</h5>
-                        <input type="text" name="productWarranty" value="@Model.Warranty" id="email[1]" aria-required="true" class="input" ></input>
+                        <input type="text" name="productWarranty" value="@Model.Warranty" id="email[1]" aria-required="true" class="input"/>
                         <h5>Số lượng</h5>
-                        <input type="text" name="productQuantity" value="@Model.Quantity" id="email[1]" aria-required="true" class="input"></input>
+                        <input type="text" name="productQuantity" value="@Model.Quantity" id="email[1]" aria-required="true" class="input"/>
                         <!--CKEDITOR-->
                         <h5>Mô tả:</h5>
                         @*<input type="text" name="productDescription" value="@Model.Description" id="email[1]" aria-required="true" class="input" ></input>*@

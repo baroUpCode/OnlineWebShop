@@ -27,7 +27,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             int pageSize = 8;
             int pageNum = (page ?? 1);
-            return View(db.Products.ToList().OrderBy(x=>x.ProductID).ToPagedList(pageNum, pageSize));
+            return View(db.Products.OrderByDescending(x=>x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditProduct(int id)
         {
@@ -42,14 +42,42 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return View(pro);
         }
         [HttpPost]
+        public ActionResult EditImages(HttpPostedFileBase fileUpload)
+        {
+            return PartialView();
+        }
+        [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditProduct(int id,FormCollection f)
+        public ActionResult EditProduct(int id, FormCollection f,HttpPostedFileBase fileUpload)
         {
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             if (pro != null)
             {
+                if (fileUpload == null)
+                {
+                    UpdateModel(pro);
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        //lay duong dan cua anh
+                        var fileName = Path.GetFileName(fileUpload.FileName);
+                        //Luu anh tu duong dan sang ~assets/images
+                        var path = Path.Combine(Server.MapPath("~/Assets/Images/"), fileName);
+                        if (System.IO.File.Exists(path))
+                        {
+                            ViewBag.Mess = "Hình ảnh đã tồn tại";
+                        }
+                        else
+                        {
+                            fileUpload.SaveAs(path);
+                        }
+                        pro.ProductImages = fileName;
+                        UpdateModel(pro);
+                    }
+                }
                 pro.Name = f["productName"];
-                pro.ProductImages = f["productImages"].ToString();
                 pro.Quantity = Convert.ToInt32(f["productQuantity"]);
                 pro.Warranty = Convert.ToInt32(f["productWarranty"]);
                 pro.Price = Convert.ToDecimal(f["productPrice"]);
@@ -61,8 +89,8 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             }
             else
                 return RedirectToAction("Products", "Modules");
-        }
-        public ActionResult DeleteProduct(int id)
+}
+    public ActionResult DeleteProduct(int id)
         {
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             db.Products.DeleteOnSubmit(pro);
@@ -72,6 +100,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult InsertProduct()
         {
+            //List<Producer> producer = db.Producers.ToList();
+            //SelectList producerList = new SelectList(producer, "ProducerID", "Name");
+            ViewBag.ProList = new SelectList(db.Producers.OrderBy(x => x.Name), "ProducerID", "Name");
+            //List<Catogory> cat = db.Catogories.ToList();
+            //SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName");
+            ViewBag.CatList = new SelectList(db.Catogories.OrderBy(x => x.CatogoriesName), "CatogoriesID", "CatogoriesName"); ;
             return View();
         }
         [HttpPost]
@@ -79,35 +113,37 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult InsertProduct(FormCollection f,HttpPostedFileBase fileUpload)
         {
             Product pro = new Product();
-            if (fileUpload == null)
-            {
-                ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
-                return View();
-            }
-            else
-            {
-                if (ModelState.IsValid)
-                {
-                    var fileName = Path.GetFileName(fileUpload.FileName);
-                    var path = Path.Combine(Server.MapPath("~/proImage"), fileName);
-                    if (System.IO.File.Exists(path))
-                        ViewBag.ThongBao = "Hình ảnh đã tồn tại";
-                    else
-                    {
-                        fileUpload.SaveAs(path);
-                    }
-                    pro.ProductImages = fileName;
-                }
-            }
-            pro.Name = f["proName"];
-            pro.Quantity = Convert.ToInt32(f["proQuantity"]);
-            pro.Warranty = Convert.ToInt32(f["proWarranty"]);
-            pro.Description = f["proDes"];
-            pro.CatogoriesID = Convert.ToInt32(f["proCat"]);
-            pro.Price = Convert.ToDecimal(f["proPrice"]);
+            //if (fileUpload == null)
+            //{
+            //    ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
+            //    return View();
+            //}
+            //else
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+            //        var fileName = Path.GetFileName(fileUpload.FileName);
+            //        var path = Path.Combine(Server.MapPath("~/productImage"), fileName);
+            //        if (System.IO.File.Exists(path))
+            //            ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+            //        else
+            //        {
+            //            fileUpload.SaveAs(path);
+            //        }
+            //        pro.ProductImages = fileName;
+            //    }
+            //}
+            pro.Name = f["productName"];
+            pro.ProductImages = f["productImages"];
+            pro.Quantity = Convert.ToInt32(f["productQuantity"]);
+            pro.Warranty = Convert.ToInt32(f["productWarranty"]);
+            pro.Description = f["productDescription"];
+            pro.ProducerID = Convert.ToInt32(f["productProducer"]);
+            pro.CatogoriesID = Convert.ToInt32(f["productCatogories"]);
+            pro.Price = Convert.ToDecimal(f["productPrice"]);
             db.Products.InsertOnSubmit(pro);
             db.SubmitChanges();
-            return View();
+            return RedirectToAction("Products","Modules");
         }
         /// <summary>
         /// Module Catogories

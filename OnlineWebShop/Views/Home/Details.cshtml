@@ -114,11 +114,18 @@ $(window).load(function() {
                     <div class="clearfix"></div>
                 </div>
                 </div>
+            
             <div class="col-md-12">
                 <!--Related Product Catogory-->
+                <ul class="unit">
+                    <li><span>Sản phẩm liên quan</span></li>
+                    <div class="clearfix"></div>
+                </ul>
                   @Html.Action("RelatedProductCatogory", "Home", new { id = Model.CatogoriesID })
                 <!--End Related Product Catogory-->
+                <hr />
             </div>
+           
             <div class="col-md-12">
                 <div class="in-check">
                     <ul class="unit">
