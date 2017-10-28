@@ -31,10 +31,18 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult EditProduct(int id)
         {
+            
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
+            List<Producer> producer = db.Producers.ToList();
+            SelectList producerList = new SelectList(producer, "ProducerID", "Name",pro.ProducerID);
+            ViewBag.ProList = producerList;
+            List<Catogory> cat = db.Catogories.ToList();
+            SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName", pro.CatogoriesID);
+            ViewBag.CatList = catList;
             return View(pro);
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult EditProduct(int id,FormCollection f)
         {
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
@@ -47,7 +55,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 pro.Price = Convert.ToDecimal(f["productPrice"]);
                 pro.CatogoriesID = Convert.ToInt32(f["productCatogories"]);
                 pro.ProducerID = Convert.ToInt32(f["productProducer"]);
-                pro.Description = Request.Form["productDescription"];
+                pro.Description = f["productDescription"];
                 db.SubmitChanges();
                 return RedirectToAction("Products", "Modules");
             }
@@ -146,13 +154,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Catogories", "Modules");
         }
-        public ActionResult CatogoriesList()
-        {
-            List<Catogory> cat = db.Catogories.ToList();
-            SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName");
-            ViewBag.CatList = catList;
-            return PartialView(ViewBag.CatList);
-        }
+        //public ActionResult CatogoriesList( )
+        //{
+        //    List<Catogory> cat = db.Catogories.ToList();
+        //    SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName");
+        //    ViewBag.CatList = catList;
+        //    return PartialView(ViewBag.CatList);
+        //}
         /// <summary>
         /// Module Producer
         /// Edit-Delete-Insert 
@@ -202,13 +210,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return this.InsertProducer();
         }
-        public ActionResult ProducerList()
-        {
-            List<Producer> producer = db.Producers.ToList();
-            SelectList producerList = new SelectList(producer, "ProducerID", "Name");
-            ViewBag.ProList = producerList;
-            return PartialView(ViewBag.ProList);
-        }
+        //public ActionResult ProducerList()
+        //{
+        //    List<Producer> producer = db.Producers.ToList();
+        //    SelectList producerList = new SelectList(producer, "ProducerID", "Name");
+        //    ViewBag.ProList = producerList;
+        //    return PartialView(ViewBag.ProList);
+        //}
         /// <summary>
         /// Module News
         /// Edit-Delete-Insert 
@@ -233,7 +241,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 news.Images = f["newsImage"].ToString();
                 news.CatogoriesID = Convert.ToInt32(f["newCatID"]);
                 db.SubmitChanges();
-                return RedirectToAction("EditCustomer", "Modules");
+                return RedirectToAction("News", "Modules");
             }
             else
                 return RedirectToAction("Customer", "Modules");
@@ -281,12 +289,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
             if (cus != null)
             {
-                cus.FullName = f["cusName"];
-                cus.Address = f["cusAddress"];
-                cus.BirthDay = Convert.ToDateTime(f["cusBirthday"]);
-                cus.Phone = f["cusPhone"];
+                cus.Address = f["Address"];
+                cus.Phone = Convert.ToString(f["Phone"]);
+                cus.Pass = f["Pass"];
                 db.SubmitChanges();
-                return RedirectToAction("Customer", "Modules");
+                return RedirectToAction("Customers", "Modules");
             }
             else
                 Response.StatusCode = 404;
@@ -299,35 +306,35 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Customers", "Modules");
         }
-        public ActionResult InsertCustomer()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult InsertCustomer(FormCollection f)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    Customer cus = new Customer();
-                    cus.FullName = f["cusName"];
-                    cus.Email = f["cusEmail"];
-                    cus.Phone = f["cusPhone"];
-                    cus.Pass = f["cusPass"];
-                    cus.Province = f["cusProvince"];
-                    db.Customers.InsertOnSubmit(cus);
-                    db.SubmitChanges();
-                    return RedirectToAction("Customers", "Modules");
-                }
-                ViewBag.Error = "Thông tin không được để trống";
-                return View(ViewBag.Error,f);
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //public ActionResult InsertCustomer()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult InsertCustomer(FormCollection f)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            Customer cus = new Customer();
+        //            cus.FullName = f["cusName"];
+        //            cus.Email = f["cusEmail"];
+        //            cus.Phone = f["cusPhone"];
+        //            cus.Pass = f["cusPass"];
+        //            cus.Province = f["cusProvince"];
+        //            db.Customers.InsertOnSubmit(cus);
+        //            db.SubmitChanges();
+        //            return RedirectToAction("Customers", "Modules");
+        //        }
+        //        ViewBag.Error = "Thông tin không được để trống";
+        //        return View(ViewBag.Error,f);
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
         public ActionResult InsertUser()
         {
             return View();

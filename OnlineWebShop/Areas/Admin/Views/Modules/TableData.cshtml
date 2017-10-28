@@ -39,8 +39,6 @@
                     <tr>
                         <th>Mã số</th>
                         <th>Họ và tên</th>
-                        <th>Email</th>
-                        <th>Quyền hạn</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -50,9 +48,7 @@
 
                         <tr>
                             <td>@item.AdminID</td>
-                            <td>@item.FullName</td>
-                            <td>@item.Email</td>
-                            <td>@item.Permission.PermissionName</td>
+                            <td>@item.FullName</td>     
                                 <td><button type="button" class="btn btn-warning" disabled><a href=" @Url.Action("EditUser", "Modules", new { id = item.AdminID })">Sửa</a></button> | <button type="button" class="btn btn-danger" disabled><a href=" @Url.Action("DeleteUser", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
                             
                         </tr>

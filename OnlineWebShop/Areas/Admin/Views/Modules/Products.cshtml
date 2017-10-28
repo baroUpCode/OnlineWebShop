@@ -5,7 +5,7 @@
     ViewBag.Title = "Products";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
-@*@helper limitChar(String input, int length)
+@*@helper limitChar(string input, int length)
 { 
     if(input.Length < length)
     {
@@ -13,7 +13,7 @@
     }
     else
     {
-        @input.Substring(0,length)<text>...</text>
+        @input.Substring(0,length)
     }
 }*@
 <div id="page-wrapper">
@@ -45,7 +45,8 @@
                     <td>@item.Warranty</td>
                     <td>@item.Quantity</td>
                     <td>@item.Price</td>
-                    <td><a href=" @Url.Action("EditProduct","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a> | <a href=" @Url.Action("DeleteProduct","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a></td>
+                    <td><a href=" @Url.Action("EditProduct","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a> 
+                    <a href=" @Url.Action("DeleteProduct","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a></td>
                 </tr>
             }
         </tbody>
