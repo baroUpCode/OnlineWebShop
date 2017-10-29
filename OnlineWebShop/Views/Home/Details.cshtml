@@ -122,10 +122,9 @@ $(window).load(function() {
                     <div class="clearfix"></div>
                 </ul>
                   @Html.Action("RelatedProductCatogory", "Home", new { id = Model.CatogoriesID })
-                <!--End Related Product Catogory-->
-                <hr />
+                <!--End Related Product Catogory--> 
             </div>
-           
+            <hr />
             <div class="col-md-12">
                 <div class="in-check">
                     <ul class="unit">
@@ -133,7 +132,7 @@ $(window).load(function() {
                         <div class="clearfix"></div>
                     </ul>
                     <div class="col-md-12">                    
-                      <span>@Model.Description</span>
+                      <span>@Html.Raw(Model.Description)</span>
                         <div class="clearfix"></div>
                     </div>
                 </div>
