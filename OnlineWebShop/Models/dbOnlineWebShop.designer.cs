@@ -434,6 +434,8 @@ namespace OnlineWebShop.Models
 		
 		private EntitySet<Catogory> _Catogories;
 		
+		private EntitySet<New> _News;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -457,6 +459,7 @@ namespace OnlineWebShop.Models
 		public RootCatogory()
 		{
 			this._Catogories = new EntitySet<Catogory>(new Action<Catogory>(this.attach_Catogories), new Action<Catogory>(this.detach_Catogories));
+			this._News = new EntitySet<New>(new Action<New>(this.attach_News), new Action<New>(this.detach_News));
 			OnCreated();
 		}
 		
@@ -613,6 +616,19 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_New", Storage="_News", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
+		public EntitySet<New> News
+		{
+			get
+			{
+				return this._News;
+			}
+			set
+			{
+				this._News.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -640,6 +656,18 @@ namespace OnlineWebShop.Models
 		}
 		
 		private void detach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.RootCatogory = null;
+		}
+		
+		private void attach_News(New entity)
+		{
+			this.SendPropertyChanging();
+			entity.RootCatogory = this;
+		}
+		
+		private void detach_News(New entity)
 		{
 			this.SendPropertyChanging();
 			entity.RootCatogory = null;
@@ -2030,11 +2058,13 @@ namespace OnlineWebShop.Models
 		
 		private string _Images;
 		
-		private long _CatogoriesID;
-		
 		private System.Nullable<int> _ModifiedBy;
 		
 		private System.Nullable<System.DateTime> _ModifiedAt;
+		
+		private System.Nullable<int> _RootCatogoryID;
+		
+		private EntityRef<RootCatogory> _RootCatogory;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2054,16 +2084,17 @@ namespace OnlineWebShop.Models
     partial void OnDeletedChanged();
     partial void OnImagesChanging(string value);
     partial void OnImagesChanged();
-    partial void OnCatogoriesIDChanging(long value);
-    partial void OnCatogoriesIDChanged();
     partial void OnModifiedByChanging(System.Nullable<int> value);
     partial void OnModifiedByChanged();
     partial void OnModifiedAtChanging(System.Nullable<System.DateTime> value);
     partial void OnModifiedAtChanged();
+    partial void OnRootCatogoryIDChanging(System.Nullable<int> value);
+    partial void OnRootCatogoryIDChanged();
     #endregion
 		
 		public New()
 		{
+			this._RootCatogory = default(EntityRef<RootCatogory>);
 			OnCreated();
 		}
 		
@@ -2207,26 +2238,6 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CatogoriesID", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public long CatogoriesID
-		{
-			get
-			{
-				return this._CatogoriesID;
-			}
-			set
-			{
-				if ((this._CatogoriesID != value))
-				{
-					this.OnCatogoriesIDChanging(value);
-					this.SendPropertyChanging();
-					this._CatogoriesID = value;
-					this.SendPropertyChanged("CatogoriesID");
-					this.OnCatogoriesIDChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<int> ModifiedBy
 		{
@@ -2263,6 +2274,64 @@ namespace OnlineWebShop.Models
 					this._ModifiedAt = value;
 					this.SendPropertyChanged("ModifiedAt");
 					this.OnModifiedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> RootCatogoryID
+		{
+			get
+			{
+				return this._RootCatogoryID;
+			}
+			set
+			{
+				if ((this._RootCatogoryID != value))
+				{
+					if (this._RootCatogory.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRootCatogoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._RootCatogoryID = value;
+					this.SendPropertyChanged("RootCatogoryID");
+					this.OnRootCatogoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_New", Storage="_RootCatogory", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID", IsForeignKey=true)]
+		public RootCatogory RootCatogory
+		{
+			get
+			{
+				return this._RootCatogory.Entity;
+			}
+			set
+			{
+				RootCatogory previousValue = this._RootCatogory.Entity;
+				if (((previousValue != value) 
+							|| (this._RootCatogory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RootCatogory.Entity = null;
+						previousValue.News.Remove(this);
+					}
+					this._RootCatogory.Entity = value;
+					if ((value != null))
+					{
+						value.News.Add(this);
+						this._RootCatogoryID = value.RootCatogoryID;
+					}
+					else
+					{
+						this._RootCatogoryID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("RootCatogory");
 				}
 			}
 		}

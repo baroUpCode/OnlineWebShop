@@ -21,6 +21,7 @@
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="RootCatogory_Catogory" Member="Catogories" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="Catogory" />
+      <Association Name="RootCatogory_New" Member="News" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="New" />
     </Type>
   </Table>
   <Table Name="dbo.AdminAccount" Member="AdminAccounts">
@@ -99,9 +100,10 @@
       <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
       <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="Images" Type="System.String" DbType="Text" CanBeNull="true" />
-      <Column Name="CatogoriesID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="RootCatogory_New" Member="RootCatogory" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="RootCatogory" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Order]" Member="Orders">

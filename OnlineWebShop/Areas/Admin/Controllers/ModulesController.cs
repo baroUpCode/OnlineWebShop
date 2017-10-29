@@ -41,40 +41,37 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             ViewBag.CatList = catList;
             return View(pro);
         }
-        [HttpPost]
-        public ActionResult EditImages(HttpPostedFileBase fileUpload)
-        {
-            return PartialView();
-        }
-        [HttpPost]
+        [HttpPost,ActionName("EditProduct")]
         [ValidateInput(false)]
-        public ActionResult EditProduct(int id, FormCollection f,HttpPostedFileBase fileUpload)
+        public ActionResult EditProduct(int id,HttpPostedFileBase productImages, FormCollection f)
         {
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             if (pro != null)
             {
-                if (fileUpload == null)
+                if (productImages == null)
                 {
                     UpdateModel(pro);
+                    db.SubmitChanges();
                 }
                 else
                 {
                     if (ModelState.IsValid)
                     {
                         //lay duong dan cua anh
-                        var fileName = Path.GetFileName(fileUpload.FileName);
+                        var fileName = Path.GetFileName(productImages.FileName);
                         //Luu anh tu duong dan sang ~assets/images
-                        var path = Path.Combine(Server.MapPath("~/Assets/Images"), fileName);
+                        var path = Path.Combine(Server.MapPath("~/Assets/images"), fileName);
                         if (System.IO.File.Exists(path))
                         {
                             ViewBag.Mess = "Hình ảnh đã tồn tại";
                         }
                         else
                         {
-                            fileUpload.SaveAs(path);
+                            productImages.SaveAs(path);
                         }
                         pro.ProductImages = fileName;
                         UpdateModel(pro);
+                        db.SubmitChanges();
                     }
                 }
                 pro.Name = f["productName"];
@@ -89,7 +86,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             }
             else
                 return RedirectToAction("Products", "Modules");
-}
+        }
     public ActionResult DeleteProduct(int id)
         {
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
@@ -262,52 +259,62 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-        public ActionResult News()
+        public ActionResult News(int? page)
         {
-            return View(db.News.ToList());
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(db.News.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditNews(int id)
         {
-            New pro = db.News.SingleOrDefault(x => x.NewsID == id);
-            return View(pro);
+            New ne = db.News.SingleOrDefault(x => x.NewsID == id);
+            List<RootCatogory> root = db.RootCatogories.ToList();
+            ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", ne.RootCatogoryID);
+            return View(ne);
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult EditNews(int id, FormCollection f)
         {
             New news = db.News.SingleOrDefault(x => x.NewsID == id);
             if (news != null)
             {
-                news.Content = f["newContent"];
+                news.Title = f["newsTitle"];
+                news.Content = f["newsContent"];
                 news.Images = f["newsImage"].ToString();
-                news.CatogoriesID = Convert.ToInt32(f["newCatID"]);
+                news.RootCatogoryID = Convert.ToInt32(f["newsRootCat"]);
                 db.SubmitChanges();
                 return RedirectToAction("News", "Modules");
             }
             else
-                return RedirectToAction("Customer", "Modules");
+                return RedirectToAction("News", "Modules");
         }
         public ActionResult DeleteNews(int id)
         {
             New news = db.News.SingleOrDefault(x => x.NewsID == id);
             db.News.DeleteOnSubmit(news);
             db.SubmitChanges();
-            return RedirectToAction("Products", "Modules");
+            return RedirectToAction("News", "Modules");
 
         }
         public ActionResult InsertNews()
         {
+            List<RootCatogory> root = db.RootCatogories.ToList();
+            ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName");
             return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult InsertNews(FormCollection f)
         {
             New news = new New();
-            news.Content = f["newContent"];
+            news.Content = f["newsContent"];
+            news.Title = f["newsTitle"];
             news.Images = f["newsImage"].ToString();
-            news.CatogoriesID = Convert.ToInt32(f["newCatID"]);
+            news.RootCatogoryID = Convert.ToInt32(f["newsRootCat"]);
             db.News.InsertOnSubmit(news);
             db.SubmitChanges();
-            return this.InsertNews();
+            return RedirectToAction("News", "Modules");
         }
         /// <summary>
         /// Module Customers

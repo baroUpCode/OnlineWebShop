@@ -639,6 +639,7 @@
     <Content Include="Assets\images\s4.jpg" />
     <Content Include="Assets\images\Scimitar PRO RGB Optical MOBA MMO Gaming Mouse — Yellow 1.jpg" />
     <Content Include="Assets\images\search.png" />
+    <Content Include="Assets\images\snap845.jpg" />
     <Content Include="Assets\images\top-arrow.png" />
     <Content Include="Assets\js\easing.js" />
     <Content Include="Assets\js\jquery-1.11.0.min.js" />
@@ -747,7 +748,6 @@
     <Content Include="Areas\Admin\Views\Modules\EditCustomer.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditCatogories.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\InsertCustomer.cshtml" />
     <Content Include="Areas\Admin\Assets\ckeditor\CHANGES.md" />
     <Content Include="Areas\Admin\Assets\ckeditor\LICENSE.md" />
     <Content Include="Areas\Admin\Assets\ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -763,6 +763,8 @@
     <Content Include="Areas\Admin\Assets\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Areas\Admin\Assets\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Areas\Admin\Assets\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Areas\Admin\Views\Modules\EditNews.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertNews.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>
@@ -793,7 +795,6 @@
     <Content Include="Views\Home\SortByCatogories.cshtml" />
     <Content Include="Views\Home\SortByProducer.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
     <Content Include="Views\ShoppingCart\CartPartial.cshtml" />

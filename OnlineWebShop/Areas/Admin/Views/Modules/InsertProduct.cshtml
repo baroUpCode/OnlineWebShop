@@ -29,8 +29,10 @@
                         <input type="text" name="productQuantity" id="email[1]" aria-required="true" required class="input" />
                         <!--CKEDITOR-->
                         <h5>Mô tả:</h5>
-                        @*<input type="text" name="productDescription" value="@Model.Description" id="email[1]" aria-required="true" class="input" ></input>*@
-                        <textarea name="productDescription" id="description" rows="10" cols="80"></textarea>
+                        <textarea name="productDescription" id="textarea" rows="10" cols="80"></textarea>
+                        <script type="text/javascript">
+                            CKEDITOR.replace('textarea');
+                        </script>
                         <h5>Giá:</h5>
                         <input type="text" name="productPrice"  id="email[1]" required aria-required="true" class="input"/>
                     </label>

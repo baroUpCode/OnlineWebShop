@@ -8,20 +8,20 @@
     <div class="modal_outside_login" id="modal">
         <div class="border_modal_login">
             <div class="modal_contain_login">
-                @using (Html.BeginForm("EditProduct", "Modules", FormMethod.Post))
+                @using (Html.BeginForm("EditProduct", "Modules", FormMethod.Post@*,new {enctype="multipart/form-data" }*@))
                 {
-                    @Html.ValidationSummary(true)
+                   @Html.AntiForgeryToken();
                     <h1>
                         <span class="text_login">Cập nhật thông tin sản phẩm</span>
                     </h1>
+                    @Html.ValidationSummary(true)
                     <label class="email_group">
                         <h5>Hình ảnh:</h5>
                         <div class="img" style="width: 500px; height: 500px;">
-                            <img src="@Url.Content("~/Assets/Images/" + Model.ProductImages)" style="width: 100%;height: auto;"/>
-                            <h5>@Model.ProductImages </h5>
+                            <img src="~/Assets/images/@Model.ProductImages" style="width: 100%;height: auto" />
                             <h5>@ViewBag.Mess</h5>
+                            <input type="file" name="productImages" />
                         </div>
-                        <input type="file" name="productImages"/>
                         <h5>Tên sản phẩm:</h5>
                         <input type="text" name="productName" value="@Model.Name" aria-required="true" id="pwd[1]" required class="input" />
                         <h5>Loại sản phẩm:</h5>
@@ -35,8 +35,10 @@
                         <!--CKEDITOR-->
                         <h5>Mô tả:</h5>
                         @*<input type="text" name="productDescription" value="@Model.Description" id="email[1]" aria-required="true" class="input" ></input>*@
-                        <textarea name="productDescription" id="description" rows="10" cols="80" >@Model.Description</textarea>
-
+                        <textarea name="productDescription" id="textarea" rows="10" cols="80" >@Model.Description</textarea>
+                        <script type="text/javascript">
+                                CKEDITOR.replace('textarea');
+                        </script>
                         <h5>Giá:</h5>
                         <input type="text" name="productPrice" value="@Model.Price" id="email[1]" aria-required="true" class="input" @Model.Description></input>
                     </label>

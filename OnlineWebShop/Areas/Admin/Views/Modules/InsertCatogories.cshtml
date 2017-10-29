@@ -15,9 +15,9 @@
                         <span class="text_login">Thông tin thêm mới</span>
                     </h1>
                     <label class="email_group">
-                        <h5>Tên loại:</h5>
-                        <input type="text" name="catName" value="@Model.CatogoriesName" id="email[1]" required aria-required="true" class="input" />
-                        <h5>Tên loại sản phẩm:</h5>
+                        <h5>Tên loại</h5>
+                        <input type="text" name="catName" id="email[1]" required aria-required="true" class="input" />
+                        <h5>Loại</h5>
                         @Html.DropDownList("catRoot", (IEnumerable<SelectListItem>)ViewBag.CatList, new { @class = "form-control" })
                     </label>
                     <input type="submit" value="Thêm mới">

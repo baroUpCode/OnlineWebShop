@@ -1,0 +1,42 @@
+﻿@model OnlineWebShop.Models.New
+@{
+    ViewBag.Title = "EditNews";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div id="page-wrapper">
+    <div class="modal_outside_login" id="modal">
+        <div class="border_modal_login">
+            <div class="modal_contain_login">
+                @using (Html.BeginForm("EditNews", "Modules", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true)
+                    <h1>
+                        <span class="text_login">Sửa tin tức </span>
+                    </h1>
+                    <label class="email_group">
+                        <h5>Ảnh bìa</h5>
+                        <div class="img" style="width: 500px; height: 500px;">
+                            <img src="@Url.Content("~/Assets/Images/" + Model.Images)" style="width: 100%;height: auto;" />
+                            <h5>@Model.Images </h5>
+                            <h5>@ViewBag.Mess</h5>
+                        </div>
+                        <input type="file" name="newsImage" />
+                        <h5>Tiêu đề tin:</h5>
+                        <input type="text" name="newsTitle" value="@Model.Title" aria-required="true" id="pwd[1]" required class="input" />
+                        <h5>Loại tin:</h5>
+                        @Html.DropDownList("newsRootCat", (IEnumerable<SelectListItem>)ViewBag.RootCat, new { @class = "form-control" })
+                        <!--CKEDITOR-->
+                        <h5>Nội dung:</h5>
+                        <textarea name="newsContent" id="textarea" rows="10" cols="80">@Model.Content</textarea>
+                        <script type="text/javascript">
+                                CKEDITOR.replace('textarea');
+                        </script>
+                    </label>
+                    <input type="submit" value="Sửa thông tin">
+                }
+                <div><a href="@Url.Action("News","Modules")">Trở về trang trước</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -146,7 +146,7 @@ namespace OnlineWebShop.Controllers
         }
         public ActionResult NewsPartial()
         {
-            var news = db.News.OrderByDescending(x=>x.CreatedAt).Take(4);
+            var news = db.News.OrderByDescending(x=>x.CreatedAt).Take(3);
             return PartialView(news);
         }
         public ActionResult RelatedProductCatogory(int id)
