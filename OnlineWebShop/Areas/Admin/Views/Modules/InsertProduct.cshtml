@@ -8,7 +8,7 @@
     <div class="modal_outside_login" id="modal">
         <div class="border_modal_login">
             <div class="modal_contain_login">
-                @using (Html.BeginForm("InsertProduct", "Modules", FormMethod.Post))
+                @using (Html.BeginForm("InsertProduct", "Modules", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.ValidationSummary(true)
                     <h1>

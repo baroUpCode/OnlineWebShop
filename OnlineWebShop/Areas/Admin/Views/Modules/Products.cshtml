@@ -5,22 +5,11 @@
     ViewBag.Title = "Products";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
-@*@helper limitChar(string input, int length)
-{ 
-    if(input.Length < length)
-    {
-           @input
-    }
-    else
-    {
-        @input.Substring(0,length)
-    }
-}*@
 <div id="page-wrapper">
     <div class="col-md-12">
         <div class="col-md-3">
             <div class="search-bar">
-                @using (Html.BeginForm("SearchingwName", "Modules", FormMethod.Post))
+                @using (Html.BeginForm("SearchingProducts", "Modules", FormMethod.Post))
                 {
                     <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
                     <input type="submit" value="">

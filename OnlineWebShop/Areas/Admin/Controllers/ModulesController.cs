@@ -18,56 +18,61 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-         public ActionResult TableData()
+        public ActionResult TableData()
         {
             var user = db.AdminAccounts;
             return PartialView(user);
         }
-    public ActionResult Products(int? page)
+        public ActionResult Products(int? page)
         {
             int pageSize = 8;
             int pageNum = (page ?? 1);
-            return View(db.Products.OrderByDescending(x=>x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            return View(db.Products.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditProduct(int id)
         {
-            
+
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             List<Producer> producer = db.Producers.ToList();
-            SelectList producerList = new SelectList(producer, "ProducerID", "Name",pro.ProducerID);
+            SelectList producerList = new SelectList(producer, "ProducerID", "Name", pro.ProducerID);
             ViewBag.ProList = producerList;
             List<Catogory> cat = db.Catogories.ToList();
             SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName", pro.CatogoriesID);
             ViewBag.CatList = catList;
+            TempData["file"] = pro.ProductImages;
+            //ViewBag.Error = TempData["e"] == null ? "" : TempData["e"].ToString();
+            //ViewBag.Files = TempData["file"] == null ? new List<string>() : (List<string>)TempData["file"];
             return View(pro);
         }
-        [HttpPost,ActionName("EditProduct")]
+        [HttpPost, ActionName("EditProduct")]
         [ValidateInput(false)]
-        public ActionResult EditProduct(int id,HttpPostedFileBase productImages, FormCollection f)
+        public ActionResult EditProduct(int id, FormCollection f, HttpPostedFileBase uploadFile)
         {
+
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             if (pro != null)
             {
-                if (productImages == null)
+
+                if (uploadFile == null)
                 {
                     UpdateModel(pro);
-                    db.SubmitChanges();
                 }
                 else
                 {
                     if (ModelState.IsValid)
                     {
                         //lay duong dan cua anh
-                        var fileName = Path.GetFileName(productImages.FileName);
+                        var fileName = Path.GetFileName(uploadFile.FileName);
                         //Luu anh tu duong dan sang ~assets/images
-                        var path = Path.Combine(Server.MapPath("~/Assets/images"), fileName);
-                        if (System.IO.File.Exists(path))
+                        var pathstr = Path.Combine(Server.MapPath("~/Assets/images/"), fileName);
+                        if (System.IO.File.Exists(pathstr))
                         {
                             ViewBag.Mess = "Hình ảnh đã tồn tại";
+                            return this.EditProduct(id);
                         }
                         else
                         {
-                            productImages.SaveAs(path);
+                            uploadFile.SaveAs(pathstr);
                         }
                         pro.ProductImages = fileName;
                         UpdateModel(pro);
@@ -85,9 +90,9 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 return RedirectToAction("Products", "Modules");
             }
             else
-                return RedirectToAction("Products", "Modules");
+                return RedirectToAction("EditProduct", "Modules");
         }
-    public ActionResult DeleteProduct(int id)
+        public ActionResult DeleteProduct(int id)
         {
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             db.Products.DeleteOnSubmit(pro);
@@ -107,31 +112,36 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult InsertProduct(FormCollection f,HttpPostedFileBase fileUpload)
+        public ActionResult InsertProduct(FormCollection f, HttpPostedFileBase uploadFile)
         {
             Product pro = new Product();
-            //if (fileUpload == null)
-            //{
-            //    ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
-            //    return View();
-            //}
-            //else
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-            //        var fileName = Path.GetFileName(fileUpload.FileName);
-            //        var path = Path.Combine(Server.MapPath("~/productImage"), fileName);
-            //        if (System.IO.File.Exists(path))
-            //            ViewBag.ThongBao = "Hình ảnh đã tồn tại";
-            //        else
-            //        {
-            //            fileUpload.SaveAs(path);
-            //        }
-            //        pro.ProductImages = fileName;
-            //    }
-            //}
+            if (uploadFile == null)
+            {
+                UpdateModel(pro);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    //lay duong dan cua anh
+                    var fileName = Path.GetFileName(uploadFile.FileName);
+                    //Luu anh tu duong dan sang ~assets/images
+                    var pathstr = Path.Combine(Server.MapPath("~/Assets/images/"), fileName);
+                    if (System.IO.File.Exists(pathstr))
+                    {
+                        ViewBag.Mess = "Hình ảnh đã tồn tại";
+                        return this.InsertProduct();
+                    }
+                    else
+                    {
+                        uploadFile.SaveAs(pathstr);
+                    }
+                    pro.ProductImages = fileName;
+                    UpdateModel(pro);
+                    db.SubmitChanges();
+                }
+            }
             pro.Name = f["productName"];
-            pro.ProductImages = f["productImages"];
             pro.Quantity = Convert.ToInt32(f["productQuantity"]);
             pro.Warranty = Convert.ToInt32(f["productWarranty"]);
             pro.Description = f["productDescription"];
@@ -140,7 +150,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             pro.Price = Convert.ToDecimal(f["productPrice"]);
             db.Products.InsertOnSubmit(pro);
             db.SubmitChanges();
-            return RedirectToAction("Products","Modules");
+            return RedirectToAction("Products", "Modules");
         }
         /// <summary>
         /// Module Catogories
@@ -153,8 +163,8 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult EditCatogories(int id)
         {
-           
-            Catogory cat= db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
+
+            Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
             List<RootCatogory> root = db.RootCatogories.ToList();
             ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", cat.RootCatogoryID);
             return View(cat);
@@ -162,12 +172,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditCatogories(int id, FormCollection f)
         {
-            
+
             Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
             cat.CatogoriesName = f["catName"];
             cat.RootCatogoryID = Convert.ToInt32(f["catRoot"]);
             db.SubmitChanges();
-            return RedirectToAction("Catogories","Modules");
+            return RedirectToAction("Catogories", "Modules");
         }
         public ActionResult InsertCatogories()
         {
@@ -240,7 +250,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult InsertProducer(FormCollection f)
         {
-           
+
             Producer pro = new Producer();
             pro.Name = f["proName"];
             db.Producers.InsertOnSubmit(pro);
@@ -274,17 +284,45 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditNews(int id, FormCollection f)
+        public ActionResult EditNews(int id, FormCollection f, HttpPostedFileBase uploadFile)
         {
+            //
             New news = db.News.SingleOrDefault(x => x.NewsID == id);
             if (news != null)
             {
+                if (uploadFile == null)
+                {
+                    UpdateModel(news);
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        //lay duong dan cua anh
+                        var fileName = Path.GetFileName(uploadFile.FileName);
+                        //Luu anh tu duong dan sang ~assets/images
+                        var pathstr = Path.Combine(Server.MapPath("~/Assets/images/"), fileName);
+                        if (System.IO.File.Exists(pathstr))
+                        {
+                            ViewBag.Mess = "Hình ảnh đã tồn tại";
+                            return this.EditNews(id);
+                        }
+                        else
+                        {
+                            uploadFile.SaveAs(pathstr);
+                        }
+                        news.Images = fileName;
+                        UpdateModel(news);
+                        db.SubmitChanges();
+                    }
+                }
                 news.Title = f["newsTitle"];
                 news.Content = f["newsContent"];
                 news.Images = f["newsImage"].ToString();
                 news.RootCatogoryID = Convert.ToInt32(f["newsRootCat"]);
                 db.SubmitChanges();
                 return RedirectToAction("News", "Modules");
+
             }
             else
                 return RedirectToAction("News", "Modules");
@@ -305,9 +343,35 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult InsertNews(FormCollection f)
+        public ActionResult InsertNews(FormCollection f, HttpPostedFileBase uploadFile)
         {
             New news = new New();
+            if (uploadFile == null)
+            {
+                UpdateModel(news);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    //lay duong dan cua anh
+                    var fileName = Path.GetFileName(uploadFile.FileName);
+                    //Luu anh tu duong dan sang ~assets/images
+                    var pathstr = Path.Combine(Server.MapPath("~/Assets/images/"), fileName);
+                    if (System.IO.File.Exists(pathstr))
+                    {
+                        ViewBag.Mess = "Hình ảnh đã tồn tại";
+                        return this.InsertNews();
+                    }
+                    else
+                    {
+                        uploadFile.SaveAs(pathstr);
+                    }
+                    news.Images = fileName;
+                    UpdateModel(news);
+                    db.SubmitChanges();
+                }
+            }
             news.Content = f["newsContent"];
             news.Title = f["newsTitle"];
             news.Images = f["newsImage"].ToString();
@@ -325,13 +389,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             return View(db.Customers.ToList());
         }
-        public ActionResult EditCustomer(int id )
+        public ActionResult EditCustomer(int id)
         {
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
             return View(cus);
         }
         [HttpPost]
-        public ActionResult EditCustomer(int id ,FormCollection f)
+        public ActionResult EditCustomer(int id, FormCollection f)
         {
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
             if (cus != null)
@@ -346,7 +410,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 Response.StatusCode = 404;
             return RedirectToAction("Customers", "Modules");
         }
-            public ActionResult DeleteCustomer(int id)
+        public ActionResult DeleteCustomer(int id)
         {
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
             db.Customers.DeleteOnSubmit(cus);
@@ -386,10 +450,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
-        public ActionResult EditUser(int id )
+        public ActionResult EditUser(int id)
         {
             var admin = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
-           
+
             return View(admin);
         }
         /// <summary>
@@ -413,7 +477,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             u.PermissionID = Convert.ToByte(f["permissionUser"]);
             u.Email = f["email"];
             db.SubmitChanges();
-            return RedirectToAction("Index","Admin");
+            return RedirectToAction("Index", "Admin");
         }
 
         public ActionResult DeleteUser(int id)
@@ -423,5 +487,16 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
+        [HttpPost]
+        public ActionResult SearchingProducts(FormCollection f)
+        {
+            var product = (from p in db.Products where p.Name.Contains(f["searchString"].ToString()) || p.Catogory.CatogoriesName.Contains(f["searchString"].ToString()) || p.Producer.Name.Contains(f["searchString"].ToString()) || p.ProductID == Int32.Parse(f["searchString"].ToString()) select p ).ToList();
+            return View(product);
+        }
+        public ActionResult SearchingProducts()
+        {
+            return View();
+        }
     }
+
 }

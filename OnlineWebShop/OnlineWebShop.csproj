@@ -765,6 +765,7 @@
     <Content Include="Areas\Admin\Assets\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Areas\Admin\Views\Modules\EditNews.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertNews.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchingProducts.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

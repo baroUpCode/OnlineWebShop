@@ -86,28 +86,19 @@ namespace OnlineWebShop.Controllers
             return View(prod.ToPagedList(pageNum, pageSize));
         }
         [HttpPost]
-        public ActionResult SearchingwName(FormCollection f)
+        public ActionResult SearchingwName(/*int? page,*/FormCollection f)
         {
-            var product = (from p in db.Products where p.Name.Contains(f["searchString"]) || p.Catogory.CatogoriesName.Contains(f["searchString"]) || p.Producer.Name.Contains(f["searchString"]) select p).ToList();
-            return View(product);
-        }
-        public ActionResult SearchingwName(/*string searchString, int? page*/)
-        {
-            //var product = from sp in db.Products select sp.Name;
-            //var cat = db.Catogories.Where(x => x.CatogoriesName.Contains(searchString));
-            //var producer = db.Producers.Where(x => x.Name.Contains(searchString));
-            //var links = links.Where(l => l.First() == '/' || l.First() == '//').ToList();
-            //int pageSize = 5;
+            //int pageSize = 8;
             //int pageNum = (page ?? 1);
-            //var product =(from p in db.Products where p.Name.Contains(searchString) select p).ToList();
-            return View(/*product.ToPagedList(pageNum, pageSize)*/);
+            var product = (from p in db.Products where p.Name.Contains(f["searchString"]) || p.Catogory.CatogoriesName.Contains(f["searchString"]) || p.Producer.Name.Contains(f["searchString"]) select p).ToList();
+            ViewBag.Result = f["searchString"].ToString();
+            return View(product/*.ToPagedList(pageNum, pageSize*/);
         }
-        //public ActionResult SearchingwProducer(string searchString)
-        //{
-        //    var product = from p in db.Producers where p.Name.Contains(searchString) select p.Products.Where(X => X.ProducerID == p.ProducerID);
-        //    ViewBag.Message = searchString.ToString();
-        //    return View(product.ToList());
-        //}
+        public ActionResult SearchingwName()
+        {
+            return View();
+        }
+   
         public ActionResult Contact()
         {
             return View();
