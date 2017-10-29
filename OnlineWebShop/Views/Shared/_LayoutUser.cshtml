@@ -152,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     @Html.Action("LaptopCatogories", "Home")
                     <li class="grid">
                         <a href="@Url.Action("Contact","Home")">Phản hồi</a>
-                        <a href="#">Tin Tức</a>
+                        <a href="@Url.Action("News","Home")">Tin Tức</a>
                         <a href="@Url.Action("AboutUs", "Home")">Vì sao chọn chúng tôi ?</a>
                     </li>
                 </ul>
@@ -195,7 +195,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="footer-text">
             <div class="container">
                 <div class="footer-main">
-                    <p class="footer-class">© 2017 BBA SHOP | Design by  <a href="@Url.Action("Index","Home")" target="_blank">BBA SHOP</a> </p>
+                    <p class="footer-class">© @DateTime.Now.Year BBA SHOP | Design by  <a href="@Url.Action("Index","Home")" target="_blank">BBA SHOP</a> </p>
                 </div>
             </div>
         </div>

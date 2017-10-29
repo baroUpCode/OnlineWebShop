@@ -1,9 +1,56 @@
-﻿@using OnlineWebShop.Models;
-@model New
+﻿@using OnlineWebShop.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<New>
 @{
     ViewBag.Title = "News";
     Layout = "~/Views/Shared/_layoutUser.cshtml";
 }
-<h1>@Model.Title</h1>
-<h4>@Model.Content</h4>
+<div id="wrap" class="js_blog website_blog">
+    <div class="container">
+    </div>
+    <div class="oe_structure">
+        <section class="mb0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb32 mt16 text-center">
+                        <h1>Tin Tức Công Nghệ</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container">
+        <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-12">
+                        <div class="mb32" name="blog_post">
+                            <div class="o_blog_cover_container cover container-fluid cover_narrow o_list_cover mt16 mb32" >
+                                <div class="o_blog_cover_component o_blog_cover_image" style="text-align:center;width:100%">
+                                    <a href="@Url.Action("NewsDetail", "Home", new { id = item.NewsID })">
+                                        <img src="~/Assets/images/@item.Images" width="1110" height="491" />
+                                        </a>
+                                </div>
+                                <div class="o_blog_cover_component o_blog_cover_filter oe_black" style="opacity: 0.5;">
+                                    <p class="MsoNormal">
+                                        <span style="font-size:20.0pt;line-height:107%"></span>
+                                        <a href="@Url.Action("NewsDetail", "Home", new { id = item.NewsID })">
+                                            <h2 class="mb4 o_blog_post_title" >@item.Title</h2>
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="text-muted" style="text-align:center">
+                                    <p class="mb12 mt12 o_blog_post_teaser" style="max-width:500ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;width:auto">@item.Content</p>
+                                    <hr />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                }
+        </div>
+        <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("News", "Home", new { page = page }))</div>
+    </div>
+</div>
+    
 

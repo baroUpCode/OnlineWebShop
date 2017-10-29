@@ -1,0 +1,18 @@
+﻿@using OnlineWebShop.Models;
+@model New
+@{
+    ViewBag.Title = "NewsDetail";
+    Layout = "~/Views/Shared/_layoutUser.cshtml";
+}
+<div class="container">
+    <div>
+        <h1>@Model.Title</h1>
+        </div>
+    <div class="col-md-12">
+        <img src="~/Assets/images/@Model.Images" width="100%"/>
+        </div>
+        <div class="col-md-12">
+            <h4>@Model.Content</h4>
+        </div>
+    </div>
+

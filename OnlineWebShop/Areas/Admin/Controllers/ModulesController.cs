@@ -64,7 +64,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                         //lay duong dan cua anh
                         var fileName = Path.GetFileName(fileUpload.FileName);
                         //Luu anh tu duong dan sang ~assets/images
-                        var path = Path.Combine(Server.MapPath("~/Assets/Images/"), fileName);
+                        var path = Path.Combine(Server.MapPath("~/Assets/Images"), fileName);
                         if (System.IO.File.Exists(path))
                         {
                             ViewBag.Mess = "Hình ảnh đã tồn tại";
@@ -156,7 +156,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult EditCatogories(int id)
         {
-           Catogory cat= db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
+           
+            Catogory cat= db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
+            List<RootCatogory> root = db.RootCatogories.ToList();
+            ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", cat.RootCatogoryID);
             return View(cat);
         }
         [HttpPost]
@@ -171,6 +174,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult InsertCatogories()
         {
+            ViewBag.CatList = new SelectList(db.RootCatogories.OrderBy(x => x.RootCatogoryName), "RootCatogoryID", "RootCatogoryName");
             return View();
         }
         [HttpPost]
@@ -181,7 +185,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             cat.RootCatogoryID = Convert.ToInt32(f["catRoot"]);
             db.Catogories.InsertOnSubmit(cat);
             db.SubmitChanges();
-            return RedirectToAction("InsertCatogories", "Modules");
+            return RedirectToAction("Catogories", "Modules");
         }
         public ActionResult DeleteCatogories(int id)
         {
@@ -349,10 +353,6 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         //[HttpPost]
         //public ActionResult InsertCustomer(FormCollection f)
         //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
         //            Customer cus = new Customer();
         //            cus.FullName = f["cusName"];
         //            cus.Email = f["cusEmail"];
@@ -362,19 +362,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         //            db.Customers.InsertOnSubmit(cus);
         //            db.SubmitChanges();
         //            return RedirectToAction("Customers", "Modules");
-        //        }
-        //        ViewBag.Error = "Thông tin không được để trống";
-        //        return View(ViewBag.Error,f);
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
         //}
-        public ActionResult InsertUser()
-        {
-            return View();
-        }
+        //public ActionResult InsertUser()
+        //{
+        //    return View();
+        //}
         [HttpPost]
         public ActionResult InsertUser(FormCollection f)
         {

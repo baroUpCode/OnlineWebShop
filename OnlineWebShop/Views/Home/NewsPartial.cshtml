@@ -9,9 +9,9 @@
     <a @Url.Action("News","Home",new {id=item.NewsID })>
         <div class="col-md-4 abt-shoe-left">
             <div class="abt-one">
-                <a href="@Url.Action("News","Home",new { id=item.NewsID})"><img src="~/Assets/images/@item.Images" alt="" /></a>
-                <h4 style="max-width:250ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis"><a href="@Url.Action("News","Home",new { id=item.NewsID})">@item.Title</a></h4>
-                <p style="max-width:200ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis">@item.Content</p>
+                <a href="@Url.Action("NewsDetail","Home",new { id=item.NewsID})"><img width="350px" src="~/Assets/images/@item.Images" alt="" /></a>
+                <h4 style="max-width:250ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;width:auto"><a href="@Url.Action("News","Home",new { id=item.NewsID})">@item.Title</a></h4>
+                <p style="max-width:200ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;width:auto" >@item.Content</p>
             </div>
         </div>
     </a>

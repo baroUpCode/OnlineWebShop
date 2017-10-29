@@ -1,6 +1,6 @@
 ﻿@model OnlineWebShop.Models.Catogory
 @{
-    ViewBag.Title = "InsertCatogories";
+    ViewBag.Title = "EditCatogories";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 
@@ -8,19 +8,20 @@
     <div class="modal_outside_login" id="modal">
         <div class="border_modal_login">
             <div class="modal_contain_login">
-                @using (Html.BeginForm("InsertCatogories", "Modules", FormMethod.Post))
-                {
+                @using (Html.BeginForm("EditCatogories", "Modules", FormMethod.Post))
+            {
                     @Html.ValidationSummary(true)
                     <h1>
-                        <span class="text_login">Thông tin thêm mới</span>
+                        <span class="text_login">Sửa thông tin loại sản phẩm</span>
                     </h1>
                     <label class="email_group">
                         <h5>Tên loại:</h5>
-                        <input type="text" name="catName" value="@Model.CatogoriesName" id="email[1]" required aria-required="true" class="input" />
+                        <input type="text" name="catName" value="@Model.CatogoriesName" id="email[1]" aria-required="true" class="input"/>
                         <h5>Tên loại sản phẩm:</h5>
-                        @Html.DropDownList("catRoot", (IEnumerable<SelectListItem>)ViewBag.CatList, new { @class = "form-control" })
+                        @Html.DropDownList("catRoot", (IEnumerable<SelectListItem>)ViewBag.RootCat, new { @class = "form-control" })
+
                     </label>
-                    <input type="submit" value="Thêm mới">
+                    <input type="submit" value="Sửa thông tin">
                 }
                 <div><a href="@Url.Action("Catogories","Modules")">Back To Product List</a></div>
             </div>

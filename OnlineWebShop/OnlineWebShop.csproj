@@ -380,9 +380,11 @@
     <Content Include="Assets\images\Corsair K70 RapidFire RGB Mxspeed 3.jpg" />
     <Content Include="Assets\images\Corsair VOID RGB 7.1 Wireless SE Yellowjacket 3.jpg" />
     <Content Include="Assets\images\Corsair VOID USB RGB 7.1 – Black 3.jpg" />
+    <Content Include="Assets\images\GH70.jpg" />
     <Content Include="Assets\images\Laptop ASUS G752VM-GC066T 4.jpg" />
     <Content Include="Assets\images\Laptop ASUS GX800VH-GY004T 2.jpg" />
     <Content Include="Assets\images\Laptop MSI GS73VR 7RF-265XVN Stealth Pro 1.jpg" />
+    <Content Include="Assets\images\moba.jpg" />
     <Content Include="Assets\images\MSI GV62 7RD 1600XVN 1.jpg" />
     <Content Include="Assets\images\News2.jpg" />
     <Content Include="Assets\images\News2Images.jpg" />
@@ -524,6 +526,8 @@
     <Content Include="Areas\Admin\Views\Modules\InsertUser.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditCustomer.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\EditCatogories.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertCustomer.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>
@@ -568,11 +572,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\RelatedProductCatogory.cshtml" />
-    <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\Home\NewsDetail.cshtml" />
     <Content Include="Views\Home\NewsPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CatogoriesPartial.cshtml" />
     <Content Include="Views\ShoppingCart\InformCustomer.cshtml" />
+    <Content Include="Views\Home\News.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

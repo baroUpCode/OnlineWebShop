@@ -131,14 +131,22 @@ namespace OnlineWebShop.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult News(int id )
+        public ActionResult NewsDetail(int id )
         {
             var news = db.News.SingleOrDefault(x => x.NewsID == id);
             return View(news);
         }
+        public ActionResult News(int? page)
+        {
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            //var prod= db.Products.Select(x=>x.ProducerID==id);
+            var news = db.News.OrderByDescending(x => x.CreatedAt).ToList();
+            return View(news.ToPagedList(pageNum, pageSize));
+        }
         public ActionResult NewsPartial()
         {
-            var news = from s in db.News select s;
+            var news = db.News.OrderByDescending(x=>x.CreatedAt).Take(4);
             return PartialView(news);
         }
         public ActionResult RelatedProductCatogory(int id)
