@@ -7,7 +7,7 @@
 }
 
 <div class="col-md-12">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="search-bar">
             <form action="@Url.Action("SearchCustomers", "Modules")" method="get">
                 <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
@@ -15,7 +15,11 @@
             </form>
         </div>
     </div> 
-</div>    <table class="table table-bordered table-hover table-striped">
+    <div class="col-md-4">
+        <button class="btn-success"><a href="@Url.Action("InsertCustomer","Modules")">Thêm Mới</a></button>
+    </div>
+</div>    
+<table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
                 <th>Mã số</th>

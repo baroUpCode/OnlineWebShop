@@ -15,84 +15,6 @@
         </div>
     </div>
 </div>
-@*@if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
-{}*@
-@*@if (!String.IsNullOrEmpty((String)HttpContext.Current.Session["AccountName"]))
-{
-    //using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    //{
-    Customer cus = (Customer)Session["AccountCustomer"];
-    <table>
-        @using (Html.BeginForm("OrderInform", "ShoppingCart"))
-        {
-            @Html.ValidationSummary(true)
-            <tr>
-                <td>Tên người nhận:</td>
-                <td>
-                    @cus.FullName
-                </td>
-            </tr>
-            <tr>
-                <td>Địa chỉ:</td>
-                <td>
-                    @cus.Address
-                </td>
-            </tr>
-            <tr>
-                <td>Ngay Giao:</td>
-                <td>
-                    <input type="date" name="deliveryDate" />
-                </td>
-            </tr>
-                <tr>
-                    <td>Số điện thoại:</td>
-                    <td>
-                        @cus.Phone
-                    </td>
-                </tr>
-              <tr>
-                  <td><input type="submit" value="Đặt Hàng" /></td>
-        </tr>
-        }
-        </table>
-}
-else
-{
-    <table>
-    @using (Html.BeginForm("OrderInform", "ShoppingCart"))
-    {
-        @Html.ValidationSummary(true)
-        <tr>
-            <td>Tên người nhận:</td>
-            <td>
-                @Html.TextBox("Name")
-            </td>
-        </tr>
-            <tr>
-                <td>Địa chỉ:</td>
-                <td>
-                    @Html.TextBox("Address")
-                </td>
-            </tr>
-            <tr>
-                <td>Ngay Giao:</td>
-                <td>
-                    <input type="date" name="deliveryDate" />
-                </td>
-            </tr>
-            <tr>
-                <td>Số điện thoại:</td>
-                <td>
-                    @Html.TextBox("Phone")
-                </td>
-            </tr>
-                <tr>
-                    <td><input type="submit" value="Đặt Hàng" /></td>
-                </tr>
-    }
-        </table>
-}*@
-
 <!--end-breadcrumbs-->
 <!--start-ckeckout-->
 @using (Html.BeginForm("OrderInform", "ShoppingCart"))
@@ -107,28 +29,29 @@ else
             <input type="text" name="Name" required title="Vui lòng nhập họ và tên" pattern=".{4,}">
         </div>
         <div class="address">
-            <span>Email</span>
-            <input type="email" name="Email" required max="100">
-        </div>
-        <div class="address">
-            <span>Địa chỉ</span>
+            <span>Địa chỉ nhận hàng</span>
             <input type="text" name="Address" required>
         </div>
         <div class="address">
+            <span>Email</span>
+            <input type="email" name="Email" required max="100" width="255" height="42">
+        </div>
+       
+        <div class="address">
             <span>Điện thoại</span>
             <!--thong tin form Phone co kieu mau pattern la so tu 0->9, it nhat 10 va nhieu nhat 12 so-->
-            <input type="tel" name="Phone" min="9" required pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại">
+            <input type="tel" name="Phone" min="9" required pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại" width="255" height="42">
         </div>
         <div class="address">
             <span>Ngày giao</span>
-            <input type="date" name="deliveryDate" required>
+            <input type="date" name="deliveryDate" required min=@DateTime.Now.ToShortDateString()>
         </div>
         @*<div class="address">
             <span> Xác nhận mật khẩu</span>
             <input type="password" name="Passconfirm" required  >
         </div>*@
         <div class="address new">
-            <input type="submit" value="submit">
+            <input type="submit" value="Xác nhận">
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -171,23 +94,23 @@ else
                                 <ul class="unit">
                                     <li></li>
                                     <li><span>Hình ảnh</span></li>
-                                    <li><span>Tên sản phẩm</span></li>
+                                    <li ><span>Tên sản phẩm</span></li>
                                     <li><span>Số lượng</span></li>
                                     <li><span>Đơn giá</span></li>
-                                    <li><span>Thành tiền</span></li>
+                                    <li ><span>Thành tiền</span></li>
                                     @*<li><span>Tình trạng</span></li>*@
                                     <div class="clearfix"> </div>
                                 </ul>
                                 @foreach (var item in Model)
                                 {
-                                    <ul class="cart-header">
+                                    <ul class="cart-header" >
                                         <li>
                                             <a href="@Url.Action("DeleteProductCart", "ShoppingCart", new { proid = item._productID })">
                                                 <div class="close1"> </div>
                                             </a>
                                         </li>
                                         <li class="ring-in">
-                                            <a href="@Url.Action("Details", "Home", new { id = item._productID })"><img src="~/Assets/images/@item._productImages" class="img-responsive" alt=""></a>
+                                            <a href="@Url.Action("Details", "Home", new { id = item._productID })"><img src="~/Assets/images/@item._productImages" class="img-responsive" alt="" width="100px" height="100px"></a>
                                         </li>
                                         <li><a href="@Url.Action("Details", "Home", new { id = item._productID })"><span>@item._productName</span></a></li>
                                         @using (Html.BeginForm("UpdateAmount", "ShoppingCart", new { id = item._productID }))
@@ -210,7 +133,7 @@ else
                                         <div class="clearfix"></div>
                                     </ul>
                                 }
-                                <div colspan="6" style="text-align:right" name="cartTotal">Tổng tiền : @String.Format("{0:0,0}", @ViewBag.Total) VND</div>
+                                    <div colspan="6" style="text-align:right" >Tổng tiền : @String.Format("{0:0,0}", @ViewBag.Total) VND</div>
                                 <div colspan="6" style="text-align:right">@Html.ActionLink("Xóa giỏ hàng", "DeleteCart", "ShoppingCart")</div>
                                 <div colspan="6" style="text-align:right">@Html.ActionLink("Tiếp tục mua hàng", "Index", "Home")</div>
                             </div>
@@ -222,3 +145,4 @@ else
         <!--End Thong tin gio hang-->
     </div>
 }
+<hr />

@@ -193,13 +193,16 @@ namespace OnlineWebShop.Controllers
             Order order = new Order();
             
             List<ShoppingCartModels> listCart = GetShoppingCart();
+            var total = listCart.Sum(x => x._total).ToString();
             Detail de = new Detail();
             if (Session["AccountCustomer"] != null)
             {
                 Customer cus = (Customer)Session["AccountCustomer"];
                 Reciever rec = new Reciever();
                 order.CustomerID = cus.CustomerID; // luu lai thong tin listgiohang vao db 
-                order.Status = false;
+                order.Status = 0;
+                order.Total = Int32.Parse(total);
+                order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
                 db.Orders.InsertOnSubmit(order);
                 db.SubmitChanges();
                 rec.RecieverName = cus.FullName;
@@ -218,8 +221,10 @@ namespace OnlineWebShop.Controllers
                 db.Recievers.InsertOnSubmit(rec);
                 db.SubmitChanges();
                 order.RecieverID = rec.RecieverID;
-                order.Total = Convert.ToInt64(f["cartTotal"]);
-                order.Status = false;
+                db.Orders.InsertOnSubmit(order);
+                order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                order.Total = Int32.Parse(total);
+                order.Status = 0;
                 db.Orders.InsertOnSubmit(order);
                 db.SubmitChanges();
             }
@@ -231,7 +236,6 @@ namespace OnlineWebShop.Controllers
                 de.Quantity = item._quantity;
                 de.UnitPrice = item._unitPrice;
                 de.Total = item._total;
-                de.DeliveryDate = Convert.ToDateTime(f["deliveryDate"]);
                 db.Details.InsertOnSubmit(de);
             }
             db.SubmitChanges();

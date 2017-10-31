@@ -426,27 +426,29 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Customers", "Modules");
         }
-        //public ActionResult InsertCustomer()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult InsertCustomer(FormCollection f)
-        //{
-        //            Customer cus = new Customer();
-        //            cus.FullName = f["cusName"];
-        //            cus.Email = f["cusEmail"];
-        //            cus.Phone = f["cusPhone"];
-        //            cus.Pass = f["cusPass"];
-        //            cus.Province = f["cusProvince"];
-        //            db.Customers.InsertOnSubmit(cus);
-        //            db.SubmitChanges();
-        //            return RedirectToAction("Customers", "Modules");
-        //}
-        //public ActionResult InsertUser()
-        //{
-        //    return View();
-        //}
+        public ActionResult InsertCustomer()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult InsertCustomer(FormCollection f)
+        {
+            Customer cus = new Customer();
+            cus.FullName = f["Name"];
+            cus.Email = f["Email"];
+            cus.Phone =f["Phone"];
+            cus.Pass = f["cusPass"];
+            cus.Address = f["Address"];
+            cus.BirthDay = DateTime.Parse(f["BirthDay"]);
+            cus.Pass = f["Pass"];
+            db.Customers.InsertOnSubmit(cus);
+            db.SubmitChanges();
+            return RedirectToAction("Customers", "Modules");
+        }
+        public ActionResult InsertUser()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult InsertAdmin(FormCollection f)
         {
@@ -495,6 +497,84 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.AdminAccounts.DeleteOnSubmit(u);
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
+        }
+        /// <summary>
+        /// Show-Sua Order
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public ActionResult Orders(int? page)
+        {
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            return View(db.Orders.OrderByDescending(x=>x.CreatedAt).ToPagedList(pageNum,pageSize));
+        }
+        public ActionResult SearchOrders(int? page, string searchString)
+        {
+            var product = db.Orders.Where(x => (x.Customer.FullName.Contains(searchString) || x.Reciever.Phone.ToString().Contains(searchString) || x.DeliveryDate.ToString().Contains(searchString)));
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum, pageSize));
+        }
+        /// <summary>
+        /// Them hoa don : can chon san pham + tinh tong tien cua hoa don roi xuat ra 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        //public ActionResult InsertOrders()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult InsertOrders(FormCollection f)
+        //{
+        //    Order order = new Order();
+        //    if (ModelState.IsValid)
+        //    {
+        //        order.Reciever.RecieverName = f["recName"];
+        //        order.Reciever.Address = f["recAddress"];
+        //        order.Reciever.Phone = Int32.Parse(f["recPhone"]);
+        //        order.Status = Convert.ToByte(f["ordStatus"]);
+        //        order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+        //        db.Orders.InsertOnSubmit(order);
+        //        db.SubmitChanges();
+        //    }
+        //    return RedirectToAction("Orders", "Modules");
+        //}
+        public ActionResult EditOrders(int id)
+        {
+            //Start binding data dropdownlist
+        
+            //End binding data dropdownlist
+            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
+                List<SelectListItem> status = new List<SelectListItem>();
+            status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0"});
+            status.Add(new SelectListItem() { Text = "Đã giao", Value = "1" });
+            ViewBag.OrderStatus = new SelectList(status, "Value", "Text",order.Status.Value);
+            return View(order);
+        }
+        [HttpPost]
+        public ActionResult EditOrders(int id,FormCollection f)
+        {
+            var order = db.Orders.SingleOrDefault(x => x.OrderID==id);
+            if (ModelState.IsValid)
+            {
+                order.Reciever.RecieverName = f["recName"];
+                order.Reciever.Address = f["recAddress"];
+                order.Reciever.Phone = Int32.Parse(f["recPhone"]);
+                order.Status =Convert.ToByte(f["ordStatus"]);
+                order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                db.SubmitChanges();
+            }
+            return RedirectToAction("Orders", "Modules");
+        }
+        public ActionResult DeleteOrders(int id)
+        {
+            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
+            db.Orders.DeleteOnSubmit(order);
+            db.SubmitChanges();
+            return RedirectToAction("Orders","Modules");
         }
         /// <summary>
         /// Searching button

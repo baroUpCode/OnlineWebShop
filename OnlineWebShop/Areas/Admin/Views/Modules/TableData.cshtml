@@ -4,7 +4,7 @@
     @if (Convert.ToString(Session["PermissionID"]) == "1")
     {
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="search-bar">
                     <form action="@Url.Action("SearchAdmin","Modules")" method="get">
                         <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
@@ -46,10 +46,9 @@
     }
     else
     {
-       
         <div class="col-md-12">
             <div class="col-md-12">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="search-bar">
                         <form action="@Url.Action("SearchAdmin","Modules")" method="get">
                             <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">

@@ -19,7 +19,9 @@
                         <h5>Loại</h5>
                         @Html.DropDownList("catRoot", (IEnumerable<SelectListItem>)ViewBag.CatList, new { @class = "form-control" })
                     </label>
-                    <input type="submit" value="Thêm mới">
+                    <div class="address new">
+                        <input type="submit" value="Thêm mới">
+                    </div>
                 }
                 <div><a href="@Url.Action("Catogories","Modules")">Back To Product List</a></div>
             </div>

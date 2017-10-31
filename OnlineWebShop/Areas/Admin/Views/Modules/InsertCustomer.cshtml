@@ -1,6 +1,6 @@
 ﻿@model OnlineWebShop.Models.Customer
 @{
-    ViewBag.Title = "EditCustomer";
+    ViewBag.Title = "InsertCustomer";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 <div class="account">
@@ -10,41 +10,42 @@
                 <div class="account-top heading">
                     <h3>Thông tin khách hàng</h3>
                 </div>
-                @using (Html.BeginForm("EditCustomer", "Modules", FormMethod.Post))
+                @using (Html.BeginForm("InsertCustomer", "Modules", FormMethod.Post))
                 {
                     @Html.ValidationSummary(true)
                     <div class="address">
                         <span>Họ và tên</span>
-                        <input type="text" name="Name" value="@Model.FullName" title="Vui lòng nhập họ và tên" pattern=".{4,}" disabled>
-                    </div>
-                    <div class="address">
-                        <span>Email</span>
-                        <input type="email" name="Email" value="@Model.Email" required max="100" disabled>
+                        <input type="text" name="Name"  title="Vui lòng nhập họ và tên" pattern=".{4,}" >
                     </div>
                     <div class="address">
                         <span>Địa chỉ</span>
-                        <input type="text" name="Address" value="@Model.Address" required>
+                        <input type="text" name="Address" required>
                     </div>
+                    <div class="address">
+                        <span>Email</span>
+                        <input type="email" name="Email"  required max="100" >
+                    </div>
+                   
                     <div class="address">
                         <span>Điện thoại</span>
                         <!--thong tin form Phone co kieu mau pattern la so tu 0->9, it nhat 10 va nhieu nhat 12 so-->
-                        <input type="tel" name="Phone" required value="@Model.Phone" pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại">
+                        <input type="tel" name="Phone" required  pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại">
                     </div>
                     <div class="address">
                         <span>Ngày sinh</span>
-                        <input type="text" name="BirthDay" value="@Model.BirthDay" disabled> 
+                        <input type="date" name="BirthDay" >
                     </div>
                     <div class="address">
                         <span>Mật khẩu</span>
                         <!--form password yeu cau phai nhap it nhat 6 ky tu giong nhu mau pattern-->
-                        <input type="password" name="Pass" required value="@Model.Pass" pattern=".{6,}" title="Mật khẩu phải có ít nhất 6 ký tự">
+                        <input type="password" name="Pass" value="123456" required pattern=".{6,}" title="Mật khẩu phải có ít nhất 6 ký tự">
                     </div>
                     @*<div class="address">
                             <span> Xác nhận mật khẩu</span>
                             <input type="password" name="Passconfirm" required  >
                         </div>*@
                     <div class="address new">
-                        <input type="submit" value="Sửa thông tin">
+                        <input type="submit" value="Thêm">
                     </div>
                 }
             </div>

@@ -768,6 +768,10 @@
     <Content Include="Areas\Admin\Views\Modules\SearchCustomers.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\SearchNews.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\SearchProducers.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\EditOrders.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\Orders.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchOrders.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertCustomer.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

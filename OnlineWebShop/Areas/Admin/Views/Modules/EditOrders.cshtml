@@ -1,0 +1,37 @@
+﻿@model OnlineWebShop.Models.Order
+@{
+    ViewBag.Title = "EditOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div class="modal_outside_login" id="modal">
+    <div class="border_modal_login">
+        <div class="modal_contain_login">
+            @using (Html.BeginForm("EditOrders", "Modules", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <h1>
+                    <span class="text_login">Sửa thông tin hóa đơn </span>
+                </h1>
+                    <label class="email_group">
+                        <h5>Mã hóa đơn</h5>
+                        <input type="text"value="@Model.OrderID" disabled/>
+                        <h5>Ngày giao hàng</h5>
+                        <input type="date" name="deliveryDate" value=@Model.DeliveryDate.Value  class="input" id="deliveryDate"/>
+                        <h5>Tình trạng</h5>
+                        @Html.DropDownList("ordStatus", (IEnumerable<SelectListItem>)ViewBag.OrderStatus, new { @class = "form-control" })
+                        <h5>Tên người nhận hàng</h5>
+                        <input type="text" name="recName" value="@Model.Reciever.RecieverName" required title="Vui lòng nhập họ và tên" pattern=".{4,}">
+                        <h5>Địa chỉ nhận hàng</h5>
+                        <input type="text" name="recAddress" value="@Model.Reciever.Address" aria-required="true" id="pwd[1]" required class="input" />
+                        <h5>Số điện thoại</h5>
+                        <input type="tel" name="recPhone" value="@Model.Reciever.Phone"required pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại">
+                    </label>
+                    <div class="address new">
+                        <input type="submit" value="Sửa thông tin">
+                    </div>
+            }
+            <div><a href="@Url.Action("News","Modules")">Trở về trang trước</a></div>
+        </div>
+    </div>
+</div>
+

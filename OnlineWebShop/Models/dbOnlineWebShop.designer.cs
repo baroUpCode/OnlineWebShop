@@ -1872,8 +1872,6 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<double> _Total;
 		
-		private System.Nullable<System.DateTime> _DeliveryDate;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1888,8 +1886,6 @@ namespace OnlineWebShop.Models
     partial void OnUnitPriceChanged();
     partial void OnTotalChanging(System.Nullable<double> value);
     partial void OnTotalChanged();
-    partial void OnDeliveryDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDeliveryDateChanged();
     #endregion
 		
 		public Detail()
@@ -1993,26 +1989,6 @@ namespace OnlineWebShop.Models
 					this._Total = value;
 					this.SendPropertyChanged("Total");
 					this.OnTotalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DeliveryDate
-		{
-			get
-			{
-				return this._DeliveryDate;
-			}
-			set
-			{
-				if ((this._DeliveryDate != value))
-				{
-					this.OnDeliveryDateChanging(value);
-					this.SendPropertyChanging();
-					this._DeliveryDate = value;
-					this.SendPropertyChanged("DeliveryDate");
-					this.OnDeliveryDateChanged();
 				}
 			}
 		}
@@ -2357,7 +2333,7 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Order]")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
 	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2379,9 +2355,11 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<int> _CustomerID;
 		
-		private bool _Status;
+		private System.Nullable<byte> _Status;
 		
 		private System.Nullable<int> _RecieverID;
+		
+		private System.Nullable<System.DateTime> _DeliveryDate;
 		
 		private EntityRef<Customer> _Customer;
 		
@@ -2407,10 +2385,12 @@ namespace OnlineWebShop.Models
     partial void OnModifiedAtChanged();
     partial void OnCustomerIDChanging(System.Nullable<int> value);
     partial void OnCustomerIDChanged();
-    partial void OnStatusChanging(bool value);
+    partial void OnStatusChanging(System.Nullable<byte> value);
     partial void OnStatusChanged();
     partial void OnRecieverIDChanging(System.Nullable<int> value);
     partial void OnRecieverIDChanged();
+    partial void OnDeliveryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDeliveryDateChanged();
     #endregion
 		
 		public Order()
@@ -2584,8 +2564,8 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public bool Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<byte> Status
 		{
 			get
 			{
@@ -2624,6 +2604,26 @@ namespace OnlineWebShop.Models
 					this._RecieverID = value;
 					this.SendPropertyChanged("RecieverID");
 					this.OnRecieverIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> DeliveryDate
+		{
+			get
+			{
+				return this._DeliveryDate;
+			}
+			set
+			{
+				if ((this._DeliveryDate != value))
+				{
+					this.OnDeliveryDateChanging(value);
+					this.SendPropertyChanging();
+					this._DeliveryDate = value;
+					this.SendPropertyChanged("DeliveryDate");
+					this.OnDeliveryDateChanged();
 				}
 			}
 		}
