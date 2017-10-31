@@ -764,6 +764,10 @@
     <Content Include="Areas\Admin\Views\Modules\EditNews.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertNews.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\SearchProducts.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchCatogories.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchCustomers.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchNews.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchProducers.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

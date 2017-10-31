@@ -6,10 +6,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
     <div class="col-md-12">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="search-bar">
                 <form action="@Url.Action("SearcProducts", "Modules")" method="get">
-                    <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
+                    <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
                     <input type="submit" value="">
                 </form>
             </div>
@@ -18,6 +18,7 @@
             <button class="btn-success"><a href="@Url.Action("InsertProduct","Modules")">Thêm Mới</a></button>
         </div>
     </div>
+<div class="col-md-12"><h3>Kết quả tìm kiếm : @ViewBag.Search</h3></div>
     <div class="col-md-12">
         <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -40,7 +41,7 @@
                         <td>@item.ProductID</td>
                         <td class="wh180"><img src="~/Assets/images/@item.ProductImages" style="width:200px;height:200px" /></td>
                         <td>@item.Name</td>
-                        <td style="max-width:100ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="100px">@item.Description</td>
+                        @*<td style="max-width:100ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="100px">@item.Description</td>*@
                         <td>@item.Catogory.CatogoriesName</td>
                         <td>@item.Producer.Name</td>
                         <td>@item.Warranty</td>

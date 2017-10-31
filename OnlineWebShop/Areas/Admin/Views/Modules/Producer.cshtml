@@ -7,22 +7,18 @@
 }
 
    <div class="col-md-12">
-    <div class="col-md-3">
-        <div class="search-bar">
-            <form action="@Url.Action("SearchProducers", "Modules")" method="get">
-                <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
-                <input type="submit" value="">
-            </form>
-        </div>
-    </div>
+       <div class="col-md-4">
+           <div class="search-bar">
+               <form action="@Url.Action("SearchProducers", "Modules")" method="get">
+                   <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
+                   <input type="submit" value="">
+               </form>
+           </div>
+       </div>
     <div class="col-md-4">
         <button class="btn-success"><a href="@Url.Action("InsertProducers","Modules")">Thêm Mới</a></button>
     </div>
 </div>
-        <div class="col-md-4">
-            <button class="btn-success"><a href="@Url.Action("InsertProduct","Modules")">Thêm Mới</a></button>
-        </div>
-    </div>
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>

@@ -4,10 +4,10 @@
     @if (Convert.ToString(Session["PermissionID"]) == "1")
     {
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="search-bar">
                     <form action="@Url.Action("SearchAdmin","Modules")" method="get">
-                        <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
+                        <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
                         <input type="submit" value="">
                     </form>
                 </div>
@@ -46,7 +46,18 @@
     }
     else
     {
+       
         <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="search-bar">
+                        <form action="@Url.Action("SearchAdmin","Modules")" method="get">
+                            <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
+                            <input type="submit" value="">
+                        </form>
+                    </div>
+                </div>
+            </div>
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>

@@ -18,10 +18,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-        public ActionResult TableData()
+        public ActionResult TableData(int? page)
         {
-            var user = db.AdminAccounts;
-            return PartialView(user);
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(db.AdminAccounts.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult Products(int? page)
         {
@@ -158,15 +159,18 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Catogories()
+        public ActionResult Catogories(int? page)
         {
-            return View(db.Catogories.ToList());
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(db.Catogories.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditCatogories(int id)
         {
 
             Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
             List<RootCatogory> root = db.RootCatogories.ToList();
+
             ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", cat.RootCatogoryID);
             return View(cat);
         }
@@ -214,9 +218,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Producer()
+        public ActionResult Producer(int? page)
         {
-            return View(db.Producers.ToList());
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(db.Producers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditProducer(int id)
         {
@@ -386,9 +392,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Customers()
+        public ActionResult Customers(int? page)
         {
-            return View(db.Customers.ToList());
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(db.Customers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
         public ActionResult EditCustomer(int id)
         {
@@ -488,7 +496,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
-
+        /// <summary>
+        /// Searching button
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         public ActionResult SearchProducts(int? page,string searchString)
         {
             var product = db.Products.Where(x=>(x.Name.Contains(searchString) || x.Catogory.CatogoriesName.Contains(searchString)|| x.Producer.Name.Contains(searchString)));
@@ -523,7 +536,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult SearchProducers(int? page, string searchString)
         {
-            var product = db.Producers.Where(x => (x.Name.Contains(searchString) || x.ProducerID.ToString()==searchString)));
+            var product = db.Producers.Where(x => (x.Name.Contains(searchString) || x.ProducerID.ToString()==searchString));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;
