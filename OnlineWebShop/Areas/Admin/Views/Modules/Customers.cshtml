@@ -1,25 +1,21 @@
-﻿@model IEnumerable<OnlineWebShop.Models.Customer>
+﻿@using OnlineWebShop.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<OnlineWebShop.Models.Customer>
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 
-<div id="page-wrapper">
-    @*<div class="col-md-12">
+<div class="col-md-12">
     <div class="col-md-3">
         <div class="search-bar">
-            @using (Html.BeginForm("SearchingwName", "Modules", FormMethod.Post))
-            {
+            <form action="@Url.Action("SearchCustomers", "Modules")" method="get">
                 <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
                 <input type="submit" value="">
-            }
+            </form>
         </div>
-    </div>
-    <div class="col-md-4">
-    </div>
-</div>*@
-
-    <table class="table table-bordered table-hover table-striped">
+    </div> 
+</div>    <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
                 <th>Mã số</th>
@@ -47,6 +43,6 @@
             }
         </tbody>
     </table>
-</div>
+<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Customers", "Modules", new { page = page }))</div>
 
 

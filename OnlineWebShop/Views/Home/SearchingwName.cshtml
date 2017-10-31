@@ -1,23 +1,23 @@
-﻿@*@using OnlineWebShop.Models
+﻿@using OnlineWebShop.Models
 @using PagedList.Mvc;
-@model PagedList.PagedList<Product>*@
-@model IEnumerable<OnlineWebShop.Models.Product>
+@model PagedList.PagedList<Product>
+@*@model IEnumerable<OnlineWebShop.Models.Product>*@
 @{
     ViewBag.Title = "SearchingwName";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<h2>Kết quả tìm kiếm :@ViewBag.Result</h2>
+<h2>Kết quả tìm kiếm :@ViewBag.Search</h2>
 <div class="shoes">
     <div class="container">
         <div class="product-one clearfix">
             <div class="col-md-12">
-                <div class="col-md-9 group-right">
+                @*<div class="col-md-9 group-right">*@
                     @foreach (var item in Model)
                     {
-                        <div class="col-md-3 product-left" style="width:200px;height:500px">
+                        <div class="col-md-4 product-left">
                             <a href="@Url.Action("Details", "Home", new { id = item.ProductID })">
-                                <div class="p-one simpleCart_shelfItem">
+                                <div class="p-one simpleCart_shelfItem" style="width:300px;height:400px">
                                     <img src="/Assets/images/@item.ProductImages" alt="@item.Name" style="height:200px" />
                                     <div class="mask">
                                     </div>
@@ -30,9 +30,9 @@
                             </a>
                         </div>
                     }
-                </div>
+                @*</div>*@
             </div>
-            @*<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SearchingwName", new {page = page }))</div>*@
+            <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SearchingwName", new {page = page, searchstring= @ViewBag.Search }))</div>
         </div>
     </div>
 </div>

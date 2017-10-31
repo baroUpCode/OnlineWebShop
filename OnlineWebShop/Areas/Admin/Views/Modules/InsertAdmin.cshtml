@@ -3,11 +3,9 @@
     ViewBag.Title = "InsertUser";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
-<div id="page-wrapper">
-
-                    @using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
+@using (Html.BeginForm("InsertUser", "Modules", FormMethod.Post))
             {
-                        @Html.ValidationSummary(true)
+               @Html.ValidationSummary(true)
                 <h1>
                    <span class="text_login">Thêm mới</span>
 
@@ -22,6 +20,5 @@
                      @Html.Action("PermissionList", "Modules")
                      </label>
                      <input type="submit" class="btn_login" value="Thêm mới">
-                    }
-</div>
+    }
 

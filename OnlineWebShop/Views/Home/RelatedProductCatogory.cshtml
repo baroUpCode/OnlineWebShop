@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<OnlineWebShop.Models.Product>
 <div class="latest products">
-    <div class="product-one">
+    @*<div class="product-one">*@
 @foreach (var item in Model)
 {
         <div class="col-md-3 product-left single-left" >
-            <div class="p-one simpleCart_shelfItem" style="width:200px;height:500px">
+            <div class="p-one simpleCart_shelfItem" style="width:250px;height:400px">
                 <a href="@Url.Action("Details", "Home", new { id = item.ProductID }, null)">
                     <img src="~/Assets/images/@item.ProductImages" alt="@item.Name" style="height:200px" />
                     <div class="mask mask1">
                     </div>
                     <h4>@item.Name</h4>
-                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">@String.Format("{0:0,0}", item.Price) VND</span></a></p>
+                    <p><a class="item_add" href="@Url.Action("InsertCart", "ShoppingCart", new { proid = item.ProductID, url = @Request.Url.ToString()})"><i></i> <span class=" item_price">@String.Format("{0:0,0}", item.Price) VND</span></a></p>
                 </a>
             </div>
         </div>
 }
-    </div>
+    @*</div>*@
 </div>

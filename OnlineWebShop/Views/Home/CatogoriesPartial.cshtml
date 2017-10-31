@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<OnlineWebShop.Models.Catogory>
-    <div class="col-md-3">
-            <div class="list">
+    <div class="col-md-3 left">
+           *<div class="list">
                 <ul class="list-group">
                     @foreach (var item in Model)
             {
                         <a href="@Url.Action("SortByCatogories", "Home",new {id=item.CatogoriesID })" class="item">
-                            <li class="list-group-item">@item.CatogoriesName</li>
+                            <li class="list-group-item"><h4>@item.CatogoriesName</h4></li>
                         </a>
                     }
                 </ul>
-            </div>
+           *</div>
     </div>
 

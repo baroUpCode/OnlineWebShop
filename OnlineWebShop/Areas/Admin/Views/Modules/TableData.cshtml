@@ -1,18 +1,19 @@
-﻿@model IEnumerable<OnlineWebShop.Models.AdminAccount>
+﻿@using OnlineWebShop.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<OnlineWebShop.Models.AdminAccount>
     @if (Convert.ToString(Session["PermissionID"]) == "1")
     {
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="search-bar">
-                    @using (Html.BeginForm("SearchingwName", "Modules", FormMethod.Post))
-                {
+                    <form action="@Url.Action("SearchAdmin","Modules")" method="get">
                         <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
                         <input type="submit" value="">
-                    }
+                    </form>
                 </div>
             </div>
             <div class="col-md-4">
-                <button class="btn-success"><a href="@Url.Action("InsertCatogories","Modules")">Thêm Mới</a></button>
+                <button class="btn-success"><a href="@Url.Action("InsertAdmin","Modules")">Thêm Mới</a></button>
             </div>
         </div>
 <div class="col-md-12">
@@ -46,20 +47,6 @@
     else
     {
         <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="search-bar">
-                    @using (Html.BeginForm("SearchingwName", "Modules", FormMethod.Post))
-                {
-                        <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
-                        <input type="submit" value="">
-                    }
-                </div>
-            </div>
-            <div class="col-md-4">
-                @*<button class="btn-success" disabled><a href="@Url.Action("InsertCatogories","Modules")">Thêm Mới</a></button>*@
-            </div>
-        </div>
-        <div class="col-md-12">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
@@ -75,7 +62,7 @@
                         <tr>
                             <td>@item.AdminID</td>
                             <td>@item.FullName</td>     
-                                <td><button type="button" class="btn btn-warning" disabled><a href=" @Url.Action("EditUser", "Modules", new { id = item.AdminID })">Sửa</a></button> | <button type="button" class="btn btn-danger" disabled><a href=" @Url.Action("DeleteUser", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
+                                <td><button type="button" class="btn btn-warning" disabled><a href=" @Url.Action("EditAdmin", "Modules", new { id = item.AdminID })">Sửa</a></button> | <button type="button" class="btn btn-danger" disabled><a href=" @Url.Action("DeleteAdmin", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
                             
                         </tr>
                     }
@@ -83,3 +70,4 @@
             </table>
         </div>
     }
+<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("TableData", "Modules", new { page = page }))</div>

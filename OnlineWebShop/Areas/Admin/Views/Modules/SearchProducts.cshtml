@@ -1,18 +1,21 @@
-﻿@model IEnumerable<OnlineWebShop.Models.Product>
+﻿@using OnlineWebShop.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<OnlineWebShop.Models.Product>
 @{
     ViewBag.Title = "SearchingProducts";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
-<div id="page-wrapper">
     <div class="col-md-12">
         <div class="col-md-3">
             <div class="search-bar">
-                @using(Html.BeginForm("SearchingProducts", "Modules", FormMethod.Post)
-                {
+                <form action="@Url.Action("SearcProducts", "Modules")" method="get">
                     <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
                     <input type="submit" value="">
-                }
+                </form>
             </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn-success"><a href="@Url.Action("InsertProduct","Modules")">Thêm Mới</a></button>
         </div>
     </div>
     <div class="col-md-12">
@@ -22,7 +25,6 @@
                     <th>Mã số</th>
                     <th>Hình ảnh</th>
                     <th>Tên sản phẩm</th>
-                    <th>Mô tả</th>
                     <th>Loại sản phẩm</th>
                     <th>Nhà sản xuất</th>
                     <th>Thời gian bảo hành</th>
@@ -53,7 +55,7 @@
             </tbody>
         </table>
     </div>
-</div>
+    <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SearchProducts", new { page = page, searchstring = @ViewBag.Search }))</div>
 
 
 

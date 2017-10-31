@@ -723,7 +723,6 @@
     <Content Include="Areas\Admin\Views\Modules\Producer.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\News.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\Customers.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\Sliders.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertCatogories.cshtml" />
     <Content Include="Assets\fonts\Asap-Bold.ttf" />
     <Content Include="Assets\fonts\Asap-BoldItalic.ttf" />
@@ -739,12 +738,11 @@
     <Content Include="Assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Modules\TableData.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\PopupAddUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\EditAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\PermissionList.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditProducer.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditProduct.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\InsertUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditCustomer.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\EditCatogories.cshtml" />
@@ -765,7 +763,7 @@
     <Content Include="Areas\Admin\Assets\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Areas\Admin\Views\Modules\EditNews.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\InsertNews.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\SearchingProducts.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\SearchProducts.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

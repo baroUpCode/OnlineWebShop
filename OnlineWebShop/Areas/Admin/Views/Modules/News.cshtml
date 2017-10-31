@@ -5,21 +5,19 @@
     ViewBag.Title = "News";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
-<div id="page-wrapper">
-    <div class="col-md-12">
-        @*<div class="col-md-3">
-           <div class="search-bar">
-                @using (Html.BeginForm("SearchingNews", "Modules", FormMethod.Post))
-                {
-                    <input type="text" placeholder="Nhập từ khóa" name="searchString" id="searchString">
-                    <input type="submit" value="">
-                }
-            </div>
-        </div>*@
-        <div class="col-md-4">
-            <button class="btn-success"><a href="@Url.Action("InsertNews","Modules")">Thêm Mới</a></button>
+   <div class="col-md-12">
+    <div class="col-md-3">
+        <div class="search-bar">
+            <form action="@Url.Action("SearchNews", "Modules")" method="get">
+                <input type="text" placeholder="Nhập sản phẩm" name="searchString" id="searchString">
+                <input type="submit" value="">
+            </form>
         </div>
     </div>
+    <div class="col-md-4">
+        <button class="btn-success"><a href="@Url.Action("InsertNews","Modules")">Thêm Mới</a></button>
+    </div>
+</div>
     <div class="col-md-12">
         <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -47,9 +45,8 @@
                 }
             </tbody>
         </table>
-        <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("News", "Modules", new { page = page }))</div>
     </div>
-</div>
+<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("News", "Modules", new { page = page }))</div>
 
 
 

@@ -127,15 +127,16 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                     var fileName = Path.GetFileName(uploadFile.FileName);
                     //Luu anh tu duong dan sang ~assets/images
                     var pathstr = Path.Combine(Server.MapPath("~/Assets/images/"), fileName);
-                    if (System.IO.File.Exists(pathstr))
-                    {
-                        ViewBag.Mess = "Hình ảnh đã tồn tại";
-                        return this.InsertProduct();
-                    }
-                    else
-                    {
-                        uploadFile.SaveAs(pathstr);
-                    }
+                    uploadFile.SaveAs(pathstr);
+                    //if (System.IO.File.Exists(pathstr))
+                    //{
+                    //    ViewBag.Mess = "Hình ảnh đã tồn tại";
+                    //    return this.InsertProduct();
+                    //}
+                    //else
+                    //{
+                    //    uploadFile.SaveAs(pathstr);
+                    //}
                     pro.ProductImages = fileName;
                     UpdateModel(pro);
                     db.SubmitChanges();
@@ -439,7 +440,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         //    return View();
         //}
         [HttpPost]
-        public ActionResult InsertUser(FormCollection f)
+        public ActionResult InsertAdmin(FormCollection f)
         {
             AdminAccount u = new AdminAccount();
             u.Email = f["email"];
@@ -450,7 +451,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
-        public ActionResult EditUser(int id)
+        public ActionResult InsertAdmin(int id)
         {
             var admin = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
 
@@ -469,7 +470,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return PartialView(ViewBag.PermissionList);
         }
         [HttpPost]
-        public ActionResult EditUser(FormCollection f, int id)
+        public ActionResult EditAdmin(FormCollection f, int id)
         {
             List<AdminAccount> perid = new List<AdminAccount>();
             var u = db.AdminAccounts.FirstOrDefault(x => x.AdminID == id);
@@ -480,23 +481,55 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
-        public ActionResult DeleteUser(int id)
+        public ActionResult DeleteAdmin(int id)
         {
             var u = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
             db.AdminAccounts.DeleteOnSubmit(u);
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
-        [HttpPost]
-        public ActionResult SearchingProducts(FormCollection f)
+
+        public ActionResult SearchProducts(int? page,string searchString)
         {
-            var product = (from p in db.Products where p.Name.Contains(f["searchString"].ToString()) || p.Catogory.CatogoriesName.Contains(f["searchString"].ToString()) || p.Producer.Name.Contains(f["searchString"].ToString()) || p.ProductID == Int32.Parse(f["searchString"].ToString()) select p ).ToList();
-            return View(product);
+            var product = db.Products.Where(x=>(x.Name.Contains(searchString) || x.Catogory.CatogoriesName.Contains(searchString)|| x.Producer.Name.Contains(searchString)));
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum,pageSize));
         }
-        public ActionResult SearchingProducts()
+        public ActionResult SearchCatogories(int? page, string searchString)
         {
-            return View();
+            var product = db.Catogories.Where(x => (x.CatogoriesName.Contains(searchString) || x.RootCatogory.RootCatogoryName.Contains(searchString)));
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum, pageSize));
         }
+        public ActionResult SearchCustomers(int? page, string searchString)
+        {
+            var product = db.Customers.Where(x => (x.FullName.Contains(searchString) || x.CustomerID.ToString()==searchString || x.Email.Contains(searchString) || x.Address.Contains(searchString) || x.Phone.Contains(searchString)));
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum, pageSize));
+        }
+        public ActionResult SearchNews(int? page, string searchString)
+        {
+            var product = db.News.Where(x => (x.NewsID.ToString()==searchString || x.Title.Contains(searchString) || x.RootCatogory.RootCatogoryName.Contains(searchString) || x.Content.Contains(searchString)));
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum, pageSize));
+        }
+        public ActionResult SearchProducers(int? page, string searchString)
+        {
+            var product = db.Producers.Where(x => (x.Name.Contains(searchString) || x.ProducerID.ToString()==searchString)));
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum, pageSize));
+        }
+
     }
 
 }

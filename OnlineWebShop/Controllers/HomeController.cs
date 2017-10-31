@@ -85,18 +85,23 @@ namespace OnlineWebShop.Controllers
             //var prod= db.Products.Select(x=>x.ProducerID==id);
             return View(prod.ToPagedList(pageNum, pageSize));
         }
-        [HttpPost]
-        public ActionResult SearchingwName(/*int? page,*/FormCollection f)
+        //[HttpPost]
+        //public ActionResult SearchingwName(/*int? page,*/FormCollection f)
+        //{
+        //    //int pageSize = 8;
+        //    //int pageNum = (page ?? 1);
+        //    //var product = (from p in db.Products where p.Name.Contains(f["searchString"]) || p.Catogory.CatogoriesName.Contains(f["searchString"]) || p.Producer.Name.Contains(f["searchString"]) select p).ToList();
+        //    //ViewBag.Result = f["searchString"].ToString();
+        //    //return View(product/*.ToPagedList(pageNum, pageSize*/);
+        //}
+        public ActionResult SearchingwName(int? page,string searchString)
         {
-            //int pageSize = 8;
-            //int pageNum = (page ?? 1);
-            var product = (from p in db.Products where p.Name.Contains(f["searchString"]) || p.Catogory.CatogoriesName.Contains(f["searchString"]) || p.Producer.Name.Contains(f["searchString"]) select p).ToList();
-            ViewBag.Result = f["searchString"].ToString();
-            return View(product/*.ToPagedList(pageNum, pageSize*/);
-        }
-        public ActionResult SearchingwName()
-        {
-            return View();
+            
+            var product = db.Products.Where(x => (x.Name.Contains(searchString) || x.Catogory.CatogoriesName.Contains(searchString) || x.Producer.Name.Contains(searchString))).OrderByDescending(x => x.CreatedAt).ToList();
+            int pageSize = 9;
+            int pageNum = (page ?? 1);
+            ViewBag.Search = searchString;
+            return View(product.ToPagedList(pageNum,pageSize));
         }
    
         public ActionResult Contact()
