@@ -73,71 +73,60 @@ $(window).load(function() {
                     </div>
                     <div class="col-md-7 single-top-right" >
                         <div class="details-left-info simpleCart_shelfItem">
-                            <h3>@Model.Name</h3>
+                            <h3>@Model.Name <div class="fb-share-button" data-href="http://localhost:51705/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A51705%2F&amp;src=sdkpreparse">Share</a></div></h3>
                             @if (Model.Status != false)
                             {
-                            <p class="availability">Tình trạng: <span class="color">Còn hàng</span></p>
+                            <h4 class="availability">Tình trạng: <span class="color">Còn hàng</span></h4>
                             }
                             else
                             {
                                 <p class="availability">Tình trạng: <span class="color">Hết hàng</span></p>
                             }
-                            <p><span >Nhà sản xuất: @Html.Action("ProducerName", "Home", new { id = Model.ProducerID })</span></p>
-                            <p><span>Thời gian bảo hành : @Model.Warranty Tháng</span></p>
+                            <h4><span >Nhà sản xuất: @Html.Action("ProducerName", "Home", new { id = Model.ProducerID })</span></h4>
+                            <h4><span>Thời gian bảo hành : @Model.Warranty Tháng</span></h4>
                             <div class="price_single">
-                                <span>@String.Format("{0:0,0}",Model.Price) VND</span>
-                            </div>
-                            @*<h2 class="quick">Quick Overview:</h2>
-                            <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>*@
-                            @*<div class="quantity_box">
-                                <ul class="product-qty">
-                                    <span>Quantity:</span>
-                                    <select>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </ul>
-                            </div>*@
+                                <h3> <span>@String.Format("{0:0,0}", Model.Price) VND</span></h3>
+                                </div>
                             <div class="clearfix"> </div>
+                       
+                            <h4 style="font-family:Avo,Open Sans,Arial,sans-serif">
+                                <span>Thanh toán trực tuyến:</span> <a href="@Model.OnlinePay"><img src="http://www.baokim.vn/developers/uploads/baokim_btn/thanhtoan-l.png" alt="Thanh toán an toàn với Bảo Kim !" border="0"></a>
+                            </h4>
+                            <hr />
                             <div class="single-but item_add">
-                                @*<p><a href="@Url.Action("InsertCart","ShoppingCart",new { proid = Model.ProductID, url= @Request.Url.ToString()})" class="btn btn-success" role="button">Thêm giỏ hàng</a></p>*@
                                 <a href="@Url.Action("InsertCart","ShoppingCart",new { proid = Model.ProductID, url= @Request.Url.ToString()})"><input type="submit" value="Thêm vào giỏ hàng" /></a>
                                 </div>
-                            <div class="single-but item_add">
-                                <a href="@Model.OnlinePay"><img src="http://www.baokim.vn/developers/uploads/baokim_btn/thanhtoan-l.png" alt="Thanh toán an toàn với Bảo Kim !" border="0"></a>
-                            </div>
-                        </div>
+                                </div>
                     </div>
-                    <div class="clearfix"></div>
+                    </div>
                 </div>
-                </div>
-            
-            <div class="col-md-12">
-                <!--Related Product Catogory-->
-                <ul class="unit">
-                    <li><span>Sản phẩm liên quan</span></li>
-                    <div class="clearfix"></div>
-                </ul>
-                  @Html.Action("RelatedProductCatogory", "Home", new { id = Model.CatogoriesID })
-                <!--End Related Product Catogory--> 
-            </div>
-            <hr />
-            <div class="col-md-12">
-                <div class="in-check">
+                <div class="col-md-12">
+                    <!--Related Product Catogory-->
                     <ul class="unit">
-                        <li><span>Mô tả</span></li>
+                        <li><span>Sản phẩm liên quan</span></li>
                         <div class="clearfix"></div>
                     </ul>
-                    <div class="col-md-12">                    
-                      <span>@Html.Raw(Model.Description)</span>
-                        <div class="clearfix"></div>
+                    @Html.Action("RelatedProductCatogory", "Home", new { id = Model.CatogoriesID })
+                    <!--End Related Product Catogory-->
+                </div>
+                <hr />
+                <div class="col-md-12">
+                    <div class="in-check">
+                        <ul class="unit">
+                            <li><span>Mô tả</span></li>
+                            <div class="clearfix"></div>
+                        </ul>
+                        <div class="col-md-12">
+                            <span>@Html.Raw(Model.Description)</span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="fb-like" data-href="https://www.facebook.com/hutechuniversity/" data-width="450" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                            <div class="fb-comments" data-href="http://localhost:51705/Home/Details/@Model.ProductID" data-width="760" data-numposts="5"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 

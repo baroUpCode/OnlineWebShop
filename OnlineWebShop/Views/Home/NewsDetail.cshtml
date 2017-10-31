@@ -6,13 +6,21 @@
 }
 <div class="container">
     <div>
-        <h1>@Model.Title</h1>
-        </div>
-    <div class="col-md-12">
-        <img src="~/Assets/images/@Model.Images" width="100%"/>
+        <h1>
+            @Model.Title
+        <div class="fb-share-button" data-href="http://localhost:51705/Home/NewsDetail/@Model.NewsID" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A51705%2FHome%2FNewsDetail%2F7&amp;src=sdkpreparse">Share</a></div>
+    </h1>
+</div>
+        <div class="col-md-12">
+            <img src="~/Assets/images/@Model.Images" width="100%" />
         </div>
         <div class="col-md-12">
             <h4>@Html.Raw(Model.Content)</h4>
         </div>
+        <div class="col-md-12">
+            <div class="fb-like" data-href="https://www.facebook.com/hutechuniversity/" data-width="450" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+            <div class="fb-comments" data-href="http://localhost:51705/Home/NewsDetail/@Model.NewsID" data-width="760" data-numposts="5"></div>
+        </div>
     </div>
+
 
