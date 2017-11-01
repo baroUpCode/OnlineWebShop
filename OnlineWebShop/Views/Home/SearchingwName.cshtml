@@ -8,11 +8,9 @@
 }
 
 <h2>Kết quả tìm kiếm :@ViewBag.Search</h2>
-<div class="shoes">
     <div class="container">
         <div class="product-one clearfix">
             <div class="col-md-12">
-                @*<div class="col-md-9 group-right">*@
                     @foreach (var item in Model)
                     {
                         <div class="col-md-4 product-left">
@@ -30,11 +28,10 @@
                             </a>
                         </div>
                     }
-                @*</div>*@
             </div>
             <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SearchingwName", new {page = page, searchstring= @ViewBag.Search }))</div>
         </div>
     </div>
-</div>
+<hr />
 
 

@@ -5,7 +5,6 @@
     ViewBag.Title = "ProductsCatogories";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<div class="shoes">
     <div class="container">
         <div class="product-one clearfix">
             <div class="col-md-12">
@@ -41,7 +40,6 @@
             </div>
             <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("SortByCatogories","Home", new { page = page }))</div>
         </div>
-    </div>
     </div>
 
 
