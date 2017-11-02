@@ -101,8 +101,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 <label class="email_group">
                                                     <h5>Email:</h5>
                                                     <input type="email" name="email" placeholder="Email" id="email[1]" aria-required="true" class="input" required title="Vui lòng nhập đúng email" autofocus></input>
+
                                                     <h5>Password:</h5>
-                                                    <input type="password" name="pass" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input" required  title="Vui lòng nhập đúng mật khẩu"></input>
+                                                    <input type="password" name="pass" placeholder="Mật khẩu" id="pwd[1]" aria-required="true" class="input" required  title="Vui lòng nhập đúng mật khẩu" value=""></input>
                                                 </label>
                                                 <input type="submit" class="btn_login" value="Đăng nhập">
                                                 <p>Chưa có tài khoản thì bấm vô <a href="@Url.Action("Register", "User")" class="link_signup link_modal_signup">Đăng Ký</a></p>
@@ -115,34 +116,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
                 <!-- End Login Modal -->
-                <!-- Signup Modal -->
-                @*<div class="modal_outside_signup" id="modal">
-                <div class="border_modal_signup">
-                    <div class="modal_contain_signup">
-                        <form action="User/Register">
-                            <h1>
-                                <span class="text_login">ĐĂNG KÝ</span>
-                            </h1>
-                            <label class="email_group">
-                                <h5>Họ tên:</h5>
-                                <input type="text" name="name" placeholder="Họ và tên" id="name" aria-required="true" class="input"></input>
-                                <h5>Email:</h5>
-                                <input type="text" name="email" placeholder="Email" id="email" aria-required="true" class="input"></input>
-                                <h5>Địa chỉ:</h5>
-                                <input type="text" name="email" placeholder="Địa chỉ" id="address" aria-required="true" class="input"></input>
-                                <h5>Password:</h5>
-                                <input type="password" name="pwd" placeholder="Mật khẩu" id="pwd" aria-required="true" class="input"></input>
-                                <h5>Nhập lại Password:</h5>
-                                <input type="text" name="conf-pwd" placeholder="Nhập lại Mật khẩu" id="conf-pwd" aria-required="true" class="input"></input>
-                            </label>
-                            <a href="@Url.Action("Register","User")" class="btn_login">ĐĂNG KÝ</a>
-                            <p>Có tài khoản rồi thì bấm <a href="#" class="link_signup link_modal_login">Đăng Nhập</a></p>
-                        </form>
-                    </div>
-                </div>
-            </div>*@
-                <!-- End Signup Modal -->
-
             </div>
 
                     </div>

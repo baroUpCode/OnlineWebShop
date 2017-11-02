@@ -125,10 +125,10 @@ $(document).ready(function(c) {
                         <div class="clearfix"></div>
                     </ul>
                     }
-                    <div colspan="6" style="text-align:right">Tổng tiền : @String.Format("{0:0,0}", @ViewBag.Total) VND</div>
-                    <div colspan="6" style="text-align:right">@Html.ActionLink("Xóa giỏ hàng", "DeleteCart", "ShoppingCart")</div>
-                    <div colspan="6" style="text-align:right">@Html.ActionLink("Tiếp tục mua hàng", "Index", "Home")</div>
-                    <div colspan="6" style="text-align:right"><a href="@Url.Action("OrderInform","ShoppingCart")">Đặt Hàng</a></div>
+                    <div colspan="6" style="text-align:right"><p class="total-size">Tổng tiền : @String.Format("{0:0,0}", @ViewBag.Total) VND</p></div>
+                    <div class="btn btn-success displayI" colspan="6" style="text-align:right"><a class="btn-color" href="@Url.Action("OrderInform","ShoppingCart")">Đặt Hàng</a></div>
+                    <div class="btn btn-warning displayI marginLR10" colspan="6" style="text-align:right"><a class="btn-color" href="@Url.Action("Index","Home")">Tiếp tục mua hàng</a></div>
+                    <div class="btn btn-danger displayI" colspan="6" style="text-align:right"><a class="btn-color" href="@Url.Action("DeleteCart", "ShoppingCart")">Xóa giỏ hàng</a></div>
                 </div>
             </div>
         </div>

@@ -101,8 +101,15 @@ function set_h4_height(){
 }
 //----------End Set h4 Height  ----------//
 
+function reset_form(){
+    var form = document.getElementById("form-login-modal");
+    form.reset();
+}
+
+
 $(document).ready(function(){
-  set_h4_height();
+    set_h4_height();
+    reset_form();
 });
 
 $(window).resize(function(){
