@@ -6,9 +6,8 @@
     ViewBag.Title = "SearchingwName";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-
-<h2>Kết quả tìm kiếm :@ViewBag.Search</h2>
     <div class="container">
+        <h2>Kết quả tìm kiếm :@ViewBag.Search</h2>
         <div class="product-one clearfix">
             <div class="col-md-12">
                     @foreach (var item in Model)

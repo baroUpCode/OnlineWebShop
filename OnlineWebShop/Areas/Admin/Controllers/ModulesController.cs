@@ -325,7 +325,6 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 }
                 news.Title = f["newsTitle"];
                 news.Content = f["newsContent"];
-                news.Images = f["newsImage"].ToString();
                 news.RootCatogoryID = Convert.ToInt32(f["newsRootCat"]);
                 db.SubmitChanges();
                 return RedirectToAction("News", "Modules");

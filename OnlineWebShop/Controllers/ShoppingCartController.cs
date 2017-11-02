@@ -191,56 +191,65 @@ namespace OnlineWebShop.Controllers
         public ActionResult OrderInform(FormCollection f)
         {
             Order order = new Order();
-            
-            List<ShoppingCartModels> listCart = GetShoppingCart();
-            var total = listCart.Sum(x => x._total).ToString();
-            Detail de = new Detail();
-            if (Session["AccountCustomer"] != null)
+            if (DateTime.Parse(f["deliveryDate"]) < DateTime.Now)
             {
-                Customer cus = (Customer)Session["AccountCustomer"];
-                Reciever rec = new Reciever();
-                order.CustomerID = cus.CustomerID; // luu lai thong tin listgiohang vao db 
-                order.Status = 0;
-                order.Total = Int32.Parse(total);
-                order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
-                db.Orders.InsertOnSubmit(order);
-                db.SubmitChanges();
-                rec.RecieverName = cus.FullName;
-                rec.Address = cus.Address;
-                rec.Phone = Convert.ToInt32(cus.Phone);
-                rec.CustomerID = cus.CustomerID;
-                db.Recievers.InsertOnSubmit(rec);
-                db.SubmitChanges();
+                ViewData["ErrorDate"] = "Ngày giao không hợp lệ";
+                return this.OrderInform();
             }
             else
             {
-                Reciever rec = new Reciever();
-                rec.RecieverName = f["Name"];
-                rec.Address = f["Address"];
-                rec.Phone = Convert.ToInt32(f["Phone"]);
-                db.Recievers.InsertOnSubmit(rec);
+                List<ShoppingCartModels> listCart = GetShoppingCart();
+                var total = listCart.Sum(x => x._total).ToString();
+                Detail de = new Detail();
+
+                if (Session["AccountCustomer"] != null)
+                {
+                    Customer cus = (Customer)Session["AccountCustomer"];
+                    Reciever rec = new Reciever();
+                    order.CustomerID = cus.CustomerID; // luu lai thong tin listgiohang vao db 
+                    order.Status = 0;
+                    order.Total = Int32.Parse(total);
+                    order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                    db.Orders.InsertOnSubmit(order);
+                    db.SubmitChanges();
+                    rec.RecieverName = cus.FullName;
+                    rec.Address = cus.Address;
+                    rec.Phone = Convert.ToInt32(cus.Phone);
+                    rec.CustomerID = cus.CustomerID;
+                    db.Recievers.InsertOnSubmit(rec);
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    Reciever rec = new Reciever();
+                    rec.RecieverName = f["Name"];
+                    rec.Address = f["Address"];
+                    rec.Phone = Convert.ToInt32(f["Phone"]);
+                    db.Recievers.InsertOnSubmit(rec);
+                    db.SubmitChanges();
+                    order.RecieverID = rec.RecieverID;
+                    db.Orders.InsertOnSubmit(order);
+                    order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                    order.Total = Int32.Parse(total);
+                    order.Status = 0;
+                    db.Orders.InsertOnSubmit(order);
+                    db.SubmitChanges();
+                }
+                //Duyệt các sản phẩm trong giỏ hàng.Thêm thông tin sản phẩm vào details
+                foreach (var item in listCart)
+                {
+                    de.OrderID = order.OrderID;
+                    de.ProductID = item._productID;
+                    de.Quantity = item._quantity;
+                    de.UnitPrice = item._unitPrice;
+                    de.Total = item._total;
+                    db.Details.InsertOnSubmit(de);
+                }
                 db.SubmitChanges();
-                order.RecieverID = rec.RecieverID;
-                db.Orders.InsertOnSubmit(order);
-                order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
-                order.Total = Int32.Parse(total);
-                order.Status = 0;
-                db.Orders.InsertOnSubmit(order);
-                db.SubmitChanges();
+                Session["Cart"] = null;
+                return RedirectToAction("OrderSuccess", "ShoppingCart");
             }
-            //Duyệt các sản phẩm trong giỏ hàng.Thêm thông tin sản phẩm vào details
-            foreach (var item in listCart)
-            {
-                de.OrderID = order.OrderID;
-                de.ProductID = item._productID;
-                de.Quantity = item._quantity;
-                de.UnitPrice = item._unitPrice;
-                de.Total = item._total;
-                db.Details.InsertOnSubmit(de);
-            }
-            db.SubmitChanges();
-            Session["Cart"] = null;
-            return RedirectToAction("OrderSuccess","ShoppingCart");
+        
             //var Name = f["name"];
             //var Address = f["address"];
             //var Phone = f["phone"];

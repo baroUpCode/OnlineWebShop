@@ -45,6 +45,7 @@
         <div class="address">
             <span>Ngày giao</span>
             <input type="date" name="deliveryDate" required min=@DateTime.Now.ToShortDateString()>
+            <h5 style="color:red">@ViewData["ErrorDate"] </h5>
         </div>
         @*<div class="address">
             <span> Xác nhận mật khẩu</span>
