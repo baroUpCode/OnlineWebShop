@@ -30,38 +30,21 @@ namespace OnlineWebShop.Controllers
         [HttpPost]
         public ActionResult Register(FormCollection form)
         {
-            Customer customer = new Customer();
-            var name = form["Name"];
-            var birth = form["BirthDay"];
-            var email = form["Email"];
-            var phone = form["Phone"];
-            var address = form["Address"];
-            var pass = form["Pass"];
-            //{
-            //    ViewData["Loi1"] = "Vui lòng nhập họ và tên";
-            //}
-            //else if (String.IsNullOrEmpty(email))
-            //{
-            //    ViewData["Loi2"] = "Vui lòng nhập Email";
-            //}
-            //else if (String.IsNullOrEmpty(phone))
-            //{
-            //    ViewData["Loi4"] = "Vui lòng nhập số điện thoại";
-            //}
-            //else if (String.IsNullOrEmpty(address))
-            //{
-            //    ViewData["Loi5"] = "Vui lòng nhập địa chỉ";
-            //}
-            //else if (String.IsNullOrEmpty(pass))
-            //{
-            //    ViewData["Loi6"] = "Vui lòng nhập mật khẩu";
-            //}
-            //else if (String.IsNullOrEmpty(repass))
-            //{
-            //    ViewData["Loi7"] = "Vui lòng nhập lại mật khẩu";
-            //}
-            //else
-            //{
+            if (DateTime.Parse(form["BirthDay"]) > DateTime.Now)
+            {
+                ViewBag.ErrorDate = "Ngày sinh không hợp lệ";
+                ViewBag.Error = "Thông tin đăng ký không hợp lệ";
+                return this.Register();
+            }
+            else
+            {
+                Customer customer = new Customer();
+                var name = form["Name"];
+                var birth = form["BirthDay"];
+                var email = form["Email"];
+                var phone = form["Phone"];
+                var address = form["Address"];
+                var pass = form["Pass"];
                 customer.FullName = name;
                 customer.Email = email;
                 customer.BirthDay = DateTime.Parse(birth);
@@ -70,7 +53,9 @@ namespace OnlineWebShop.Controllers
                 customer.Pass = pass;
                 db.Customers.InsertOnSubmit(customer);// Luu thong tin vua duoc nhap tu view vao Models
                 db.SubmitChanges();// Cap nhat lai DB tu Models
-            return View();
+                ViewBag.Succcess = "Đăng ký thành công";
+                return View();
+            }
         }
         //public ActionResult Login()
         //{

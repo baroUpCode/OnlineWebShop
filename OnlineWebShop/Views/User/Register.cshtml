@@ -21,6 +21,8 @@
             <div class="col-md-6 account-left">
                     <div class="account-top heading">
                         <h3>Đăng Ký Thành Viên</h3>
+                        <h5 style="color:red">@ViewBag.Succcess</h5>
+                        <h5 style="color:red">@ViewBag.Error</h5>
                     </div>
 @using (Html.BeginForm("Register", "User", FormMethod.Post))
 {
@@ -30,12 +32,12 @@
                         <input type="text" name="Name" required title="Vui lòng nhập họ và tên" pattern=".{4,}" autofocus>
                     </div>
                     <div class="address">
-                        <span>Email</span>
-                        <input type="email" name="Email"  required  max="100" >
-                    </div>
-                    <div class="address">
                         <span>Địa chỉ</span>
                         <input type="text" name="Address" required>
+                    </div>
+                    <div class="address">
+                        <span>Email</span>
+                        <input type="email" name="Email"  required  max="100" >
                     </div>
                     <div class="address">
                         <span>Điện thoại</span>
@@ -44,7 +46,8 @@
                     </div>
                     <div class="address">
                         <span>Ngày sinh</span>
-                        <input type="date" name="BirthDay" required  max="@DateTime.Now.ToShortDateString()" title="Vui lòng nhập đúng ngày sinh"/>
+                        <input type="date" name="BirthDay" required  title="Vui lòng nhập ngày sinh"/>
+                        <h5 style="color:red">@ViewBag.ErrorDate</h5>
                     </div>
                     <div class="address">
                         <span>Mật khẩu</span>
