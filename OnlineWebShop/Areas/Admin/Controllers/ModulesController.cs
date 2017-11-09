@@ -34,6 +34,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
 
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
+            List<SelectListItem> deleList = new List<SelectListItem>() {new SelectListItem() { Value = "1", Text = "Chưa xóa", Selected = true},
+                                                                         new SelectListItem() { Value = "2", Text = "Đã xóa" }};
+ 
+            ViewBag.deleteList = deleList;
             List<Producer> producer = db.Producers.ToList();
             SelectList producerList = new SelectList(producer, "ProducerID", "Name", pro.ProducerID);
             ViewBag.ProList = producerList;
@@ -81,6 +85,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                     }
                 }
                 pro.Name = f["productName"];
+                pro.Deleted = Byte.Parse(f["productDeleted"]);
                 pro.Quantity = Convert.ToInt32(f["productQuantity"]);
                 pro.Warranty = Convert.ToInt32(f["productWarranty"]);
                 pro.Price = Convert.ToDecimal(f["productPrice"]);
@@ -92,14 +97,6 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             }
             else
                 return RedirectToAction("EditProduct", "Modules");
-        }
-        public ActionResult DeleteProduct(int id)
-        {
-            Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
-            db.Products.DeleteOnSubmit(pro);
-            db.SubmitChanges();
-            return RedirectToAction("Products", "Modules");
-
         }
         public ActionResult InsertProduct()
         {
@@ -435,7 +432,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             Customer cus = new Customer();
             cus.FullName = f["Name"];
             cus.Email = f["Email"];
-            cus.Phone =f["Phone"];
+            cus.Phone = f["Phone"];
             cus.Pass = f["cusPass"];
             cus.Address = f["Address"];
             cus.BirthDay = DateTime.Parse(f["BirthDay"]);
@@ -506,7 +503,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             int pageSize = 10;
             int pageNum = (page ?? 1);
-            return View(db.Orders.OrderByDescending(x=>x.CreatedAt).ToPagedList(pageNum,pageSize));
+            return View(db.Orders.OrderByDescending(x => x.CreatedAt).ToPagedList(pageNum, pageSize));
         }
         public ActionResult SearchOrders(int? page, string searchString)
         {
@@ -544,25 +541,25 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult EditOrders(int id)
         {
             //Start binding data dropdownlist
-        
+
             //End binding data dropdownlist
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
-                List<SelectListItem> status = new List<SelectListItem>();
-            status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0"});
+            List<SelectListItem> status = new List<SelectListItem>();
+            status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0" });
             status.Add(new SelectListItem() { Text = "Đã giao", Value = "1" });
-            ViewBag.OrderStatus = new SelectList(status, "Value", "Text",order.Status.Value);
+            ViewBag.OrderStatus = new SelectList(status, "Value", "Text", order.Status.Value);
             return View(order);
         }
         [HttpPost]
-        public ActionResult EditOrders(int id,FormCollection f)
+        public ActionResult EditOrders(int id, FormCollection f)
         {
-            var order = db.Orders.SingleOrDefault(x => x.OrderID==id);
+            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
             if (ModelState.IsValid)
             {
                 order.Reciever.RecieverName = f["recName"];
                 order.Reciever.Address = f["recAddress"];
                 order.Reciever.Phone = Int32.Parse(f["recPhone"]);
-                order.Status =Convert.ToByte(f["ordStatus"]);
+                order.Status = Convert.ToByte(f["ordStatus"]);
                 order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
                 db.SubmitChanges();
             }
@@ -573,7 +570,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
             db.Orders.DeleteOnSubmit(order);
             db.SubmitChanges();
-            return RedirectToAction("Orders","Modules");
+            return RedirectToAction("Orders", "Modules");
         }
         /// <summary>
         /// Searching button
@@ -581,13 +578,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <param name="page"></param>
         /// <param name="searchString"></param>
         /// <returns></returns>
-        public ActionResult SearchProducts(int? page,string searchString)
+        public ActionResult SearchProducts(int? page, string searchString)
         {
-            var product = db.Products.Where(x=>(x.Name.Contains(searchString) || x.Catogory.CatogoriesName.Contains(searchString)|| x.Producer.Name.Contains(searchString)));
+            var product = db.Products.Where(x => (x.Name.Contains(searchString) || x.Catogory.CatogoriesName.Contains(searchString) || x.Producer.Name.Contains(searchString)));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;
-            return View(product.ToPagedList(pageNum,pageSize));
+            return View(product.ToPagedList(pageNum, pageSize));
         }
         public ActionResult SearchCatogories(int? page, string searchString)
         {
@@ -599,7 +596,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult SearchCustomers(int? page, string searchString)
         {
-            var product = db.Customers.Where(x => (x.FullName.Contains(searchString) || x.CustomerID.ToString()==searchString || x.Email.Contains(searchString) || x.Address.Contains(searchString) || x.Phone.Contains(searchString)));
+            var product = db.Customers.Where(x => (x.FullName.Contains(searchString) || x.CustomerID.ToString() == searchString || x.Email.Contains(searchString) || x.Address.Contains(searchString) || x.Phone.Contains(searchString)));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;
@@ -607,7 +604,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult SearchNews(int? page, string searchString)
         {
-            var product = db.News.Where(x => (x.NewsID.ToString()==searchString || x.Title.Contains(searchString) || x.RootCatogory.RootCatogoryName.Contains(searchString) || x.Content.Contains(searchString)));
+            var product = db.News.Where(x => (x.NewsID.ToString() == searchString || x.Title.Contains(searchString) || x.RootCatogory.RootCatogoryName.Contains(searchString) || x.Content.Contains(searchString)));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;
@@ -615,11 +612,23 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult SearchProducers(int? page, string searchString)
         {
-            var product = db.Producers.Where(x => (x.Name.Contains(searchString) || x.ProducerID.ToString()==searchString));
+            var product = db.Producers.Where(x => (x.Name.Contains(searchString) || x.ProducerID.ToString() == searchString));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;
             return View(product.ToPagedList(pageNum, pageSize));
+        }
+        public ActionResult ProductDetail(int id)
+        {
+            var pro = db.Products.SingleOrDefault(x => x.ProductID == id);
+            return View(pro);
+        }
+        public ActionResult DeleteProduct(int id)
+        {
+            var product = db.Products.SingleOrDefault(x => x.ProductID == id);
+            product.Deleted = 2;
+            db.SubmitChanges();
+            return RedirectToAction("Products", "Modules");
         }
 
     }

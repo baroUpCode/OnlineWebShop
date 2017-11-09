@@ -22,6 +22,16 @@
                             
                             <h5>Tên sản phẩm:</h5>
                             <input type="text" name="productName" value="@Model.Name" aria-required="true" id="pwd[1]" required class="input" />
+                            <h5>
+                            Trạng thái tồn tại: @if (Model.Deleted == 1)
+                            {
+                                <strong style="color:lawngreen">Chưa xóa</strong>
+                            }
+                            else if (Model.Deleted == 2)
+                            {
+                                <strong style="color:red">Đã xóa</strong>
+                            }
+                           </h5>
                             <h5>Loại sản phẩm:</h5>
                             @Html.DropDownList("productCatogories", (IEnumerable<SelectListItem>)ViewBag.CatList, new { @class = "form-control" })
                             <h5>Nhà sản xuất</h5>
@@ -30,6 +40,8 @@
                             <input type="number" name="productWarranty" value="@Model.Warranty" id="email[1]" aria-required="true" class="input" />
                             <h5>Số lượng</h5>
                             <input type="number" name="productQuantity" value="@Model.Quantity" id="email[1]" aria-required="true" class="input" />
+                            <h5>Giá:</h5>
+                            <input type="text" name="productPrice" value="@String.Format("{0:0,0}",Model.Price)" id="email[1]" aria-required="true" class="input"/>
                             <!--CKEDITOR-->
                             <h5>Mô tả:</h5>
                             @*<input type="text" name="productDescription" value="@Model.Description" id="email[1]" aria-required="true" class="input" ></input>*@
@@ -37,8 +49,7 @@
                             <script type="text/javascript">
                                 CKEDITOR.replace('textarea');
                             </script>
-                            <h5>Giá:</h5>
-                            <input type="number" name="productPrice" value="@Model.Price" id="email[1]" aria-required="true" class="input" @Model.Description></input>
+                          
 </label>
                 <div class="address new">
                     <input type="submit" value="Sửa thông tin">

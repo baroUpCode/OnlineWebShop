@@ -809,6 +809,7 @@
     <Content Include="Assets\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="Assets\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="Assets\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Modules\ProductDetail.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

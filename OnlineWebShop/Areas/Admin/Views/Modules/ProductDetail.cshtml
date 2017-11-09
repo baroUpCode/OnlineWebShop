@@ -1,0 +1,50 @@
+﻿@model OnlineWebShop.Models.Product
+@{
+    ViewBag.Title = "EditProducer";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="modal_outside_login" id="modal">
+    <div class="border_modal_login">
+        <div class="modal_contain_login">
+                @Html.AntiForgeryToken()
+                <h1>
+                    <span class="text_login">Thông tin sản phẩm</span>
+                </h1>
+                    @Html.ValidationSummary(true)
+                    <label class="email_group">
+                        <h5>Hình ảnh:</h5>
+                        <img src="~/Assets/images/@Model.ProductImages" style="width:500px;height: 500px"/>
+                        <h5>Tên sản phẩm: <strong>@Model.Name</strong></h5>
+                        <h5>
+                            Trạng thái tồn tại: @if (Model.Deleted == 1)
+                            {
+                                <strong style="color:lawngreen">Chưa xóa</strong>
+                            }
+                            else if (Model.Deleted == 2)
+                            {
+                                <strong style="color:red">Đã xóa</strong>
+                            }
+                        </h5>
+                        <h5>Loại sản phẩm: <strong>@Model.Catogory.CatogoriesName</strong></h5>
+                        <h5>Nhà sản xuất: <strong>@Model.Producer.Name</strong></h5>
+                        <h5>Thời gian bảo hành: <strong>@Model.Warranty</strong></h5>
+                        <h5>Số lượng: <strong>@Model.Quantity</strong></h5>
+                        <h5>Giá: <strong>@String.Format("{0:0,0}",Model.Price) VND</strong></h5>
+                        
+                        <!--CKEDITOR-->
+                        <h5>Mô tả:</h5>
+                        @*<input type="text" name="productDescription" value="@Model.Description" id="email[1]" aria-required="true" class="input" ></input>*@
+                        <textarea name="productDescription" id="textarea" rows="10" cols="80" disabled>@Model.Description</textarea>
+                        <script type="text/javascript">
+                                CKEDITOR.replace('textarea');
+                        </script>
+                        <div style="display:block;float:right;padding:6px">
+                            <a href=" @Url.Action("EditProduct","Modules",new {id=Model.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                            <a href=" @Url.Action("DeleteProduct","Modules",new {id=Model.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                        </div>
+                    </label>
+            <div><a href="@Url.Action("Products","Modules")">Back To Product List</a></div>
+        </div>
+    </div>
+</div>
