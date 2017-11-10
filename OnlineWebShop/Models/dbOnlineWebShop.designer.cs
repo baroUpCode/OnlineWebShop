@@ -3091,8 +3091,6 @@ namespace OnlineWebShop.Models
 		
 		private string _Description;
 		
-		private System.Nullable<bool> _Status;
-		
 		private System.Nullable<decimal> _PromoPrice;
 		
 		private int _ProducerID;
@@ -3106,6 +3104,8 @@ namespace OnlineWebShop.Models
 		private System.Nullable<int> _CatogoriesID;
 		
 		private string _OnlinePay;
+		
+		private System.Nullable<bool> _Status;
 		
 		private EntityRef<Catogory> _Catogory;
 		
@@ -3135,8 +3135,6 @@ namespace OnlineWebShop.Models
     partial void OnProductImagesChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnStatusChanging(System.Nullable<bool> value);
-    partial void OnStatusChanged();
     partial void OnPromoPriceChanging(System.Nullable<decimal> value);
     partial void OnPromoPriceChanged();
     partial void OnProducerIDChanging(int value);
@@ -3151,6 +3149,8 @@ namespace OnlineWebShop.Models
     partial void OnCatogoriesIDChanged();
     partial void OnOnlinePayChanging(string value);
     partial void OnOnlinePayChanged();
+    partial void OnStatusChanging(System.Nullable<bool> value);
+    partial void OnStatusChanged();
     #endregion
 		
 		public Product()
@@ -3360,26 +3360,6 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<bool> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PromoPrice", DbType="Decimal(18,0)", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<decimal> PromoPrice
 		{
@@ -3524,6 +3504,26 @@ namespace OnlineWebShop.Models
 					this._OnlinePay = value;
 					this.SendPropertyChanged("OnlinePay");
 					this.OnOnlinePayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<bool> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}

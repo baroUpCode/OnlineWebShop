@@ -153,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GarbageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -810,6 +811,7 @@
     <Content Include="Assets\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="Assets\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\Modules\ProductDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Garbage\DeletedProduct.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

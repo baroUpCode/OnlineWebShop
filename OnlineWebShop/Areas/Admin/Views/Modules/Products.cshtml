@@ -5,6 +5,7 @@
     ViewBag.Title = "Products";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
+
 <div class="col-md-12">
     <div class="col-md-3">
         <div class="search-bar">
@@ -36,6 +37,8 @@
                 <tbody>
                     @foreach (var item in Model)
             {
+                        if (item.Deleted == 1)
+                        {
                         <tr>
                             <td>@item.ProductID</td>
                             <td class="wh180"><img src="~/Assets/images/@item.ProductImages" style="width:200px;height:200px" /></td>
@@ -47,14 +50,15 @@
                             <td>@item.Quantity</td>
                             <td>@String.Format("{0:0,0}", item.Price) VND</td>
                             <td>
-                                <a href=" @Url.Action("ProductDetail","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
+                                <a href=" @Url.Action("ProductDetail", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
                                 <span style="display:inline-block">
-                                    <a href=" @Url.Action("EditProduct","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a>
-                                    <a href=" @Url.Action("DeleteProduct","Modules",new {id=item.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                                    <a href=" @Url.Action("EditProduct", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                                    <a href=" @Url.Action("DeleteProduct", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a>
                                 </span>
                         </td>
                         </tr>
-                    }
+                            }
+                        }
                 </tbody>
             </table>
         </div>

@@ -153,7 +153,6 @@
       <Column Name="Warranty" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ProductImages" Type="System.String" DbType="Text" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" />
-      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="PromoPrice" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="ProducerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -161,6 +160,7 @@
       <Column Name="Details" Type="System.String" DbType="NText" CanBeNull="true" />
       <Column Name="CatogoriesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OnlinePay" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Catogory_Product" Member="Catogory" ThisKey="CatogoriesID" OtherKey="CatogoriesID" Type="Catogory" IsForeignKey="true" />
       <Association Name="Producer_Product" Member="Producer" ThisKey="ProducerID" OtherKey="ProducerID" Type="Producer" IsForeignKey="true" />
     </Type>

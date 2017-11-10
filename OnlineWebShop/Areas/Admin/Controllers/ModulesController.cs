@@ -141,6 +141,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 }
             }
             pro.Name = f["productName"];
+            pro.Deleted = 1;
             pro.Quantity = Convert.ToInt32(f["productQuantity"]);
             pro.Warranty = Convert.ToInt32(f["productWarranty"]);
             pro.Description = f["productDescription"];
