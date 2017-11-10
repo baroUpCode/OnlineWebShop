@@ -55,6 +55,6 @@
         </tbody>
     </table>
     </div>
-    <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Products", "Modules", new { page = page }))</div>
+    <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("DeletedProduct", "Garbage", new { page = page }))</div>
 
 

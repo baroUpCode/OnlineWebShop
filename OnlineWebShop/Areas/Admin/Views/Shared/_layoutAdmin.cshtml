@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-
     <!--CKEditor-->
     <script src="~/Areas/Admin/Assets/ckeditor/ckeditor.js"></script>
     <script src="~/Areas/Admin/Assets/ckeditor/styles.js"></script>
@@ -80,22 +79,46 @@
                             <a href="@Url.Action("Index","Admin")"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Products","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý sản phẩm</a>
+                             <a href="#"><i class="fa fa-edit fa-fw"></i> Quản lý sản phẩm<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Products","Modules")"><i class="fa fa-edit fa-fw"></i> Danh sách sản phẩm</a> </li>
+                                <li><a href="@Url.Action("DeletedProduct","Garbage")"><i class="fa fa-edit fa-fw"></i> Sản phẩm đã xóa</a> </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="@Url.Action("Orders","Modules")"><i class="fa fa-edit fa-fw"></i>Quản lý hóa đơn</a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i>Quản lý hóa đơn<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Orders","Modules")"><i class="fa fa-edit fa-fw"></i> Danh sách hóa đơn</a> </li>
+                                <li><a href="@Url.Action("DeletedOrder","Garbage")"><i class="fa fa-edit fa-fw"></i> Hóa đơn đã xóa</a> </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="@Url.Action("Catogories","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý loại sản phẩm</a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Quản lý loại sản phẩm<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Catogories","Modules")"><i class="fa fa-edit fa-fw"></i> Danh sách loại sản phẩm</a> </li>
+                                <li><a href="@Url.Action("DeletedCatogories","Garbage")"><i class="fa fa-edit fa-fw"></i> Các loại đã xóa</a> </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="@Url.Action("Producer","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý nhà sản xuất</a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Quản lý nhà sản xuất<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Producer","Modules")"><i class="fa fa-edit fa-fw"></i> Danh sách nhà sản xuất</a> </li>
+                                <li><a href="@Url.Action("DeletedProducer","Garbage")"><i class="fa fa-edit fa-fw"></i> Nhà sản xuất đã xóa</a> </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="@Url.Action("News","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý tin tức</a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Quản lý tin tức<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("News","Modules")"><i class="fa fa-edit fa-fw"></i> Danh sách tin tức</a> </li>
+                                <li><a href="@Url.Action("DeletedNews","Garbage")"><i class="fa fa-edit fa-fw"></i> Tin tức xuất đã xóa</a> </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="@Url.Action("Customers","Modules")"><i class="fa fa-edit fa-fw"></i> Quản lý khách hàng</a>
+                            <a href="#)"><i class="fa fa-edit fa-fw"></i> Quản lý khách hàng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Customers","Modules")"><i class="fa fa-edit fa-fw"></i> Danh sách khách hàng</a> </li>
+                                <li><a href="@Url.Action("DeletedCustomers","Garbage")"><i class="fa fa-edit fa-fw"></i> Khách hàng đã xóa</a> </li>
+                            </ul>
                         </li>
 
                        

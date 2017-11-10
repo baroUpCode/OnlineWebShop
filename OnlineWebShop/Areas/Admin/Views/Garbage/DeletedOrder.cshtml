@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 @model PagedList.PagedList<OnlineWebShop.Models.Order>
 @{
-    ViewBag.Title = "Order";
+    ViewBag.Title = "DeletedOrder";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
 <div class="col-md-12">
@@ -33,8 +33,6 @@
         <tbody>
             @foreach (var item in Model)
             {
-                if (item.Deleted == 1)
-                {
                 <tr>
                     <td>@item.OrderID</td>
                     <td>@item.DeliveryDate.ToString()</td>
@@ -54,12 +52,11 @@
                     <td>@item.Reciever.Phone</td>
                     <td><span>@String.Format("{0:0,0}", item.Total) VND</span></td>
                     <td>
-                        <a href=" @Url.Action("EditOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>|<a href=" @Url.Action("DeleteOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                        <a href=" @Url.Action("RestoreOrder", "Garbage", new { id = item.OrderID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
                     </td>
                 </tr>
-                }
             }
         </tbody>
     </table>
 </div>
-<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Orders", "Modules", new { page = page}))</div>
+<div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("DeletedOrder", "Garbage", new { page = page }))</div>

@@ -30,6 +30,7 @@
         <tbody>
             @foreach (var item in Model)
             {
+                if (item.Deleted == 1) { 
                 <tr>
                     <td>@item.CatogoriesID</td>
                     <td>@item.CatogoriesName</td>
@@ -37,6 +38,7 @@
                     <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditCatogories","Modules",new {id=item.CatogoriesID })">Sửa</a></button>
                     <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteCatogories","Modules",new {id=item.CatogoriesID })">Xóa</a></button></td>
                 </tr>
+                }
             }
         </tbody>
     </table>

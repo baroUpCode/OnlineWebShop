@@ -49,11 +49,12 @@
                             <script type="text/javascript">
                                 CKEDITOR.replace('textarea');
                             </script>
-                          
-</label>
-                <div class="address new">
-                    <input type="submit" value="Sửa thông tin">
-                </div>
+                        <div class="address new" style="display:block;float:right">
+                            <input type="submit" value="Sửa thông tin">
+                            <a href=" @Url.Action("DeleteProduct", "Modules", new { id = Model.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                        </div>           
+                        </label>
+               
                 }
                 <div><a href="@Url.Action("Products","Modules")">Back To Product List</a></div>
             </div>

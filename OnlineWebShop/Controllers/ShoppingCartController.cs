@@ -208,6 +208,7 @@ namespace OnlineWebShop.Controllers
                     Reciever rec = new Reciever();
                     order.CustomerID = cus.CustomerID; // luu lai thong tin listgiohang vao db 
                     order.Status = 0;
+                    order.Deleted = 1;
                     order.Total = Int32.Parse(total);
                     order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
                     db.Orders.InsertOnSubmit(order);

@@ -34,6 +34,8 @@
         <tbody>
             @foreach (var item in Model)
             {
+                if (item.Deleted == 1)
+                {
                 <tr>
                     <td>@item.CustomerID</td>
                     <td>@item.FullName</td>
@@ -42,8 +44,9 @@
                     <td>@item.Phone</td>
                     <td>@item.Address</td>
                     <td>@item.Pass</td>
-                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditCustomer","Modules",new {id=item.CustomerID })">Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteCustomer","Modules",new {id=item.CustomerID })">Xóa</a></button></td>
+                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditCustomer", "Modules", new { id = item.CustomerID })">Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteCustomer", "Modules", new { id = item.CustomerID })">Xóa</a></button></td>
                 </tr>
+                }
             }
         </tbody>
     </table>

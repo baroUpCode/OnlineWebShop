@@ -47,6 +47,7 @@ namespace OnlineWebShop.Controllers
                 var pass = form["Pass"];
                 customer.FullName = name;
                 customer.Email = email;
+                customer.Deleted = 1;
                 customer.BirthDay = DateTime.Parse(birth);
                 customer.Phone = phone;
                 customer.Address = address;

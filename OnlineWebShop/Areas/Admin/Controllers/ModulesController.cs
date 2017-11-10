@@ -141,6 +141,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 }
             }
             pro.Name = f["productName"];
+            pro.Status = true;
             pro.Deleted = 1;
             pro.Quantity = Convert.ToInt32(f["productQuantity"]);
             pro.Warranty = Convert.ToInt32(f["productWarranty"]);
@@ -192,6 +193,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             Catogory cat = new Catogory();
             cat.CatogoriesName = f["catName"];
+            cat.Deleted = 1;
             cat.RootCatogoryID = Convert.ToInt32(f["catRoot"]);
             db.Catogories.InsertOnSubmit(cat);
             db.SubmitChanges();
@@ -200,7 +202,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult DeleteCatogories(int id)
         {
             Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
-            db.Catogories.DeleteOnSubmit(cat);
+            cat.Deleted = 2;
             db.SubmitChanges();
             return RedirectToAction("Catogories", "Modules");
         }
@@ -243,7 +245,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult DeleteProducer(int id)
         {
             Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
-            db.Producers.DeleteOnSubmit(pro);
+            pro.Deleted = 2;
             db.SubmitChanges();
             return RedirectToAction("Products", "Modules");
 
@@ -258,6 +260,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
 
             Producer pro = new Producer();
             pro.Name = f["proName"];
+            pro.Deleted = 1;
             db.Producers.InsertOnSubmit(pro);
             db.SubmitChanges();
             return this.InsertProducer();
@@ -334,7 +337,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult DeleteNews(int id)
         {
             New news = db.News.SingleOrDefault(x => x.NewsID == id);
-            db.News.DeleteOnSubmit(news);
+            news.Deleted = 2;
             db.SubmitChanges();
             return RedirectToAction("News", "Modules");
 
@@ -378,6 +381,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             }
             news.Content = f["newsContent"];
             news.Title = f["newsTitle"];
+            news.Deleted = 1;
             news.Images = f["newsImage"].ToString();
             news.RootCatogoryID = Convert.ToInt32(f["newsRootCat"]);
             db.News.InsertOnSubmit(news);
@@ -419,7 +423,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult DeleteCustomer(int id)
         {
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
-            db.Customers.DeleteOnSubmit(cus);
+            cus.Deleted = 2;
             db.SubmitChanges();
             return RedirectToAction("Customers", "Modules");
         }
@@ -432,6 +436,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             Customer cus = new Customer();
             cus.FullName = f["Name"];
+            cus.Deleted = 1;
             cus.Email = f["Email"];
             cus.Phone = f["Phone"];
             cus.Pass = f["cusPass"];
@@ -569,7 +574,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult DeleteOrders(int id)
         {
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
-            db.Orders.DeleteOnSubmit(order);
+            order.Deleted = 2;
             db.SubmitChanges();
             return RedirectToAction("Orders", "Modules");
         }

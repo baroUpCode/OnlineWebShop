@@ -32,16 +32,18 @@
             </thead>
             <tbody>
                 @foreach (var item in Model)
-            {
+                {
+                    if (item.Deleted == 1)
+                    {
                     <tr>
                         <td>@item.NewsID</td>
                         <td class="wh180"><img src="~/Assets/images/@item.Images" style="width:200px;height:200px" /></td>
                         <td>@item.Title</td>
-                        <td style="max-width:60ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="80px">@item.Content</td>
                         <td>@item.RootCatogory.RootCatogoryName</td>
-                         <td><a href=" @Url.Action("EditNews","Modules",new {id=item.NewsID })"><button type="button" class="btn btn-warning">Sửa</button></a>|<a href=" @Url.Action("DeleteNews","Modules",new {id=item.NewsID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                         <td><a href=" @Url.Action("EditNews", "Modules", new { id = item.NewsID })"><button type="button" class="btn btn-warning">Sửa</button></a>|<a href=" @Url.Action("DeleteNews", "Modules", new { id = item.NewsID })"><button type="button" class="btn btn-danger">Xóa</button></a>
                         </td>
                     </tr>
+                    }
                 }
             </tbody>
         </table>

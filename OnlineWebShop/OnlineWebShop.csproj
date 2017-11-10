@@ -812,6 +812,11 @@
     <Content Include="Assets\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\Modules\ProductDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Garbage\DeletedProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Garbage\DeletedCatogories.cshtml" />
+    <Content Include="Areas\Admin\Views\Garbage\DeletedProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\Garbage\DeletedOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Garbage\DeletedNews.cshtml" />
+    <Content Include="Areas\Admin\Views\Garbage\DeletedCustomers.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>
