@@ -32,8 +32,8 @@
                 <tr>
                     <td>@item.ProducerID</td>
                     <td>@item.Name</td>
-                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditProducer","Modules",new {id=item.ProducerID })">Sửa</a></button>
-                    <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteProducer","Modules",new {id=item.ProducerID })">Xóa</a></button></td>
+                    <td><a href=" @Url.Action("EditProducer","Modules",new {id=item.ProducerID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                        <a href=" @Url.Action("DeleteProducer","Modules",new {id=item.ProducerID })"><button type="button" class="btn btn-danger">Xóa</button></a></td>
                 </tr>
             }
         </tbody>

@@ -27,8 +27,7 @@
                 <th>Ngày sinh</th>
                 <th>Email</th>
                 <th>Điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Mật khẩu tài khoản</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -42,9 +41,10 @@
                     <td>@item.BirthDay.Value.ToString("dd/MMM/yyyy").</td>
                     <td>@item.Email</td>
                     <td>@item.Phone</td>
-                    <td>@item.Address</td>
-                    <td>@item.Pass</td>
-                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditCustomer", "Modules", new { id = item.CustomerID })">Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteCustomer", "Modules", new { id = item.CustomerID })">Xóa</a></button></td>
+                    <td>
+                        <a href="@Url.Action("CustomerDetail", "Modules", new { id = item.CustomerID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
+                        <span style="display:inline-block"><a href=" @Url.Action("EditCustomer", "Modules", new { id = item.CustomerID })"><button type="button" class="btn btn-warning">Sửa</button></a> <a href=" @Url.Action("DeleteCustomer", "Modules", new { id = item.CustomerID })"><button type="button" class="btn btn-danger">Xóa</button></a></span>
+                    </td>
                 </tr>
                 }
             }

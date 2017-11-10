@@ -25,7 +25,7 @@
             <th>Email</th>
             <th>Điện thoại</th>
             <th>Địa chỉ</th>
-            <th>Mật khẩu tài khoản</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +38,6 @@
                 <td>@item.Email</td>
                 <td>@item.Phone</td>
                 <td>@item.Address</td>
-                <td>@item.Pass</td>
                 <td><a href=" @Url.Action("RestoreCustomers", "Garbage", new { id = item.CustomerID })"><button type="button" class="btn btn-success">Phục hồi</button></a></td>
             </tr>
         }

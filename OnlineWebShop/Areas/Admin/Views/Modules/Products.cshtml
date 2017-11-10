@@ -28,7 +28,6 @@
                         <th>Tên sản phẩm</th>
                         <th>Loại sản phẩm</th>
                         <th>Nhà sản xuất</th>
-                        <th>Thời gian bảo hành</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
 
@@ -46,16 +45,12 @@
                             @*<td style="max-width:100ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="100px">@item.Description</td>*@
                             <td>@item.Catogory.CatogoriesName</td>
                             <td>@item.Producer.Name</td>
-                            <td>@item.Warranty</td>
                             <td>@item.Quantity</td>
                             <td>@String.Format("{0:0,0}", item.Price) VND</td>
                             <td>
-                                <a href=" @Url.Action("ProductDetail", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
-                                <span style="display:inline-block">
-                                    <a href=" @Url.Action("EditProduct", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a>
-                                    <a href=" @Url.Action("DeleteProduct", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a>
-                                </span>
-                        </td>
+                                <a href="@Url.Action("ProductDetail", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
+                                <span style="display:inline-block"><a href=" @Url.Action("EditProduct", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-warning">Sửa</button></a> <a href=" @Url.Action("DeleteProduct", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-danger">Xóa</button></a></span>
+                            </td>
                         </tr>
                             }
                         }

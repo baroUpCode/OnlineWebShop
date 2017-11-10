@@ -35,8 +35,8 @@
                     <td>@item.CatogoriesID</td>
                     <td>@item.CatogoriesName</td>
                     <td>@item.RootCatogory.RootCatogoryName</td>
-                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditCatogories","Modules",new {id=item.CatogoriesID })">Sửa</a></button>
-                    <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteCatogories","Modules",new {id=item.CatogoriesID })">Xóa</a></button></td>
+                    <td><a href=" @Url.Action("EditCatogories","Modules",new {id=item.CatogoriesID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                        <a href=" @Url.Action("DeleteCatogories","Modules",new {id=item.CatogoriesID })"><button type="button" class="btn btn-danger">Xóa</button></a></td>
                 </tr>
                 }
             }

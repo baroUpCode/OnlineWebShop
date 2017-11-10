@@ -54,7 +54,8 @@
                     <td>@item.Reciever.Phone</td>
                     <td><span>@String.Format("{0:0,0}", item.Total) VND</span></td>
                     <td>
-                        <a href=" @Url.Action("EditOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>|<a href=" @Url.Action("DeleteOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                        <a href=" @Url.Action("OrderDetail", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
+                        <span style="display:inline-block"><a href=" @Url.Action("EditOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a><a href=" @Url.Action("DeleteOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a></span>
                     </td>
                 </tr>
                 }

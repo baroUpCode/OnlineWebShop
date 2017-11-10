@@ -22,7 +22,6 @@
                 <th>Mã tin</th>
                 <th>Ảnh bìa</th>
                 <th>Tiêu đề</th>
-                <th>Mô tả</th>
                 <th>Loại tin</th>
                 <th></th>
             </tr>
@@ -34,10 +33,10 @@
                     <td>@item.NewsID</td>
                     <td class="wh180"><img src="~/Assets/images/@item.Images" style="width:200px;height:200px" /></td>
                     <td>@item.Title</td>
-                    <td style="max-width:60ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="80px">@item.Content</td>
                     <td>@item.RootCatogory.RootCatogoryName</td>
                     <td>
                       <a href=" @Url.Action("RestoreNews", "Garbage", new { id = item.NewsID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
+                    </td>
                 </tr>
             }
         </tbody>
