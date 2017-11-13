@@ -153,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GarbageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -817,6 +818,7 @@
     <Content Include="Areas\Admin\Views\Garbage\DeletedOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Garbage\DeletedNews.cshtml" />
     <Content Include="Areas\Admin\Views\Garbage\DeletedCustomers.cshtml" />
+    <Content Include="Areas\Admin\Views\Details\OrderDetail.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

@@ -1,0 +1,26 @@
+﻿@model OnlineWebShop.Models.Order
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="modal_outside_login" id="modal">
+    <div class="border_modal_login">
+        <div class="modal_contain_login">
+            @Html.AntiForgeryToken()
+            <h1>
+                <span class="text_login">Thông tin hóa đơn</span>
+            </h1>
+            @Html.ValidationSummary(true)
+            <label class="email_group">
+                <h5>Mã hóa đơn:<strong>@Model.OrderID</strong></h5>
+                <h5>Ngày giao : <strong>@Model.DeliveryDate.ToString()</strong></h5>
+                <div style="display:block;float:right;padding:6px">
+                    <a href=" @Url.Action("EditOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                    <a href=" @Url.Action("DeleteOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                </div>
+            </label>
+            <div><a href="@Url.Action("Products","Modules")">Back To Product List</a></div>
+        </div>
+    </div>
+</div>
