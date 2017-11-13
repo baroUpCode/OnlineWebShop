@@ -233,6 +233,7 @@ namespace OnlineWebShop.Controllers
                     order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
                     order.Total = Int32.Parse(total);
                     order.Status = 0;
+                    order.Deleted = 1;
                     db.Orders.InsertOnSubmit(order);
                     db.SubmitChanges();
                 }

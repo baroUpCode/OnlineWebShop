@@ -1,26 +1,86 @@
-﻿@model OnlineWebShop.Models.Order
+﻿@model OnlineWebShop.Models.Detail
 @{
     ViewBag.Title = "OrderDetail";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
 }
-
 <div class="modal_outside_login" id="modal">
     <div class="border_modal_login">
         <div class="modal_contain_login">
-            @Html.AntiForgeryToken()
-            <h1>
-                <span class="text_login">Thông tin hóa đơn</span>
-            </h1>
-            @Html.ValidationSummary(true)
-            <label class="email_group">
-                <h5>Mã hóa đơn:<strong>@Model.OrderID</strong></h5>
-                <h5>Ngày giao : <strong>@Model.DeliveryDate.ToString()</strong></h5>
-                <div style="display:block;float:right;padding:6px">
-                    <a href=" @Url.Action("EditOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>
-                    <a href=" @Url.Action("DeleteOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
-                </div>
-            </label>
-            <div><a href="@Url.Action("Products","Modules")">Back To Product List</a></div>
+            <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    <h1>
+                        <span class="text_login">Thông tin hóa đơn</span>
+                    </h1>
+                    @Html.ValidationSummary(true)
+                    <label class="email_group">
+                        <h5>Mã hóa đơn: <strong>@Model.OrderID</strong></h5>
+                        <h5>Ngày giao : <strong>@Model.Order.DeliveryDate.ToString()</strong></h5>
+                        <h5>Tên người nhận: <strong>@Model.Order.Reciever.RecieverName</strong></h5>
+                        <h5>Địa chỉ giao hàng: <strong>@Model.Order.Reciever.Address</strong></h5>
+                        <h5>Số điện thoại người nhận: <strong>@Model.Order.Reciever.Phone</strong></h5>
+                        <h5>Trạng thái xử lý:@if (Model.Order.Status == 1)
+                        {
+                        <strong style="color:orangered">Đang xử lý</strong>
+                        }
+                        else{ 
+                            <strong style="color:lawngreen">Đã giao hàng</strong>
+                        }
+                        </h5>
+
+                        <h5>Trạng thái hóa đơn: @if (Model.Order.Deleted == 1)
+                        {
+                            <strong style="color:lawngreen">Chưa xóa</strong>
+                        }
+                        else
+                        {
+                            <strong style="color:red">Đã xóa</strong>
+                        }
+                        </h5>
+                        <h5>Tổng cộng: <strong>@String.Format("{0:0,0}",Model.Order.Total) VND</strong></h5>
+                    </label>
+            </div>
+            
+            <!--Order's Product-->
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mã số</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Nhà sản xuất</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.ProductList)
+                        {
+                                <tr>
+                                    <td>@item.ProductID</td>
+                                    <td class="wh180"><img src="~/Assets/images/@item.ProductImages" style="width:200px;height:200px" /></td>
+                                    <td>@item.Name</td>
+                                    @*<td style="max-width:100ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="100px">@item.Description</td>*@
+                                    <td>@item.Catogory.CatogoriesName</td>
+                                    <td>@item.Producer.Name</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@String.Format("{0:0,0}", item.Price) VND</td>
+                                    <td>
+                                        <a href="@Url.Action("ProductDetail", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
+                                    </td>
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!--End Order's Product-->
+            <div style="display:block;float:right;padding:6px">
+                <a href=" @Url.Action("EditOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                <a href=" @Url.Action("DeleteOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                <div><a href="@Url.Action("Products","Modules")">Back To Product List</a></div>
+            </div>
         </div>
     </div>
 </div>

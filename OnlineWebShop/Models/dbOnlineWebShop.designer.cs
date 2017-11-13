@@ -1872,6 +1872,10 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<double> _Total;
 		
+		private EntityRef<Order> _Order;
+		
+		private EntityRef<Product> _Product;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1890,6 +1894,8 @@ namespace OnlineWebShop.Models
 		
 		public Detail()
 		{
+			this._Order = default(EntityRef<Order>);
+			this._Product = default(EntityRef<Product>);
 			OnCreated();
 		}
 		
@@ -1904,6 +1910,10 @@ namespace OnlineWebShop.Models
 			{
 				if ((this._ProductID != value))
 				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnProductIDChanging(value);
 					this.SendPropertyChanging();
 					this._ProductID = value;
@@ -1924,6 +1934,10 @@ namespace OnlineWebShop.Models
 			{
 				if ((this._OrderID != value))
 				{
+					if (this._Order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnOrderIDChanging(value);
 					this.SendPropertyChanging();
 					this._OrderID = value;
@@ -1989,6 +2003,74 @@ namespace OnlineWebShop.Models
 					this._Total = value;
 					this.SendPropertyChanged("Total");
 					this.OnTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_Detail", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
+		public Order Order
+		{
+			get
+			{
+				return this._Order.Entity;
+			}
+			set
+			{
+				Order previousValue = this._Order.Entity;
+				if (((previousValue != value) 
+							|| (this._Order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Order.Entity = null;
+						previousValue.Details.Remove(this);
+					}
+					this._Order.Entity = value;
+					if ((value != null))
+					{
+						value.Details.Add(this);
+						this._OrderID = value.OrderID;
+					}
+					else
+					{
+						this._OrderID = default(int);
+					}
+					this.SendPropertyChanged("Order");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Detail", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.Details1.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.Details1.Add(this);
+						this._ProductID = value.ProductID;
+					}
+					else
+					{
+						this._ProductID = default(int);
+					}
+					this.SendPropertyChanged("Product");
 				}
 			}
 		}
@@ -2361,6 +2443,8 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<System.DateTime> _DeliveryDate;
 		
+		private EntitySet<Detail> _Details;
+		
 		private EntityRef<Customer> _Customer;
 		
 		private EntityRef<Reciever> _Reciever;
@@ -2395,6 +2479,7 @@ namespace OnlineWebShop.Models
 		
 		public Order()
 		{
+			this._Details = new EntitySet<Detail>(new Action<Detail>(this.attach_Details), new Action<Detail>(this.detach_Details));
 			this._Customer = default(EntityRef<Customer>);
 			this._Reciever = default(EntityRef<Reciever>);
 			OnCreated();
@@ -2628,6 +2713,19 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_Detail", Storage="_Details", ThisKey="OrderID", OtherKey="OrderID")]
+		public EntitySet<Detail> Details
+		{
+			get
+			{
+				return this._Details;
+			}
+			set
+			{
+				this._Details.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
 		public Customer Customer
 		{
@@ -2714,6 +2812,18 @@ namespace OnlineWebShop.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Details(Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = this;
+		}
+		
+		private void detach_Details(Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = null;
 		}
 	}
 	
@@ -3107,6 +3217,8 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<bool> _Status;
 		
+		private EntitySet<Detail> _Details1;
+		
 		private EntityRef<Catogory> _Catogory;
 		
 		private EntityRef<Producer> _Producer;
@@ -3155,6 +3267,7 @@ namespace OnlineWebShop.Models
 		
 		public Product()
 		{
+			this._Details1 = new EntitySet<Detail>(new Action<Detail>(this.attach_Details1), new Action<Detail>(this.detach_Details1));
 			this._Catogory = default(EntityRef<Catogory>);
 			this._Producer = default(EntityRef<Producer>);
 			OnCreated();
@@ -3528,6 +3641,19 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Detail", Storage="_Details1", ThisKey="ProductID", OtherKey="ProductID")]
+		public EntitySet<Detail> Details1
+		{
+			get
+			{
+				return this._Details1;
+			}
+			set
+			{
+				this._Details1.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Catogory_Product", Storage="_Catogory", ThisKey="CatogoriesID", OtherKey="CatogoriesID", IsForeignKey=true)]
 		public Catogory Catogory
 		{
@@ -3614,6 +3740,18 @@ namespace OnlineWebShop.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Details1(Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_Details1(Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
 		}
 	}
 	

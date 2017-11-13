@@ -88,6 +88,8 @@
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Total" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Order_Detail" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
+      <Association Name="Product_Detail" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.News" Member="News">
@@ -118,6 +120,7 @@
       <Column Name="Status" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="RecieverID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Order_Detail" Member="Details" ThisKey="OrderID" OtherKey="OrderID" Type="Detail" />
       <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
       <Association Name="Reciever_Order" Member="Reciever" ThisKey="RecieverID" OtherKey="RecieverID" Type="Reciever" IsForeignKey="true" />
     </Type>
@@ -161,6 +164,7 @@
       <Column Name="CatogoriesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OnlinePay" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Product_Detail" Member="Details1" ThisKey="ProductID" OtherKey="ProductID" Type="Detail" />
       <Association Name="Catogory_Product" Member="Catogory" ThisKey="CatogoriesID" OtherKey="CatogoriesID" Type="Catogory" IsForeignKey="true" />
       <Association Name="Producer_Product" Member="Producer" ThisKey="ProducerID" OtherKey="ProducerID" Type="Producer" IsForeignKey="true" />
     </Type>
