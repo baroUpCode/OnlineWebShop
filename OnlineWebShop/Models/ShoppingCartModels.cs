@@ -27,6 +27,7 @@ namespace OnlineWebShop.Models
         /// <param name="proID"></param>
         public ShoppingCartModels(int modelID)
         {
+
             _productID = modelID;
            var price = from p in db.Details where p.ProductID == _productID select p.UnitPrice;
            Product product = db.Products.Single(x=>x.ProductID==_productID);// lấy đơn thông tin sản phẩm từ db 

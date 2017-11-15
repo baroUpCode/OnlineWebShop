@@ -200,8 +200,7 @@ namespace OnlineWebShop.Controllers
             {
                 List<ShoppingCartModels> listCart = GetShoppingCart();
                 var total = listCart.Sum(x => x._total).ToString();
-                Detail de = new Detail();
-
+           
                 if (Session["AccountCustomer"] != null)
                 {
                     Customer cus = (Customer)Session["AccountCustomer"];
@@ -240,6 +239,7 @@ namespace OnlineWebShop.Controllers
                 //Duyệt các sản phẩm trong giỏ hàng.Thêm thông tin sản phẩm vào details
                 foreach (var item in listCart)
                 {
+                    Detail de = new Detail();
                     de.OrderID = order.OrderID;
                     de.ProductID = item._productID;
                     de.Quantity = item._quantity;
@@ -251,46 +251,11 @@ namespace OnlineWebShop.Controllers
                 Session["Cart"] = null;
                 return RedirectToAction("OrderSuccess", "ShoppingCart");
             }
-        
-            //var Name = f["name"];
-            //var Address = f["address"];
-            //var Phone = f["phone"];
-            //if (String.IsNullOrEmpty(Name))
-            //{
-            //    ViewData["ErrorName"] = "Vui lòng nhập tên người nhận";
-            //}
-            //if (String.IsNullOrEmpty(Address))
-            //{
-            //    ViewData["ErrorAddress"] = "Vui lòng nhập địa chỉ nhận hàng";
-            //}
-            //if (String.IsNullOrEmpty(Phone))
-            //{
-            //    ViewData["ErrorPhone"] = "Vui lòng nhập số điện thoại người nhận";
-            //}
-            //else
-            //{
-            //    rec.RecieverName = Name;
-            //    rec.Address = Address;
-            //    rec.Phone = Int32.Parse(Phone);
-            //    db.Recievers.InsertOnSubmit(rec);
-            //    db.SubmitChanges();
-            //}
         }
         public ActionResult OrderSuccess()
         {
             return View();
         }
-        //public ActionResult CustomerInform(int id)
-        //{
-        //    Customer cus = db.Customers.SingleOrDefault(x => x.CustomersID == id);
-        //    Reciever rec = new Reciever();
-        //    rec.RecieverName = cus.FullName;
-        //    rec.Address = cus.Address;
-        //    rec.Phone = Convert.ToInt32(cus.Phone);
-        //    db.Recievers.InsertOnSubmit(rec);
-        //    db.SubmitChanges();
-        //    return this.OrderInform(rec);
-        //}
 
     }
 }

@@ -39,7 +39,7 @@
                         <td class="wh180"><img src="~/Assets/images/@item.Images" style="width:200px;height:200px" /></td>
                         <td>@item.Title</td>
                         <td>@item.RootCatogory.RootCatogoryName</td>
-                         <td><a href="@Url.Action("NewsDetail", "Modules", new { id = item.NewsID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
+                         <td><a href="@Url.Action("NewsDetail", "Details", new { id = item.NewsID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
                              <span style="display:inline-block"><a href=" @Url.Action("EditNews", "Modules", new { id = item.NewsID })"><button type="button" class="btn btn-warning">Sửa</button></a> <a href=" @Url.Action("DeleteNews", "Modules", new { id = item.NewsID })"><button type="button" class="btn btn-danger">Xóa</button></a></span>
                           </td>
                     </tr>

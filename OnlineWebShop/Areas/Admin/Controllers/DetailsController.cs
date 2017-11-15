@@ -13,18 +13,18 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         dbOnlineWebShopDataContext db = new dbOnlineWebShopDataContext();
         // GET: Admin/Details
         public ActionResult OrderDetail(int id) {
-            var order = db.Details.SingleOrDefault(x => x.OrderID == id);
+            var order = db.Orders.SingleOrDefault(x=>x.OrderID==id);
             List<Product> pro = new List<Product>();
-            var listor = db.Details.Where(x => x.OrderID == id).ToList();
-            foreach (var i in listor)
+            foreach (var item in order.Details)
             {
-            pro.Add(db.Products.Single(x=>x.ProductID==i.ProductID));
+                var listor = db.Products.Single(x => x.ProductID == item.ProductID);
+                pro.Add(listor);
             }
             ViewBag.ProductList = pro;
             return View(order);
         }
         public ActionResult NewsDetail(int id)
-        {
+        {   
             var news = db.News.SingleOrDefault(x => x.NewsID == id);
             return View(news);
         }

@@ -85,7 +85,6 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                     }
                 }
                 pro.Name = f["productName"];
-                pro.Deleted = Byte.Parse(f["productDeleted"]);
                 pro.Quantity = Convert.ToInt32(f["productQuantity"]);
                 pro.Warranty = Convert.ToInt32(f["productWarranty"]);
                 pro.Price = Convert.ToDecimal(f["productPrice"]);

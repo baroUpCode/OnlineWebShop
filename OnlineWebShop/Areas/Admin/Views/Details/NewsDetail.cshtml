@@ -1,0 +1,38 @@
+﻿@model OnlineWebShop.Models.New
+@{
+    ViewBag.Title = "NewsDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div class="modal_outside_login" id="modal">
+    <div class="border_modal_login">
+        <div class="modal_contain_login">
+                <h1>
+                    <span class="text_login">Chi tiết tin tức</span>
+                </h1>
+                    <label class="email_group">
+                        <h5>Ảnh bìa</h5>
+                        <img src="~/Assets/images/@Model.Images" style="width:500px;height: 500px" />
+                        <h5>@ViewBag.Mess</h5>
+                        <h5>Tiêu đề tin: <strong>@Model.Title</strong></h5>
+                        <h5>Loại tin: <strong>@Model.RootCatogory.RootCatogoryName</strong></h5>
+                        <!--CKEDITOR-->
+                        <h5>Nội dung:</h5>
+                        <textarea name="newsContent" id="textarea" rows="10" cols="80" disabled>@Model.Content</textarea>
+                        <script type="text/javascript">
+                                CKEDITOR.replace('textarea');
+                        </script>
+                        <div style="display:block;padding:6px">
+                            <span style="float:left"><a href="@Url.Action("News","Modules")">Back To News List</a></span>
+                            <span style="float:right">
+                                <a href=" @Url.Action("EditNews","Modules",new {id=Model.NewsID })"><button type="button" class="btn btn-warning">Sửa</button></a>
+                                <a href=" @Url.Action("DeleteNews","Modules",new {id=Model.NewsID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                            </span>
+                            
+                        </div>
+                    </label>
+        </div>
+    </div>
+</div>
+
+
+

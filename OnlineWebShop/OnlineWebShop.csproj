@@ -819,6 +819,7 @@
     <Content Include="Areas\Admin\Views\Garbage\DeletedNews.cshtml" />
     <Content Include="Areas\Admin\Views\Garbage\DeletedCustomers.cshtml" />
     <Content Include="Areas\Admin\Views\Details\OrderDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Details\NewsDetail.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>
