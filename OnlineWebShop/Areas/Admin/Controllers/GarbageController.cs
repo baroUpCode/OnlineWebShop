@@ -100,7 +100,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
             var detail = db.Details.Where(x => x.OrderID == order.OrderID).ToList();
-
+            foreach (var item in detail)
+            {
+                db.Details.DeleteOnSubmit(item);
+            }
+            db.Orders.DeleteOnSubmit(order);
+            db.SubmitChanges();
             return RedirectToAction("Orders", "Modules");
         }
     }
