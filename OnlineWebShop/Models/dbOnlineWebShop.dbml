@@ -119,7 +119,7 @@
       <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Status" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="RecieverID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Association Name="Order_Detail" Member="Details" ThisKey="OrderID" OtherKey="OrderID" Type="Detail" />
       <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
       <Association Name="Reciever_Order" Member="Reciever" ThisKey="RecieverID" OtherKey="RecieverID" Type="Reciever" IsForeignKey="true" />

@@ -16,7 +16,8 @@
                         <h5>Mã hóa đơn</h5>
                         <input type="text"value="@Model.OrderID" disabled/>
                         <h5>Ngày giao hàng</h5>
-                        <input type="date" name="deliveryDate" value=@Model.DeliveryDate.Value  class="input" id="deliveryDate"/>
+                        <input type="datetime" name="deliveryDate" value="@Model.DeliveryDate.Value"  class="input" id="deliveryDate"/>
+                        <h5 style="color:red">@ViewBag.Mess</h5>
                         <h5>Tình trạng</h5>
                         @Html.DropDownList("ordStatus", (IEnumerable<SelectListItem>)ViewBag.OrderStatus, new { @class = "form-control" })
                         <h5>Tên người nhận hàng</h5>
@@ -24,7 +25,7 @@
                         <h5>Địa chỉ nhận hàng</h5>
                         <input type="text" name="recAddress" value="@Model.Reciever.Address" aria-required="true" id="pwd[1]" required class="input" />
                         <h5>Số điện thoại</h5>
-                        <input type="tel" name="recPhone" value="@Model.Reciever.Phone"required pattern="[0-9]{10,12}" title="Vui lòng nhập đúng số điện thoại">
+                        <input type="tel" name="recPhone" value="@Model.Reciever.Phone"required pattern="[0-9]{9,11}" title="Vui lòng nhập đúng số điện thoại">
                     </label>
                     <div class="address new">
                         <input type="submit" value="Sửa thông tin">

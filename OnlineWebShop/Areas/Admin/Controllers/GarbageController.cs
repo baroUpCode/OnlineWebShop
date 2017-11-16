@@ -14,10 +14,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         // GET: Admin/Garbage
         public ActionResult DeletedProduct(int? page)
         {
-            var pro = db.Products.Where(x => x.Deleted == 2).OrderByDescending(x=>x.ProductID);
+            var pro = db.Products.Where(x => x.Deleted == 2).OrderByDescending(x => x.ProductID);
             int pageSize = 8;
             int pageNum = (page ?? 1);
-            return View(pro.ToPagedList(pageNum,pageSize));
+            return View(pro.ToPagedList(pageNum, pageSize));
         }
         public ActionResult RestoreProduct(int id)
         {
@@ -95,6 +95,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             pro.Deleted = 1;
             db.SubmitChanges();
             return RedirectToAction("DeletedCustomers");
+        }
+        public ActionResult DeleteOrders(int id )
+        {
+            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
+            var detail = db.Details.Where(x => x.OrderID == order.OrderID).ToList();
+
+            return RedirectToAction("Orders", "Modules");
         }
     }
 }

@@ -565,7 +565,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 order.Reciever.Address = f["recAddress"];
                 order.Reciever.Phone = Int32.Parse(f["recPhone"]);
                 order.Status = Convert.ToByte(f["ordStatus"]);
-                order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                if (DateTime.Parse(f["deliveryDate"]) < DateTime.Now)
+                {
+                    ViewBag.Mess = "Ngày giao không được nhỏ hơn ngày hiện tại";
+                    return this.EditOrders(id);
+                }
+                else
+                {
+                    order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                }
                 db.SubmitChanges();
             }
             return RedirectToAction("Orders", "Modules");
