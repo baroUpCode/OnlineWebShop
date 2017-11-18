@@ -167,7 +167,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         {
 
             Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
-            List<RootCatogory> root = db.RootCatogories.ToList();
+            List<ParentCatogory> root = db.ParentCatogories.ToList();
 
             ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", cat.RootCatogoryID);
             return View(cat);
@@ -184,7 +184,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult InsertCatogories()
         {
-            ViewBag.CatList = new SelectList(db.RootCatogories.OrderBy(x => x.RootCatogoryName), "RootCatogoryID", "RootCatogoryName");
+            ViewBag.CatList = new SelectList(db.ParentCatogories.OrderBy(x => x.RootCatogoryName), "RootCatogoryID", "RootCatogoryName");
             return View();
         }
         [HttpPost]
@@ -285,7 +285,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         public ActionResult EditNews(int id)
         {
             New ne = db.News.SingleOrDefault(x => x.NewsID == id);
-            List<RootCatogory> root = db.RootCatogories.ToList();
+            List<ParentCatogory> root = db.ParentCatogories.ToList();
             ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", ne.RootCatogoryID);
             return View(ne);
         }
@@ -343,7 +343,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult InsertNews()
         {
-            List<RootCatogory> root = db.RootCatogories.ToList();
+            List<ParentCatogory> root = db.ParentCatogories.ToList();
             ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName");
             return View();
         }
@@ -440,7 +440,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             cus.Phone = f["Phone"];
             cus.Pass = f["cusPass"];
             cus.Address = f["Address"];
-            cus.BirthDay = DateTime.Parse(f["BirthDay"]);
+            if (DateTime.Parse(f["BirthDay"]) > DateTime.Now)
+            {
+                ViewBag.Mess = "Ngày sinh nhập vào không hợp lệ. Vui lòng nhập lại.";
+                return this.InsertCustomer();
+            }
+            else
+            {
+                cus.BirthDay = DateTime.Parse(f["BirthDay"]);
+            }
             cus.Pass = f["Pass"];
             db.Customers.InsertOnSubmit(cus);
             db.SubmitChanges();
@@ -601,7 +609,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult SearchCatogories(int? page, string searchString)
         {
-            var product = db.Catogories.Where(x => (x.CatogoriesName.Contains(searchString) || x.RootCatogory.RootCatogoryName.Contains(searchString)));
+            var product = db.Catogories.Where(x => (x.CatogoriesName.Contains(searchString) || x.ParentCatogory.RootCatogoryName.Contains(searchString)));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;
@@ -617,7 +625,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult SearchNews(int? page, string searchString)
         {
-            var product = db.News.Where(x => (x.NewsID.ToString() == searchString || x.Title.Contains(searchString) || x.RootCatogory.RootCatogoryName.Contains(searchString) || x.Content.Contains(searchString)));
+            var product = db.News.Where(x => (x.NewsID.ToString() == searchString || x.Title.Contains(searchString) || x.ParentCatogory.RootCatogoryName.Contains(searchString) || x.Content.Contains(searchString)));
             int pageSize = 10;
             int pageNum = (page ?? 1);
             ViewBag.Search = searchString;

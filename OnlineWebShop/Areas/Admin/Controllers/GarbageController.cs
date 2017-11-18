@@ -192,5 +192,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("DeletedNews");
         }
+        /// <summary>
+        /// Xóa một Sản phẩm khỏi danh sách sản phẩm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ConfirmDeleteProduct(int id)
+        {
+            return RedirectToAction("DeletedProduct");
+        }
+
     }
 }

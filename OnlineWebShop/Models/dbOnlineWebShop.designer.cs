@@ -33,9 +33,9 @@ namespace OnlineWebShop.Models
     partial void InsertAbout(About instance);
     partial void UpdateAbout(About instance);
     partial void DeleteAbout(About instance);
-    partial void InsertRootCatogory(RootCatogory instance);
-    partial void UpdateRootCatogory(RootCatogory instance);
-    partial void DeleteRootCatogory(RootCatogory instance);
+    partial void InsertReciever(Reciever instance);
+    partial void UpdateReciever(Reciever instance);
+    partial void DeleteReciever(Reciever instance);
     partial void InsertAdminAccount(AdminAccount instance);
     partial void UpdateAdminAccount(AdminAccount instance);
     partial void DeleteAdminAccount(AdminAccount instance);
@@ -57,6 +57,9 @@ namespace OnlineWebShop.Models
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
+    partial void InsertParentCatogory(ParentCatogory instance);
+    partial void UpdateParentCatogory(ParentCatogory instance);
+    partial void DeleteParentCatogory(ParentCatogory instance);
     partial void InsertPermission(Permission instance);
     partial void UpdatePermission(Permission instance);
     partial void DeletePermission(Permission instance);
@@ -66,9 +69,6 @@ namespace OnlineWebShop.Models
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
-    partial void InsertReciever(Reciever instance);
-    partial void UpdateReciever(Reciever instance);
-    partial void DeleteReciever(Reciever instance);
     #endregion
 		
 		public dbOnlineWebShopDataContext() : 
@@ -109,11 +109,11 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<RootCatogory> RootCatogories
+		public System.Data.Linq.Table<Reciever> Recievers
 		{
 			get
 			{
-				return this.GetTable<RootCatogory>();
+				return this.GetTable<Reciever>();
 			}
 		}
 		
@@ -173,6 +173,14 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<ParentCatogory> ParentCatogories
+		{
+			get
+			{
+				return this.GetTable<ParentCatogory>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Permission> Permissions
 		{
 			get
@@ -194,14 +202,6 @@ namespace OnlineWebShop.Models
 			get
 			{
 				return this.GetTable<Product>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Reciever> Recievers
-		{
-			get
-			{
-				return this.GetTable<Reciever>();
 			}
 		}
 	}
@@ -412,93 +412,161 @@ namespace OnlineWebShop.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RootCatogory")]
-	public partial class RootCatogory : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Reciever")]
+	public partial class Reciever : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _RootCatogoryID;
+		private int _RecieverID;
 		
-		private string _RootCatogoryName;
+		private string _RecieverName;
+		
+		private string _Address;
+		
+		private int _Phone;
+		
+		private System.Nullable<int> _CustomerID;
 		
 		private System.Data.Linq.Binary _CreatedAt;
 		
-		private System.Nullable<int> _CreatedBy;
+		private string _ModifyBy;
 		
-		private System.Nullable<byte> _Deleted;
+		private System.Nullable<System.DateTime> _ModifyAt;
 		
-		private System.Nullable<int> _ModifiedBy;
+		private EntitySet<Order> _Orders;
 		
-		private System.Nullable<System.DateTime> _ModifiedAt;
-		
-		private EntitySet<Catogory> _Catogories;
-		
-		private EntitySet<New> _News;
+		private EntityRef<Customer> _Customer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnRootCatogoryIDChanging(int value);
-    partial void OnRootCatogoryIDChanged();
-    partial void OnRootCatogoryNameChanging(string value);
-    partial void OnRootCatogoryNameChanged();
+    partial void OnRecieverIDChanging(int value);
+    partial void OnRecieverIDChanged();
+    partial void OnRecieverNameChanging(string value);
+    partial void OnRecieverNameChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPhoneChanging(int value);
+    partial void OnPhoneChanged();
+    partial void OnCustomerIDChanging(System.Nullable<int> value);
+    partial void OnCustomerIDChanged();
     partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
     partial void OnCreatedAtChanged();
-    partial void OnCreatedByChanging(System.Nullable<int> value);
-    partial void OnCreatedByChanged();
-    partial void OnDeletedChanging(System.Nullable<byte> value);
-    partial void OnDeletedChanged();
-    partial void OnModifiedByChanging(System.Nullable<int> value);
-    partial void OnModifiedByChanged();
-    partial void OnModifiedAtChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedAtChanged();
+    partial void OnModifyByChanging(string value);
+    partial void OnModifyByChanged();
+    partial void OnModifyAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifyAtChanged();
     #endregion
 		
-		public RootCatogory()
+		public Reciever()
 		{
-			this._Catogories = new EntitySet<Catogory>(new Action<Catogory>(this.attach_Catogories), new Action<Catogory>(this.detach_Catogories));
-			this._News = new EntitySet<New>(new Action<New>(this.attach_News), new Action<New>(this.detach_News));
+			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
+			this._Customer = default(EntityRef<Customer>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int RootCatogoryID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecieverID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int RecieverID
 		{
 			get
 			{
-				return this._RootCatogoryID;
+				return this._RecieverID;
 			}
 			set
 			{
-				if ((this._RootCatogoryID != value))
+				if ((this._RecieverID != value))
 				{
-					this.OnRootCatogoryIDChanging(value);
+					this.OnRecieverIDChanging(value);
 					this.SendPropertyChanging();
-					this._RootCatogoryID = value;
-					this.SendPropertyChanged("RootCatogoryID");
-					this.OnRootCatogoryIDChanged();
+					this._RecieverID = value;
+					this.SendPropertyChanged("RecieverID");
+					this.OnRecieverIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryName", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string RootCatogoryName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecieverName", DbType="NVarChar(200) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string RecieverName
 		{
 			get
 			{
-				return this._RootCatogoryName;
+				return this._RecieverName;
 			}
 			set
 			{
-				if ((this._RootCatogoryName != value))
+				if ((this._RecieverName != value))
 				{
-					this.OnRootCatogoryNameChanging(value);
+					this.OnRecieverNameChanging(value);
 					this.SendPropertyChanging();
-					this._RootCatogoryName = value;
-					this.SendPropertyChanged("RootCatogoryName");
-					this.OnRootCatogoryNameChanged();
+					this._RecieverName = value;
+					this.SendPropertyChanged("RecieverName");
+					this.OnRecieverNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public int Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
 				}
 			}
 		}
@@ -523,109 +591,90 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> CreatedBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyBy", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string ModifyBy
 		{
 			get
 			{
-				return this._CreatedBy;
+				return this._ModifyBy;
 			}
 			set
 			{
-				if ((this._CreatedBy != value))
+				if ((this._ModifyBy != value))
 				{
-					this.OnCreatedByChanging(value);
+					this.OnModifyByChanging(value);
 					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
+					this._ModifyBy = value;
+					this.SendPropertyChanged("ModifyBy");
+					this.OnModifyByChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<byte> Deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> ModifyAt
 		{
 			get
 			{
-				return this._Deleted;
+				return this._ModifyAt;
 			}
 			set
 			{
-				if ((this._Deleted != value))
+				if ((this._ModifyAt != value))
 				{
-					this.OnDeletedChanging(value);
+					this.OnModifyAtChanging(value);
 					this.SendPropertyChanging();
-					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
+					this._ModifyAt = value;
+					this.SendPropertyChanged("ModifyAt");
+					this.OnModifyAtChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> ModifiedBy
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reciever_Order", Storage="_Orders", ThisKey="RecieverID", OtherKey="RecieverID")]
+		public EntitySet<Order> Orders
 		{
 			get
 			{
-				return this._ModifiedBy;
+				return this._Orders;
 			}
 			set
 			{
-				if ((this._ModifiedBy != value))
+				this._Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Reciever", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnModifiedByChanging(value);
 					this.SendPropertyChanging();
-					this._ModifiedBy = value;
-					this.SendPropertyChanged("ModifiedBy");
-					this.OnModifiedByChanged();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Recievers.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Recievers.Add(this);
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Customer");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> ModifiedAt
-		{
-			get
-			{
-				return this._ModifiedAt;
-			}
-			set
-			{
-				if ((this._ModifiedAt != value))
-				{
-					this.OnModifiedAtChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedAt = value;
-					this.SendPropertyChanged("ModifiedAt");
-					this.OnModifiedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_Catogory", Storage="_Catogories", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
-		public EntitySet<Catogory> Catogories
-		{
-			get
-			{
-				return this._Catogories;
-			}
-			set
-			{
-				this._Catogories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_New", Storage="_News", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
-		public EntitySet<New> News
-		{
-			get
-			{
-				return this._News;
-			}
-			set
-			{
-				this._News.Assign(value);
 			}
 		}
 		
@@ -649,28 +698,16 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		private void attach_Catogories(Catogory entity)
+		private void attach_Orders(Order entity)
 		{
 			this.SendPropertyChanging();
-			entity.RootCatogory = this;
+			entity.Reciever = this;
 		}
 		
-		private void detach_Catogories(Catogory entity)
+		private void detach_Orders(Order entity)
 		{
 			this.SendPropertyChanging();
-			entity.RootCatogory = null;
-		}
-		
-		private void attach_News(New entity)
-		{
-			this.SendPropertyChanging();
-			entity.RootCatogory = this;
-		}
-		
-		private void detach_News(New entity)
-		{
-			this.SendPropertyChanging();
-			entity.RootCatogory = null;
+			entity.Reciever = null;
 		}
 	}
 	
@@ -1017,7 +1054,7 @@ namespace OnlineWebShop.Models
 		
 		private EntitySet<Product> _Products;
 		
-		private EntityRef<RootCatogory> _RootCatogory;
+		private EntityRef<ParentCatogory> _ParentCatogory;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1044,7 +1081,7 @@ namespace OnlineWebShop.Models
 		public Catogory()
 		{
 			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
-			this._RootCatogory = default(EntityRef<RootCatogory>);
+			this._ParentCatogory = default(EntityRef<ParentCatogory>);
 			OnCreated();
 		}
 		
@@ -1199,7 +1236,7 @@ namespace OnlineWebShop.Models
 			{
 				if ((this._RootCatogoryID != value))
 				{
-					if (this._RootCatogory.HasLoadedOrAssignedValue)
+					if (this._ParentCatogory.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1225,26 +1262,26 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_Catogory", Storage="_RootCatogory", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID", IsForeignKey=true)]
-		public RootCatogory RootCatogory
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ParentCatogory_Catogory", Storage="_ParentCatogory", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID", IsForeignKey=true)]
+		public ParentCatogory ParentCatogory
 		{
 			get
 			{
-				return this._RootCatogory.Entity;
+				return this._ParentCatogory.Entity;
 			}
 			set
 			{
-				RootCatogory previousValue = this._RootCatogory.Entity;
+				ParentCatogory previousValue = this._ParentCatogory.Entity;
 				if (((previousValue != value) 
-							|| (this._RootCatogory.HasLoadedOrAssignedValue == false)))
+							|| (this._ParentCatogory.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._RootCatogory.Entity = null;
+						this._ParentCatogory.Entity = null;
 						previousValue.Catogories.Remove(this);
 					}
-					this._RootCatogory.Entity = value;
+					this._ParentCatogory.Entity = value;
 					if ((value != null))
 					{
 						value.Catogories.Add(this);
@@ -1254,7 +1291,7 @@ namespace OnlineWebShop.Models
 					{
 						this._RootCatogoryID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("RootCatogory");
+					this.SendPropertyChanged("ParentCatogory");
 				}
 			}
 		}
@@ -1482,9 +1519,9 @@ namespace OnlineWebShop.Models
 		
 		private string _Pass;
 		
-		private EntitySet<Order> _Orders;
-		
 		private EntitySet<Reciever> _Recievers;
+		
+		private EntitySet<Order> _Orders;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1520,8 +1557,8 @@ namespace OnlineWebShop.Models
 		
 		public Customer()
 		{
-			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
 			this._Recievers = new EntitySet<Reciever>(new Action<Reciever>(this.attach_Recievers), new Action<Reciever>(this.detach_Recievers));
+			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
 			OnCreated();
 		}
 		
@@ -1785,19 +1822,6 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Orders", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<Order> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Reciever", Storage="_Recievers", ThisKey="CustomerID", OtherKey="CustomerID")]
 		public EntitySet<Reciever> Recievers
 		{
@@ -1808,6 +1832,19 @@ namespace OnlineWebShop.Models
 			set
 			{
 				this._Recievers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Orders", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<Order> Orders
+		{
+			get
+			{
+				return this._Orders;
+			}
+			set
+			{
+				this._Orders.Assign(value);
 			}
 		}
 		
@@ -1831,18 +1868,6 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		private void attach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customer = this;
-		}
-		
-		private void detach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customer = null;
-		}
-		
 		private void attach_Recievers(Reciever entity)
 		{
 			this.SendPropertyChanging();
@@ -1850,6 +1875,18 @@ namespace OnlineWebShop.Models
 		}
 		
 		private void detach_Recievers(Reciever entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = null;
+		}
+		
+		private void attach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = this;
+		}
+		
+		private void detach_Orders(Order entity)
 		{
 			this.SendPropertyChanging();
 			entity.Customer = null;
@@ -2122,7 +2159,7 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<int> _RootCatogoryID;
 		
-		private EntityRef<RootCatogory> _RootCatogory;
+		private EntityRef<ParentCatogory> _ParentCatogory;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2152,7 +2189,7 @@ namespace OnlineWebShop.Models
 		
 		public New()
 		{
-			this._RootCatogory = default(EntityRef<RootCatogory>);
+			this._ParentCatogory = default(EntityRef<ParentCatogory>);
 			OnCreated();
 		}
 		
@@ -2347,7 +2384,7 @@ namespace OnlineWebShop.Models
 			{
 				if ((this._RootCatogoryID != value))
 				{
-					if (this._RootCatogory.HasLoadedOrAssignedValue)
+					if (this._ParentCatogory.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2360,26 +2397,26 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RootCatogory_New", Storage="_RootCatogory", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID", IsForeignKey=true)]
-		public RootCatogory RootCatogory
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ParentCatogory_New", Storage="_ParentCatogory", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID", IsForeignKey=true)]
+		public ParentCatogory ParentCatogory
 		{
 			get
 			{
-				return this._RootCatogory.Entity;
+				return this._ParentCatogory.Entity;
 			}
 			set
 			{
-				RootCatogory previousValue = this._RootCatogory.Entity;
+				ParentCatogory previousValue = this._ParentCatogory.Entity;
 				if (((previousValue != value) 
-							|| (this._RootCatogory.HasLoadedOrAssignedValue == false)))
+							|| (this._ParentCatogory.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._RootCatogory.Entity = null;
+						this._ParentCatogory.Entity = null;
 						previousValue.News.Remove(this);
 					}
-					this._RootCatogory.Entity = value;
+					this._ParentCatogory.Entity = value;
 					if ((value != null))
 					{
 						value.News.Add(this);
@@ -2389,7 +2426,7 @@ namespace OnlineWebShop.Models
 					{
 						this._RootCatogoryID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("RootCatogory");
+					this.SendPropertyChanged("ParentCatogory");
 				}
 			}
 		}
@@ -2824,6 +2861,268 @@ namespace OnlineWebShop.Models
 		{
 			this.SendPropertyChanging();
 			entity.Order = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ParentCatogory")]
+	public partial class ParentCatogory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RootCatogoryID;
+		
+		private string _RootCatogoryName;
+		
+		private System.Data.Linq.Binary _CreatedAt;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Nullable<byte> _Deleted;
+		
+		private System.Nullable<int> _ModifiedBy;
+		
+		private System.Nullable<System.DateTime> _ModifiedAt;
+		
+		private EntitySet<Catogory> _Catogories;
+		
+		private EntitySet<New> _News;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRootCatogoryIDChanging(int value);
+    partial void OnRootCatogoryIDChanged();
+    partial void OnRootCatogoryNameChanging(string value);
+    partial void OnRootCatogoryNameChanged();
+    partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
+    partial void OnCreatedAtChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
+    partial void OnDeletedChanging(System.Nullable<byte> value);
+    partial void OnDeletedChanged();
+    partial void OnModifiedByChanging(System.Nullable<int> value);
+    partial void OnModifiedByChanged();
+    partial void OnModifiedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedAtChanged();
+    #endregion
+		
+		public ParentCatogory()
+		{
+			this._Catogories = new EntitySet<Catogory>(new Action<Catogory>(this.attach_Catogories), new Action<Catogory>(this.detach_Catogories));
+			this._News = new EntitySet<New>(new Action<New>(this.attach_News), new Action<New>(this.detach_News));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int RootCatogoryID
+		{
+			get
+			{
+				return this._RootCatogoryID;
+			}
+			set
+			{
+				if ((this._RootCatogoryID != value))
+				{
+					this.OnRootCatogoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._RootCatogoryID = value;
+					this.SendPropertyChanged("RootCatogoryID");
+					this.OnRootCatogoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RootCatogoryName", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string RootCatogoryName
+		{
+			get
+			{
+				return this._RootCatogoryName;
+			}
+			set
+			{
+				if ((this._RootCatogoryName != value))
+				{
+					this.OnRootCatogoryNameChanging(value);
+					this.SendPropertyChanging();
+					this._RootCatogoryName = value;
+					this.SendPropertyChanged("RootCatogoryName");
+					this.OnRootCatogoryNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<byte> Deleted
+		{
+			get
+			{
+				return this._Deleted;
+			}
+			set
+			{
+				if ((this._Deleted != value))
+				{
+					this.OnDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._Deleted = value;
+					this.SendPropertyChanged("Deleted");
+					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> ModifiedBy
+		{
+			get
+			{
+				return this._ModifiedBy;
+			}
+			set
+			{
+				if ((this._ModifiedBy != value))
+				{
+					this.OnModifiedByChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedBy = value;
+					this.SendPropertyChanged("ModifiedBy");
+					this.OnModifiedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> ModifiedAt
+		{
+			get
+			{
+				return this._ModifiedAt;
+			}
+			set
+			{
+				if ((this._ModifiedAt != value))
+				{
+					this.OnModifiedAtChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedAt = value;
+					this.SendPropertyChanged("ModifiedAt");
+					this.OnModifiedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ParentCatogory_Catogory", Storage="_Catogories", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
+		public EntitySet<Catogory> Catogories
+		{
+			get
+			{
+				return this._Catogories;
+			}
+			set
+			{
+				this._Catogories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ParentCatogory_New", Storage="_News", ThisKey="RootCatogoryID", OtherKey="RootCatogoryID")]
+		public EntitySet<New> News
+		{
+			get
+			{
+				return this._News;
+			}
+			set
+			{
+				this._News.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.ParentCatogory = this;
+		}
+		
+		private void detach_Catogories(Catogory entity)
+		{
+			this.SendPropertyChanging();
+			entity.ParentCatogory = null;
+		}
+		
+		private void attach_News(New entity)
+		{
+			this.SendPropertyChanging();
+			entity.ParentCatogory = this;
+		}
+		
+		private void detach_News(New entity)
+		{
+			this.SendPropertyChanging();
+			entity.ParentCatogory = null;
 		}
 	}
 	
@@ -3752,305 +4051,6 @@ namespace OnlineWebShop.Models
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Reciever")]
-	public partial class Reciever : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RecieverID;
-		
-		private string _RecieverName;
-		
-		private string _Address;
-		
-		private int _Phone;
-		
-		private System.Nullable<int> _CustomerID;
-		
-		private System.Data.Linq.Binary _CreatedAt;
-		
-		private string _ModifyBy;
-		
-		private System.Nullable<System.DateTime> _ModifyAt;
-		
-		private EntitySet<Order> _Orders;
-		
-		private EntityRef<Customer> _Customer;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRecieverIDChanging(int value);
-    partial void OnRecieverIDChanged();
-    partial void OnRecieverNameChanging(string value);
-    partial void OnRecieverNameChanged();
-    partial void OnAddressChanging(string value);
-    partial void OnAddressChanged();
-    partial void OnPhoneChanging(int value);
-    partial void OnPhoneChanged();
-    partial void OnCustomerIDChanging(System.Nullable<int> value);
-    partial void OnCustomerIDChanged();
-    partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
-    partial void OnCreatedAtChanged();
-    partial void OnModifyByChanging(string value);
-    partial void OnModifyByChanged();
-    partial void OnModifyAtChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifyAtChanged();
-    #endregion
-		
-		public Reciever()
-		{
-			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
-			this._Customer = default(EntityRef<Customer>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecieverID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int RecieverID
-		{
-			get
-			{
-				return this._RecieverID;
-			}
-			set
-			{
-				if ((this._RecieverID != value))
-				{
-					this.OnRecieverIDChanging(value);
-					this.SendPropertyChanging();
-					this._RecieverID = value;
-					this.SendPropertyChanged("RecieverID");
-					this.OnRecieverIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecieverName", DbType="NVarChar(200) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string RecieverName
-		{
-			get
-			{
-				return this._RecieverName;
-			}
-			set
-			{
-				if ((this._RecieverName != value))
-				{
-					this.OnRecieverNameChanging(value);
-					this.SendPropertyChanging();
-					this._RecieverName = value;
-					this.SendPropertyChanged("RecieverName");
-					this.OnRecieverNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this.OnAddressChanging(value);
-					this.SendPropertyChanging();
-					this._Address = value;
-					this.SendPropertyChanged("Address");
-					this.OnAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyBy", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
-		public string ModifyBy
-		{
-			get
-			{
-				return this._ModifyBy;
-			}
-			set
-			{
-				if ((this._ModifyBy != value))
-				{
-					this.OnModifyByChanging(value);
-					this.SendPropertyChanging();
-					this._ModifyBy = value;
-					this.SendPropertyChanged("ModifyBy");
-					this.OnModifyByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> ModifyAt
-		{
-			get
-			{
-				return this._ModifyAt;
-			}
-			set
-			{
-				if ((this._ModifyAt != value))
-				{
-					this.OnModifyAtChanging(value);
-					this.SendPropertyChanging();
-					this._ModifyAt = value;
-					this.SendPropertyChanged("ModifyAt");
-					this.OnModifyAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reciever_Order", Storage="_Orders", ThisKey="RecieverID", OtherKey="RecieverID")]
-		public EntitySet<Order> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Reciever", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.Recievers.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.Recievers.Add(this);
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Reciever = this;
-		}
-		
-		private void detach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Reciever = null;
 		}
 	}
 }

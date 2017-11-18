@@ -11,17 +11,18 @@
       <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.RootCatogory" Member="RootCatogories">
-    <Type Name="RootCatogory">
-      <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RootCatogoryName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.Reciever" Member="Recievers">
+    <Type Name="Reciever">
+      <Column Name="RecieverID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RecieverName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="RootCatogory_Catogory" Member="Catogories" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="Catogory" />
-      <Association Name="RootCatogory_New" Member="News" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="New" />
+      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ModifyAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Reciever_Order" Member="Orders" ThisKey="RecieverID" OtherKey="RecieverID" Type="Order" />
+      <Association Name="Customer_Reciever" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AdminAccount" Member="AdminAccounts">
@@ -50,7 +51,7 @@
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Catogory_Product" Member="Products" ThisKey="CatogoriesID" OtherKey="CatogoriesID" Type="Product" />
-      <Association Name="RootCatogory_Catogory" Member="RootCatogory" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="RootCatogory" IsForeignKey="true" />
+      <Association Name="ParentCatogory_Catogory" Member="ParentCatogory" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="ParentCatogory" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Contact" Member="Contacts">
@@ -77,8 +78,8 @@
       <Column Name="BirthDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Pass" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Customer_Order" Member="Orders" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
       <Association Name="Customer_Reciever" Member="Recievers" ThisKey="CustomerID" OtherKey="CustomerID" Type="Reciever" />
+      <Association Name="Customer_Order" Member="Orders" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
     </Type>
   </Table>
   <Table Name="dbo.Detail" Member="Details">
@@ -104,7 +105,7 @@
       <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="RootCatogory_New" Member="RootCatogory" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="RootCatogory" IsForeignKey="true" />
+      <Association Name="ParentCatogory_New" Member="ParentCatogory" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="ParentCatogory" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Orders" Member="Orders">
@@ -123,6 +124,19 @@
       <Association Name="Order_Detail" Member="Details" ThisKey="OrderID" OtherKey="OrderID" Type="Detail" />
       <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
       <Association Name="Reciever_Order" Member="Reciever" ThisKey="RecieverID" OtherKey="RecieverID" Type="Reciever" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ParentCatogory" Member="ParentCatogories">
+    <Type Name="ParentCatogory">
+      <Column Name="RootCatogoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RootCatogoryName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ParentCatogory_Catogory" Member="Catogories" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="Catogory" />
+      <Association Name="ParentCatogory_New" Member="News" ThisKey="RootCatogoryID" OtherKey="RootCatogoryID" Type="New" />
     </Type>
   </Table>
   <Table Name="dbo.Permission" Member="Permissions">
@@ -167,20 +181,6 @@
       <Association Name="Product_Detail" Member="Details1" ThisKey="ProductID" OtherKey="ProductID" Type="Detail" />
       <Association Name="Catogory_Product" Member="Catogory" ThisKey="CatogoriesID" OtherKey="CatogoriesID" Type="Catogory" IsForeignKey="true" />
       <Association Name="Producer_Product" Member="Producer" ThisKey="ProducerID" OtherKey="ProducerID" Type="Producer" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Reciever" Member="Recievers">
-    <Type Name="Reciever">
-      <Column Name="RecieverID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RecieverName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Address" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" />
-      <Column Name="Phone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedAt" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="ModifyBy" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="ModifyAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Reciever_Order" Member="Orders" ThisKey="RecieverID" OtherKey="RecieverID" Type="Order" />
-      <Association Name="Customer_Reciever" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
