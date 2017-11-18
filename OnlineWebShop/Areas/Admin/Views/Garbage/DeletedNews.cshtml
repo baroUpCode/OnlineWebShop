@@ -36,6 +36,7 @@
                     <td>@item.RootCatogory.RootCatogoryName</td>
                     <td>
                       <a href=" @Url.Action("RestoreNews", "Garbage", new { id = item.NewsID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
+                      <a href=" @Url.Action("ConfirmDeleteNews", "Garbage", new { id = item.NewsID })"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có thực sự muốn xóa')">Xóa khỏi dữ liệu</button></a>
                     </td>
                 </tr>
             }

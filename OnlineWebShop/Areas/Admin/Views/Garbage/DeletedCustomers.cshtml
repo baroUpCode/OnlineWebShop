@@ -38,7 +38,10 @@
                 <td>@item.Email</td>
                 <td>@item.Phone</td>
                 <td>@item.Address</td>
-                <td><a href=" @Url.Action("RestoreCustomers", "Garbage", new { id = item.CustomerID })"><button type="button" class="btn btn-success">Phục hồi</button></a></td>
+                <td>
+                    <a href=" @Url.Action("RestoreCustomers", "Garbage", new { id = item.CustomerID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
+                    <a href=" @Url.Action("ConfirmDeleteCustomer", "Garbage", new { id = item.CustomerID })"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có thực sự muốn xóa')">Xóa khỏi dữ liệu</button></a>
+                </td>
             </tr>
         }
     </tbody>
