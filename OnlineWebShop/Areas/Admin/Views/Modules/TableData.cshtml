@@ -36,7 +36,7 @@
                     <td>@item.FullName</td>
                     <td>@item.Email</td>
                     <td>@item.Permission.PermissionName</td>
-                    <td><button type="button" class="btn btn-warning"><a href=" @Url.Action("EditUser", "Modules", new { id = item.AdminID })" >Sửa</a></button> | <button type="button" class="btn btn-danger"><a href=" @Url.Action("DeleteUser", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
+                    <td><a href=" @Url.Action("EditUser", "Modules", new { id = item.AdminID })"><button type="button" class="btn btn-warning">Sửa</button></a> | <a href=" @Url.Action("DeleteUser", "Modules", new { id = item.AdminID })"><button type="button" class="btn btn-danger">Xóa</button></a></td>
                 </tr>
             }
 
@@ -72,7 +72,7 @@
                         <tr>
                             <td>@item.AdminID</td>
                             <td>@item.FullName</td>     
-                                <td><button type="button" class="btn btn-warning" disabled><a href=" @Url.Action("EditAdmin", "Modules", new { id = item.AdminID })">Sửa</a></button> | <button type="button" class="btn btn-danger" disabled><a href=" @Url.Action("DeleteAdmin", "Modules", new { id = item.AdminID })">Xóa</a></button></td>
+                                <td><a href=" @Url.Action("EditAdmin", "Modules", new { id = item.AdminID })"><button type="button" class="btn btn-warning" disabled>Sửa</button></a> | <a href=" @Url.Action("DeleteAdmin", "Modules", new { id = item.AdminID })"><button type="button" class="btn btn-danger" disabled>Xóa</button></a></td>
                             
                         </tr>
                     }
