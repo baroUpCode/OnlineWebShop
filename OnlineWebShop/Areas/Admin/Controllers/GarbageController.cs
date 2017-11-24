@@ -193,7 +193,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return RedirectToAction("DeletedNews");
         }
         /// <summary>
-        /// Xóa một Sản phẩm khỏi danh sách sản phẩm
+        /// Xóa một Sản phẩm khỏi danh sách sản phẩm, nếu thông tin sẩn phẩm bị xóa , đồng thời xóa ProductID ở Order Detail 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
