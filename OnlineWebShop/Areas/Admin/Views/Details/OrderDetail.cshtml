@@ -62,7 +62,7 @@
                         @foreach (var item in ViewBag.ProductList)
                         {
                                 <tr>
-                                    <td>@item.ProductID</td>
+                                    <td>@item.ProductID</td> 
                                     <td class="wh180"><img src="~/Assets/images/@item.ProductImages" style="width:200px;height:200px" /></td>
                                     <td>@item.Name</td>
                                     @*<td style="max-width:100ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="100px">@item.Description</td>*@
@@ -82,6 +82,8 @@
             <div style="display:block;float:right;padding:6px">
                 <a href=" @Url.Action("EditOrders","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>
                 <a href=" @Url.Action("DeleteOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
+                @*<a href=" @Url.Action("ExportToExcel","Modules",new {id=Model.OrderID, url=Request.Url.ToString()})"><button type="button" class="btn btn-success">Export Data</button></a>*@
+
                 <div><a href="@Url.Action("Orders","Modules")">Back To Order List</a></div>
             </div>
         </div>

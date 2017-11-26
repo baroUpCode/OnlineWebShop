@@ -142,3 +142,15 @@ D:\Git\OnlineWebShop\OnlineWebShop\bin\Microsoft.AI.Web.xml
 D:\Git\OnlineWebShop\OnlineWebShop\obj\Debug\OnlineWebShop.csprojResolveAssemblyReference.cache
 D:\Git\OnlineWebShop\OnlineWebShop\obj\Debug\OnlineWebShop.dll
 D:\Git\OnlineWebShop\OnlineWebShop\obj\Debug\OnlineWebShop.pdb
+D:\Git\OnlineWebShop\OnlineWebShop\obj\Debug\OnlineWebShop.csproj.ResolveComReference.cache
+D:\Git\OnlineWebShop\OnlineWebShop\bin\ClosedXML.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\DocumentFormat.OpenXml.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\FastMember.Signed.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\LinqToExcel.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\Remotion.Data.Linq.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\Remotion.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\Remotion.Interfaces.dll
+D:\Git\OnlineWebShop\OnlineWebShop\bin\ClosedXML.pdb
+D:\Git\OnlineWebShop\OnlineWebShop\bin\ClosedXML.xml
+D:\Git\OnlineWebShop\OnlineWebShop\bin\DocumentFormat.OpenXml.xml
+D:\Git\OnlineWebShop\OnlineWebShop\bin\LinqToExcel.xml

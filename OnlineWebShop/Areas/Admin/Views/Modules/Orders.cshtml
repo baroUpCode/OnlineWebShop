@@ -63,4 +63,7 @@
         </tbody>
     </table>
 </div>
+<div style="float:right;padding:15px">
+    <a href=" @Url.Action("ExportOrdersToExcel","Modules",new {url=Request.Url.ToString()})"><button type="button" class="btn btn-success">Xuất thống kê ra Excel</button></a>
+</div>
 <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Orders", "Modules", new { page = page}))</div>

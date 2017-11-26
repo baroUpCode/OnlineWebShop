@@ -35,7 +35,8 @@
             </div>
             <div class="col-md-12">
                     @Html.Action("CatogoriesPartial", "Home")
-                    <div class="col-md-9 right" >
+                <!--Just add new Class for JS Ajax-->
+                    <div class="col-md-9 right">
                             @foreach (var item in Model)
                             {
                                 if (item.Deleted == 1)

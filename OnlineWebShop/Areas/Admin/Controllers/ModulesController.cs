@@ -6,6 +6,12 @@ using System.Web.Mvc;
 using OnlineWebShop.Models;
 using PagedList;
 using System.IO;
+using System.Data;
+using Microsoft.Office.Interop.Excel;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using ClosedXML.Excel;
+using System.Web.Helpers;
 
 namespace OnlineWebShop.Areas.Admin.Controllers
 {
@@ -30,13 +36,18 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             int pageNum = (page ?? 1);
             return View(db.Products.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
+        /// <summary>
+        /// Sửa sản phẩm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditProduct(int id)
         {
 
             Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             List<SelectListItem> deleList = new List<SelectListItem>() {new SelectListItem() { Value = "1", Text = "Chưa xóa", Selected = true},
                                                                          new SelectListItem() { Value = "2", Text = "Đã xóa" }};
- 
+
             ViewBag.deleteList = deleList;
             List<Producer> producer = db.Producers.ToList();
             SelectList producerList = new SelectList(producer, "ProducerID", "Name", pro.ProducerID);
@@ -44,6 +55,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             List<Catogory> cat = db.Catogories.ToList();
             SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName", pro.CatogoriesID);
             ViewBag.CatList = catList;
+            //TempData -> lưu giá trị hình ảnh hiện tại của Product trước khi thay đổi và display ở View
             TempData["file"] = pro.ProductImages;
             //ViewBag.Error = TempData["e"] == null ? "" : TempData["e"].ToString();
             //ViewBag.Files = TempData["file"] == null ? new List<string>() : (List<string>)TempData["file"];
@@ -97,6 +109,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             else
                 return RedirectToAction("EditProduct", "Modules");
         }
+        /// <summary>
+        /// Thêm sản phẩm
+        /// </summary>
+        /// <returns></returns>
         public ActionResult InsertProduct()
         {
             //List<Producer> producer = db.Producers.ToList();
@@ -153,7 +169,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return RedirectToAction("Products", "Modules");
         }
         /// <summary>
-        /// Module Catogories
+        /// Danh sách loại sản phẩm
         /// Edit-Delete-Insert 
         /// </summary>
         /// <returns></returns>
@@ -163,6 +179,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             int pageNum = (page ?? 1);
             return View(db.Catogories.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
+        /// <summary>
+        /// Sửa loại sản phẩm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditCatogories(int id)
         {
 
@@ -182,6 +203,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Catogories", "Modules");
         }
+        /// <summary>
+        /// Thêm loại sản phẩm
+        /// </summary>
+        /// <returns></returns>
         public ActionResult InsertCatogories()
         {
             ViewBag.CatList = new SelectList(db.ParentCatogories.OrderBy(x => x.RootCatogoryName), "RootCatogoryID", "RootCatogoryName");
@@ -198,6 +223,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Catogories", "Modules");
         }
+        /// <summary>
+        /// Xóa loại sản phẩm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteCatogories(int id)
         {
             Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
@@ -213,8 +243,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         //    return PartialView(ViewBag.CatList);
         //}
         /// <summary>
-        /// Module Producer
-        /// Edit-Delete-Insert 
+        /// Danh sách nhà sản xuất
         /// </summary>
         /// <returns></returns>
         public ActionResult Producer(int? page)
@@ -223,6 +252,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             int pageNum = (page ?? 1);
             return View(db.Producers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
+        /// <summary>
+        /// Sửa thông tin nhà sản xuất
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditProducer(int id)
         {
             Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
@@ -241,6 +275,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             else
                 return RedirectToAction("Producer", "Modules");
         }
+        /// <summary>
+        /// Xóa nhà sản xuất
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteProducer(int id)
         {
             Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
@@ -249,6 +288,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return RedirectToAction("Products", "Modules");
 
         }
+        /// <summary>
+        /// Thêm nhà sản xuất
+        /// </summary>
+        /// <returns></returns>
         public ActionResult InsertProducer()
         {
             return View();
@@ -264,17 +307,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return this.InsertProducer();
         }
-        //public ActionResult ProducerList()
-        //{
-        //    List<Producer> producer = db.Producers.ToList();
-        //    SelectList producerList = new SelectList(producer, "ProducerID", "Name");
-        //    ViewBag.ProList = producerList;
-        //    return PartialView(ViewBag.ProList);
-        //}
         /// <summary>
-        /// Module News
-        /// Edit-Delete-Insert 
+        /// Danh sách tin tức
         /// </summary>
+        /// <param name="page"></param>
         /// <returns></returns>
         public ActionResult News(int? page)
         {
@@ -282,6 +318,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             int pageNum = (page ?? 1);
             return View(db.News.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
+        /// <summary>
+        /// Sửa thông tin tin tức 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditNews(int id)
         {
             New ne = db.News.SingleOrDefault(x => x.NewsID == id);
@@ -333,6 +374,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             else
                 return RedirectToAction("News", "Modules");
         }
+        /// <summary>
+        /// Xóa tin tức
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteNews(int id)
         {
             New news = db.News.SingleOrDefault(x => x.NewsID == id);
@@ -341,6 +387,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return RedirectToAction("News", "Modules");
 
         }
+        /// <summary>
+        /// Thêm tin tức
+        /// </summary>
+        /// <returns></returns>
         public ActionResult InsertNews()
         {
             List<ParentCatogory> root = db.ParentCatogories.ToList();
@@ -398,6 +448,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             int pageNum = (page ?? 1);
             return View(db.Customers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
         }
+        /// <summary>
+        /// Sửa thông tin khách hàng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult EditCustomer(int id)
         {
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
@@ -419,6 +474,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 Response.StatusCode = 404;
             return RedirectToAction("Customers", "Modules");
         }
+        /// <summary>
+        /// Xóa thông tin khách hàng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteCustomer(int id)
         {
             Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
@@ -426,6 +486,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Customers", "Modules");
         }
+        /// <summary>
+        /// Thêm mới khách hàng
+        /// </summary>
+        /// <returns></returns>
         public ActionResult InsertCustomer()
         {
             return View();
@@ -454,7 +518,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Customers", "Modules");
         }
-        public ActionResult InsertUser()
+        /// <summary>
+        /// Thêm mới Quản trị viên
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InsertAdmin()
         {
             return View();
         }
@@ -482,9 +550,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult PermissionList()
         {
+            //Tạo một danh sách đối tượng Permission
             List<Permission> per = db.Permissions.ToList();
-            SelectList perList = new SelectList(per, "PermissionID", "PermissionName");//Tạo một biến đối tượng kiểu SelectList
-            //với tham số truyền vào là Danh sách thông tin Permission lấy được, lấy giá trị option là ID và tên hiển thị là PermissionName
+            //Tạo một biến đối tượng kiểu SelectList với tham số truyền vào là Danh sách thông tin Permission lấy được, lấy giá trị(item value) option là ID và tên hiển thị(text display) là PermissionName
+            SelectList perList = new SelectList(per, "PermissionID", "PermissionName");
+            //Lưu biến vừa tạo vào ViewBag để Access Data ở View
             ViewBag.PermissionList = perList;
             return PartialView(ViewBag.PermissionList);
         }
@@ -499,7 +569,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
-
+        /// <summary>
+        /// Xóa thông tin Quản trị viên
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteAdmin(int id)
         {
             var u = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
@@ -551,11 +625,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         //    }
         //    return RedirectToAction("Orders", "Modules");
         //}
+       
         public ActionResult EditOrders(int id)
         {
-            //Start binding data dropdownlist
-
-            //End binding data dropdownlist
+           //Tạo một danh sách đối tượng SelectListItem để lưu giá trị Item trong SelectList và trả về cho View bằng ViewBag
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
             List<SelectListItem> status = new List<SelectListItem>();
             status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0" });
@@ -586,6 +659,11 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             }
             return RedirectToAction("Orders", "Modules");
         }
+        /// <summary>
+        /// Xóa tạm thông tin hóa đơn
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteOrders(int id)
         {
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
@@ -639,11 +717,21 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             ViewBag.Search = searchString;
             return View(product.ToPagedList(pageNum, pageSize));
         }
+        /// <summary>
+        /// Chi tiết thông tin sản phẩm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ProductDetail(int id)
         {
             var pro = db.Products.SingleOrDefault(x => x.ProductID == id);
             return View(pro);
         }
+        /// <summary>
+        /// Xóa tạm thông tin sản phẩm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteProduct(int id)
         {
             var product = db.Products.SingleOrDefault(x => x.ProductID == id);
@@ -652,6 +740,37 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return RedirectToAction("Products", "Modules");
         }
 
+        /// <summary>
+        /// Tạo form View mẫu để người dùng biết được form xuất ra sẽ như thế nào, tự design giống với function ExportOrdersData 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ExportOrdersToExcel()
+        {
+            dbOnlineWebShopDataContext db = new dbOnlineWebShopDataContext();
+            return View(db.Orders.ToList());
+            // Step 1 - get the data from database
+        }
+        /// <summary>
+        /// Hàm xuất thông kê ra file excel với các thuộc tính tương ứng muốn xuất ra, ở đay (chọn thông tin muốn xuất và thêm vào webGrid)
+        /// </summary>
+        public void ExportOrdersData() { 
+                var data = db.Orders.ToList();
+            //Khởi tạo một đối tượng WebGrid và truyền vào data để vẽ được các thuộc tính trong dât bằng đối tượng WebGrid
+                WebGrid webGrid = new WebGrid(data, canPage: true, rowsPerPage: 20);
+                string gridData = webGrid.GetHtml(
+                    columns: webGrid.Columns(
+                 webGrid.Column(columnName: "OrderID", header: "OrderID"),
+                 webGrid.Column(columnName: "CustomerID", header: "Mã khách hàng"),
+                 webGrid.Column(columnName: "RecieverID", header: "Mã người nhận"),
+                 webGrid.Column(columnName: "Status", header: "Trạng thái xử lý "),
+                 webGrid.Column(columnName: "DeliveryDate", header: "Ngày giao hàng"),
+                 webGrid.Column(columnName: "Total", header: "Tổng tiền")
+                )).ToString();
+                Response.ClearContent();
+                Response.AddHeader("content-disposition", "attachment; filename=Orders Report.xls");
+                Response.ContentType = "applicatiom/excel";
+                Response.Write(gridData);
+                Response.End();
+            }
+        }
     }
-
-}
