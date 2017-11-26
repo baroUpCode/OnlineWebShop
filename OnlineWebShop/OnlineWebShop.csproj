@@ -842,7 +842,7 @@
     <Content Include="Areas\Admin\Views\Garbage\DeletedCustomers.cshtml" />
     <Content Include="Areas\Admin\Views\Details\OrderDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Details\NewsDetail.cshtml" />
-    <Content Include="Areas\Admin\Views\Modules\ExportToExcel.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\ExportOrdersToExcel.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

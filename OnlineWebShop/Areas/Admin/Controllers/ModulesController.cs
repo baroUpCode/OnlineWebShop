@@ -625,10 +625,10 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         //    }
         //    return RedirectToAction("Orders", "Modules");
         //}
-       
+
         public ActionResult EditOrders(int id)
         {
-           //Tạo một danh sách đối tượng SelectListItem để lưu giá trị Item trong SelectList và trả về cho View bằng ViewBag
+            //Tạo một danh sách đối tượng SelectListItem để lưu giá trị Item trong SelectList và trả về cho View bằng ViewBag
             var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
             List<SelectListItem> status = new List<SelectListItem>();
             status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0" });
@@ -746,31 +746,75 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult ExportOrdersToExcel()
         {
-            dbOnlineWebShopDataContext db = new dbOnlineWebShopDataContext();
-            return View(db.Orders.ToList());
+            var order = db.Orders.ToList();
+            var total = order.Sum(x => x.Total);
+            ViewBag.Total = total;
+            return View(order);
             // Step 1 - get the data from database
         }
         /// <summary>
         /// Hàm xuất thông kê ra file excel với các thuộc tính tương ứng muốn xuất ra, ở đay (chọn thông tin muốn xuất và thêm vào webGrid)
         /// </summary>
-        public void ExportOrdersData() { 
+        public ActionResult ExportOrdersData() { 
                 var data = db.Orders.ToList();
+            var total = data.Sum(x => x.Total);
             //Khởi tạo một đối tượng WebGrid và truyền vào data để vẽ được các thuộc tính trong dât bằng đối tượng WebGrid
-                WebGrid webGrid = new WebGrid(data, canPage: true, rowsPerPage: 20);
-                string gridData = webGrid.GetHtml(
-                    columns: webGrid.Columns(
-                 webGrid.Column(columnName: "OrderID", header: "OrderID"),
-                 webGrid.Column(columnName: "CustomerID", header: "Mã khách hàng"),
-                 webGrid.Column(columnName: "RecieverID", header: "Mã người nhận"),
-                 webGrid.Column(columnName: "Status", header: "Trạng thái xử lý "),
-                 webGrid.Column(columnName: "DeliveryDate", header: "Ngày giao hàng"),
-                 webGrid.Column(columnName: "Total", header: "Tổng tiền")
-                )).ToString();
-                Response.ClearContent();
-                Response.AddHeader("content-disposition", "attachment; filename=Orders Report.xls");
-                Response.ContentType = "applicatiom/excel";
-                Response.Write(gridData);
-                Response.End();
-            }
+            WebGrid webGrid = new WebGrid(data, canPage: true, rowsPerPage: 20);
+            //var newR = new WebGridRow(webGrid,total,5);
+            //webGrid.Rows.Add(newR);
+            string gridData = webGrid.GetHtml(
+                columns: webGrid.Columns(
+             webGrid.Column(columnName: "OrderID", header: "Mã hóa đơn"),
+             webGrid.Column(columnName: "CustomerID", header: "Mã khách hàng"),
+             webGrid.Column(columnName: "RecieverID", header: "Mã người nhận"),
+             webGrid.Column(columnName: "Status", header: "Trạng thái xử lý "),
+             webGrid.Column(columnName: "DeliveryDate", header: "Ngày giao hàng"),
+             webGrid.Column(columnName: "Total", header: "Tổng tiền")
+             )).ToString();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename=OrdersReport.xls");
+            Response.ContentType = "applicatiom/excel";
+            Response.Write(gridData);
+            Response.End();
+            //other way
+            //var gv = new GridView();
+            //gv.DataSource = db.Orders.ToList();
+            //gv.HeaderRow.Cells[0].Text = "Mã hóa đơn";
+            //gv.HeaderRow.Cells[1].Text = "Mã khách hàng";
+            //gv.HeaderRow.Cells[2].Text = "Mã người nhận";
+            //gv.HeaderRow.Cells[3].Text = "Trạng thái xử lý";
+            //gv.HeaderRow.Cells[4].Text = "Ngày giao hàng";
+            //gv.HeaderRow.Cells[5].Text = "Tổng tiền";
+            //gv.DataBind();
+            //Response.ClearContent();
+            //Response.Buffer = true;
+            //Response.AddHeader("content-disposition", "attachment; filename=Order Report.xls");
+            //Response.ContentType = "application/ms-excel";
+            //Response.Charset = "";
+            //StringWriter objStringWriter = new StringWriter();
+            //HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            //gv.RenderControl(objHtmlTextWriter);
+            //Response.Output.Write(objStringWriter.ToString());
+            //Response.Flush();
+            //Response.End();
+            return View("ExportOrdersToExcel");
         }
+        //Tạo một đối tượng ViewModel để lấy dữ liệu cần xuất báo cáo-> sau khi có ModelView thì viết một hàm trả về List<ModelView> và lưu trữ dữ iệu lại , viết một hàm GetOrderData để láy dữ liệu của Model khi đã được set và trả về một bảng gridview định dạng Excel
+        //public IList<OrderReport> GetOrderModel()
+        //{
+        //    var listOrder = (from o in db.Orders
+        //                     join d in db.Details on o.OrderID equals d.OrderID
+        //                     select new OrderReport
+        //                     {
+        //                         orderID = o.OrderID,
+        //                         customerID=Int32.Parse(o.CustomerID.ToString()),
+        //                         recieverID=Int32.Parse(o.RecieverID.ToString()),
+        //                         orderStatus=Byte.Parse(o.Status.ToString()),
+        //                         orderDeleted=o.Deleted
+
+        //                     }).ToList();
+        //    return listOrder;
+        //}
+        }
+
     }
