@@ -2,6 +2,7 @@
     @{
         ViewBag.Title = "ExportToExcel";
         Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+    //Tạo một biến grid kiểu đối tượng WebGrid có source là Model và 10 dòng trong một trang
         var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
         grid.Pager(WebGridPagerModes.All);
     }
@@ -136,12 +137,13 @@
                     </td>
                 </tr>
             }
-            <tr><td><h4>TỔNG CỘNG:@String.Format("{0:0,0}", ViewBag.Total) VND</h4></td></tr>
+            <tr><td style="border: 2px solid black; float:right" colspan="6"><h4>TỔNG CỘNG:@String.Format("{0:0,0}", ViewBag.Total) VND</h4></td></tr>
             <tr>
                 <td colspan="4">
                     <br />
                     <br />
                     <input type="submit" value="Export to Excel" class="button" />
+                    
                 </td>
             </tr>
         </table>

@@ -759,6 +759,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
                 var data = db.Orders.ToList();
             var total = data.Sum(x => x.Total);
             //Khởi tạo một đối tượng WebGrid và truyền vào data để vẽ được các thuộc tính trong dât bằng đối tượng WebGrid
+            //Vẫn sử dụng đối tượng WebGrid để show thông tin ở View 
             WebGrid webGrid = new WebGrid(data, canPage: true, rowsPerPage: 20);
             //var newR = new WebGridRow(webGrid,total,5);
             //webGrid.Rows.Add(newR);
