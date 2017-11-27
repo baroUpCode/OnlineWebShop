@@ -800,22 +800,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             //Response.End();
             return View("ExportOrdersToExcel");
         }
-        //Tạo một đối tượng ViewModel để lấy dữ liệu cần xuất báo cáo-> sau khi có ModelView thì viết một hàm trả về List<ModelView> và lưu trữ dữ iệu lại , viết một hàm GetOrderData để láy dữ liệu của Model khi đã được set và trả về một bảng gridview định dạng Excel
-        //public IList<OrderReport> GetOrderModel()
-        //{
-        //    var listOrder = (from o in db.Orders
-        //                     join d in db.Details on o.OrderID equals d.OrderID
-        //                     select new OrderReport
-        //                     {
-        //                         orderID = o.OrderID,
-        //                         customerID=Int32.Parse(o.CustomerID.ToString()),
-        //                         recieverID=Int32.Parse(o.RecieverID.ToString()),
-        //                         orderStatus=Byte.Parse(o.Status.ToString()),
-        //                         orderDeleted=o.Deleted
-
-        //                     }).ToList();
-        //    return listOrder;
-        //}
+        //Tạo một đối tượng ViewModel để lấy dữ liệu cần xuất báo cáo-> sau khi có ModelView thì viết một hàm trả về List<ModelView> và lưu trữ dữ iệu lại , viết một hàm GetOrderData để láy dữ liệu của Model khi đã được set và trả về một bảng gridview định dạng Exce
         }
 
     }
