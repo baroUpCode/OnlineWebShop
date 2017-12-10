@@ -37,6 +37,7 @@
                         }
                         </h5>
                         <h5>Tổng cộng: <strong>@String.Format("{0:0,0}",Model.Total) VND</strong></h5>
+                        <a href=" @Url.Action("OrderReport","OrderReport")"><button type="button" class="btn btn-warning">Xuất hóa đơn</button></a>
                     </label>
             </div>
                 
@@ -83,7 +84,6 @@
                 <a href=" @Url.Action("EditOrders","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-warning">Sửa</button></a>
                 <a href=" @Url.Action("DeleteOrder","Modules",new {id=Model.OrderID })"><button type="button" class="btn btn-danger">Xóa</button></a>
                 @*<a href=" @Url.Action("ExportToExcel","Modules",new {id=Model.OrderID, url=Request.Url.ToString()})"><button type="button" class="btn btn-success">Export Data</button></a>*@
-
                 <div><a href="@Url.Action("Orders","Modules")">Back To Order List</a></div>
             </div>
         </div>
