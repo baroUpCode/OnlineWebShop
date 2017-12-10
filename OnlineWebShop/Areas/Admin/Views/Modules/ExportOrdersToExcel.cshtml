@@ -1,98 +1,23 @@
-﻿@*@model IEnumerable<OnlineWebShop.Models.Order>
-    @{
-        ViewBag.Title = "ExportToExcel";
-        Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
-    //Tạo một biến grid kiểu đối tượng WebGrid có source là Model và 10 dòng trong một trang
-        var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
-        grid.Pager(WebGridPagerModes.All);
-    }
-    <div class="modal_outside_login" id="modal">
-        <div class="border_modal_login">
-            <div class="modal_contain_login">
-                <div class="col-md-12">
-                    <div id="gridContent" style="font-family: Arial; padding: 20px;">
-                        <h2>Thống kê hóa đơn BBA Shop</h2>
-                        @grid.GetHtml(tableStyle: "webgrid-table",
-    headerStyle: "webgrid-header",
-    footerStyle: "webgrid-footer",
-    alternatingRowStyle: "webgrid-alternating-row",
-    selectedRowStyle: "webgrid-selected-row",
-    rowStyle: "webgrid-row-style",
-    columns: grid.Columns(
-                grid.Column(columnName: "OrderID", header: "OrderID"),
-                 grid.Column(columnName: "CustomerID", header: "Mã khách hàng"),
-                 grid.Column(columnName: "RecieverID", header: "Mã người nhận"),
-                 grid.Column(columnName: "Status", header: "Trạng thái xử lý "),
-                 grid.Column(columnName: "DeliveryDate", header: "Ngày giao hàng"),
-                 grid.Column(columnName: "Total", header: "Tổng tiền")
-
-
-    ))
-                    </div>
-                    </div>
-                <div class="col-md-12">@Html.ActionLink("Xuất thống kê", "ExportOrdersData", "Modules")</div>
-                </div>
-            </div>
-        </div>
-
-<style type="text/css">
-    .webgrid-table {
-        font-family: Arial,Helvetica,sans-serif;
-        font-size: 14px;
-        font-weight: normal;
-        width: 650px;
-        display: table;
-        border-collapse: collapse;
-        border: solid 1px #C5C5C5;
-        background-color: white;
-    }
-
-        .webgrid-table td, th {
-            border: 1px solid #C5C5C5;
-            padding: 3px 7px 2px;
-        }
-
-    .webgrid-header, .webgrid-header a {
-        background-color: #0094ff;
-        color: #ffffff;
-        text-align: left;
-        text-decoration: none;
-    }
-
-    .webgrid-footer {
-    }
-
-    .webgrid-row-style {
-        padding: 3px 7px 2px;
-    }
-
-    .webgrid-alternating-row {
-        background-color: azure;
-        padding: 3px 7px 2px;
-    }
-
-    .col1Width {
-        width: 55px;
-    }
-
-    .col2Width {
-        width: 220px;
-    }
-</style>*@
+﻿
 @model IList<OnlineWebShop.Models.Order>
     @{
         ViewBag.Title = "ExportOrdersToExcel";
         Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
     }
-
-    @using (Html.BeginForm("ExportOrdersData", "Modules", FormMethod.Post))
-    {
-
         <br />
         <br />
         <h2>
             Báo cáo hóa đơn BBA Shop
         </h2>
+        @*<div class="col-md-12" style="padding:5px">
+            <h4>Chọn tháng</h4>
+            <form action="@Url.Action("ReportFilterByMonth", "Modules")" method="get">
+                <input type="text" name="searchString" id="searchString">
+                <input type="submit" value="Chọn Tháng">
+            </form>
+        </div>*@
+@using (Html.BeginForm("ExportOrdersData", "Modules", FormMethod.Post))
+{
         <table style="background-color: white; width: 100%;">
             <tr>
                 <th style="border: 2px solid black; text-align: center; width: 20%">
@@ -133,7 +58,7 @@
                         @item.DeliveryDate
                     </td>
                     <td style="padding: 5px;border: 2px solid black; text-align: center">
-                        @String.Format("{0:0,0}",item.Total)
+                        @String.Format("{0:0,0}", item.Total)
                     </td>
                 </tr>
             }
@@ -147,5 +72,5 @@
                 </td>
             </tr>
         </table>
-    }
+}
 

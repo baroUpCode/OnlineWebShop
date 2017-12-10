@@ -47,7 +47,6 @@
                                             <img src="/Assets/images/@item.ProductImages" alt="@item.Name" style="height:200px" />
                                             <div class="mask">
                                             </div>
-
                                             <h4 class="h4-title">@item.Name</h4>
                                             <p><a href="@Url.Action("InsertCart", "ShoppingCart", new { proid = item.ProductID, url = @Request.Url.ToString() })"><i></i></a> <span class=" item_price">@String.Format("{0:0,0}", @item.Price) VND</span></p>
                                             @*<div class="single-but item_add">

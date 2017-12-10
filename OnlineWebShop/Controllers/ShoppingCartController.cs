@@ -208,6 +208,7 @@ namespace OnlineWebShop.Controllers
                     order.CustomerID = cus.CustomerID; // luu lai thong tin listgiohang vao db 
                     order.Status = 0;
                     order.Deleted = 1;
+                    order.CreatedAt = DateTime.Now;
                     order.Total = Int32.Parse(total);
                     order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
                     db.Orders.InsertOnSubmit(order);
@@ -230,6 +231,7 @@ namespace OnlineWebShop.Controllers
                     order.RecieverID = rec.RecieverID;
                     db.Orders.InsertOnSubmit(order);
                     order.DeliveryDate = DateTime.Parse(f["deliveryDate"]);
+                    order.CreatedAt = DateTime.Now;
                     order.Total = Int32.Parse(total);
                     order.Status = 0;
                     order.Deleted = 1;

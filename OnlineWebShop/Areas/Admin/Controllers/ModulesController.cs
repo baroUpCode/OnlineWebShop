@@ -746,7 +746,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult ExportOrdersToExcel()
         {
-            var order = db.Orders.ToList();
+            var order = db.Orders.OrderByDescending(x=>x.CreatedAt).ToList();
             var total = order.Sum(x => x.Total);
             ViewBag.Total = total;
             return View(order);
@@ -756,7 +756,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// Hàm xuất thông kê ra file excel với các thuộc tính tương ứng muốn xuất ra, ở đay (chọn thông tin muốn xuất và thêm vào webGrid)
         /// </summary>
         public ActionResult ExportOrdersData() { 
-                var data = db.Orders.ToList();
+            var data = db.Orders.ToList();
             var total = data.Sum(x => x.Total);
             //Khởi tạo một đối tượng WebGrid và truyền vào data để vẽ được các thuộc tính trong dât bằng đối tượng WebGrid
             //Vẫn sử dụng đối tượng WebGrid để show thông tin ở View 
@@ -765,12 +765,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             //webGrid.Rows.Add(newR);
             string gridData = webGrid.GetHtml(
                 columns: webGrid.Columns(
-             webGrid.Column(columnName: "OrderID", header: "Mã hóa đơn"),
-             webGrid.Column(columnName: "CustomerID", header: "Mã khách hàng"),
-             webGrid.Column(columnName: "RecieverID", header: "Mã người nhận"),
-             webGrid.Column(columnName: "Status", header: "Trạng thái xử lý "),
-             webGrid.Column(columnName: "DeliveryDate", header: "Ngày giao hàng"),
-             webGrid.Column(columnName: "Total", header: "Tổng tiền")
+             webGrid.Column(columnName: "OrderID", header: "Ma hoa don"),
+             webGrid.Column(columnName: "CustomerID", header: "Ma khach hang"),
+             webGrid.Column(columnName: "RecieverID", header: "Ma nguoi nhan"),
+             webGrid.Column(columnName: "Status", header: "Trang thai xu lu "),
+             webGrid.Column(columnName: "DeliveryDate", header: "Ngay giao hang"),
+             webGrid.Column(columnName: "Total", header: "Tong tien")
              )).ToString();
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment; filename=OrdersReport.xls");
@@ -800,7 +800,20 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             //Response.End();
             return View("ExportOrdersToExcel");
         }
-        //Tạo một đối tượng ViewModel để lấy dữ liệu cần xuất báo cáo-> sau khi có ModelView thì viết một hàm trả về List<ModelView> và lưu trữ dữ iệu lại , viết một hàm GetOrderData để láy dữ liệu của Model khi đã được set và trả về một bảng gridview định dạng Exce
+        /// <summary>
+        /// Tạo bộ lọc xuất báo cáo theo tháng.
+        /// How to convert Binary Type to DateTime Type 
+        /// </summary>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public ActionResult ReportFilterByMonth(string month)
+        {
+            var order = db.Orders.Where(x=>DateTime.Parse(x.CreatedAt.ToString()).Month.ToString() == month).ToList();
+            var total = order.Sum(x => x.Total);
+            ViewBag.ToTal = total;
+            return View(order);
         }
+        //Tạo một đối tượng ViewModel để lấy dữ liệu cần xuất báo cáo-> sau khi có ModelView thì viết một hàm trả về List<ModelView> và lưu trữ dữ iệu lại , viết một hàm GetOrderData để láy dữ liệu của Model khi đã được set và trả về một bảng gridview định dạng Exce
+    }
 
     }

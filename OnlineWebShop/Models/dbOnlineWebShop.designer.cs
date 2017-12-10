@@ -1899,13 +1899,13 @@ namespace OnlineWebShop.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ProductID;
-		
 		private int _OrderID;
+		
+		private int _ProductID;
 		
 		private System.Nullable<int> _Quantity;
 		
-		private double _UnitPrice;
+		private System.Nullable<double> _UnitPrice;
 		
 		private System.Nullable<double> _Total;
 		
@@ -1917,13 +1917,13 @@ namespace OnlineWebShop.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnProductIDChanging(int value);
-    partial void OnProductIDChanged();
     partial void OnOrderIDChanging(int value);
     partial void OnOrderIDChanged();
+    partial void OnProductIDChanging(int value);
+    partial void OnProductIDChanged();
     partial void OnQuantityChanging(System.Nullable<int> value);
     partial void OnQuantityChanged();
-    partial void OnUnitPriceChanging(double value);
+    partial void OnUnitPriceChanging(System.Nullable<double> value);
     partial void OnUnitPriceChanged();
     partial void OnTotalChanging(System.Nullable<double> value);
     partial void OnTotalChanged();
@@ -1934,30 +1934,6 @@ namespace OnlineWebShop.Models
 			this._Order = default(EntityRef<Order>);
 			this._Product = default(EntityRef<Product>);
 			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ProductID
-		{
-			get
-			{
-				return this._ProductID;
-			}
-			set
-			{
-				if ((this._ProductID != value))
-				{
-					if (this._Product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProductIDChanging(value);
-					this.SendPropertyChanging();
-					this._ProductID = value;
-					this.SendPropertyChanged("ProductID");
-					this.OnProductIDChanged();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL", IsPrimaryKey=true)]
@@ -1984,6 +1960,30 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProductIDChanging(value);
+					this.SendPropertyChanging();
+					this._ProductID = value;
+					this.SendPropertyChanged("ProductID");
+					this.OnProductIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
 		public System.Nullable<int> Quantity
 		{
@@ -2004,8 +2004,8 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitPrice", DbType="Float NOT NULL")]
-		public double UnitPrice
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitPrice", DbType="Float")]
+		public System.Nullable<double> UnitPrice
 		{
 			get
 			{
@@ -2464,8 +2464,6 @@ namespace OnlineWebShop.Models
 		
 		private System.Nullable<int> _CreatedBy;
 		
-		private System.Data.Linq.Binary _CreatedAt;
-		
 		private System.Nullable<byte> _Deleted;
 		
 		private System.Nullable<int> _ModifiedBy;
@@ -2479,6 +2477,8 @@ namespace OnlineWebShop.Models
 		private System.Nullable<int> _RecieverID;
 		
 		private System.Nullable<System.DateTime> _DeliveryDate;
+		
+		private System.Nullable<System.DateTime> _CreatedAt;
 		
 		private EntitySet<Detail> _Details;
 		
@@ -2496,8 +2496,6 @@ namespace OnlineWebShop.Models
     partial void OnTotalChanged();
     partial void OnCreatedByChanging(System.Nullable<int> value);
     partial void OnCreatedByChanged();
-    partial void OnCreatedAtChanging(System.Data.Linq.Binary value);
-    partial void OnCreatedAtChanged();
     partial void OnDeletedChanging(System.Nullable<byte> value);
     partial void OnDeletedChanged();
     partial void OnModifiedByChanging(System.Nullable<int> value);
@@ -2512,6 +2510,8 @@ namespace OnlineWebShop.Models
     partial void OnRecieverIDChanged();
     partial void OnDeliveryDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDeliveryDateChanged();
+    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedAtChanged();
     #endregion
 		
 		public Order()
@@ -2522,7 +2522,7 @@ namespace OnlineWebShop.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int OrderID
 		{
 			get
@@ -2542,7 +2542,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="BigInt", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="BigInt")]
 		public System.Nullable<long> Total
 		{
 			get
@@ -2562,7 +2562,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
 		public System.Nullable<int> CreatedBy
 		{
 			get
@@ -2582,27 +2582,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted", DbType="TinyInt")]
 		public System.Nullable<byte> Deleted
 		{
 			get
@@ -2622,7 +2602,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int")]
 		public System.Nullable<int> ModifiedBy
 		{
 			get
@@ -2642,7 +2622,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedAt", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedAt", DbType="DateTime")]
 		public System.Nullable<System.DateTime> ModifiedAt
 		{
 			get
@@ -2662,7 +2642,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
 		public System.Nullable<int> CustomerID
 		{
 			get
@@ -2686,7 +2666,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="TinyInt", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="TinyInt")]
 		public System.Nullable<byte> Status
 		{
 			get
@@ -2706,7 +2686,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecieverID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecieverID", DbType="Int")]
 		public System.Nullable<int> RecieverID
 		{
 			get
@@ -2730,7 +2710,7 @@ namespace OnlineWebShop.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="Date", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="Date")]
 		public System.Nullable<System.DateTime> DeliveryDate
 		{
 			get
@@ -2746,6 +2726,26 @@ namespace OnlineWebShop.Models
 					this._DeliveryDate = value;
 					this.SendPropertyChanged("DeliveryDate");
 					this.OnDeliveryDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
 				}
 			}
 		}
