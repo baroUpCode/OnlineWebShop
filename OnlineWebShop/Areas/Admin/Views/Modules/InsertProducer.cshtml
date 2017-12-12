@@ -1,0 +1,31 @@
+﻿@model OnlineWebShop.Models.Producer
+@{
+    ViewBag.Title = "InsertProducer";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="modal_outside_login" id="modal">
+    <div class="border_modal_login">
+        <div class="modal_contain_login">
+            @using (Html.BeginForm("InsertProducer", "Modules", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <h1>
+                    <span class="text_login">Thông tin thêm mới</span>
+                </h1>
+                    <label class="email_group">
+                        <h5>Tên nhà sản xuất</h5>
+                        <input type="text" name="proName" id="email[1]" required aria-required="true" class="input" />
+                        <div class="address new">
+                            <input type="submit" value="Thêm mới">
+                        </div>
+                    </label>
+
+            }
+            <div><a href="@Url.Action("Producer","Modules")"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back To Producer List</a></div>
+        </div>
+    </div>
+</div>
+
+
+

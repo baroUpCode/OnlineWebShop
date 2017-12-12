@@ -900,6 +900,7 @@
     <Content Include="Areas\Admin\Views\Details\NewsDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\ExportOrdersToExcel.cshtml" />
     <Content Include="Areas\Admin\Views\OrderReport\OrderReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\InsertProducer.cshtml" />
     <None Include="Models\dbOnlineWebShop.dbml.layout">
       <DependentUpon>dbOnlineWebShop.dbml</DependentUpon>
     </None>

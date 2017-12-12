@@ -20,8 +20,10 @@
                         <input type="text" name="productName"  aria-required="true" id="pwd[1]" required class="input" />
                         <h5>Loại sản phẩm:</h5>
                         @Html.DropDownList("productCatogories",(IEnumerable<SelectListItem>)ViewBag.CatList,new { @class = "form-control" })
+                        <a href="@Url.Action("InsertCatogories","Modules")"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
                         <h5>Nhà sản xuất</h5>
                         @Html.DropDownList("productProducer",(IEnumerable<SelectListItem>)ViewBag.ProList,new { @class = "form-control" })
+                        <a href="@Url.Action("InsertProducer","Modules")"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
                         <h5>Thời gian bảo hành:</h5>
                         <input type="text" name="productWarranty"  id="email[1]" aria-required="true" required class="input" />
                         <h5>Số lượng</h5>

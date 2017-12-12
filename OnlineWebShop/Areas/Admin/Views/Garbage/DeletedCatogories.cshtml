@@ -30,7 +30,7 @@
             <tr>
                 <td>@item.CatogoriesID</td>
                 <td>@item.CatogoriesName</td>
-                <td>@item.RootCatogory.RootCatogoryName</td>
+                <td>@item.ParentCatogory.RootCatogoryName</td>
                 <td>
                     <a href=" @Url.Action("RestoreCatogories", "Garbage", new { id = item.CatogoriesID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
                 </td>

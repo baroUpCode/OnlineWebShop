@@ -18,12 +18,13 @@
                         <input type="text" name="catName" id="email[1]" required aria-required="true" class="input" />
                         <h5>Loại</h5>
                         @Html.DropDownList("catRoot", (IEnumerable<SelectListItem>)ViewBag.CatList, new { @class = "form-control" })
+                        <div class="address new">
+                            <input type="submit" value="Thêm mới">
+                        </div>
                     </label>
-                    <div class="address new">
-                        <input type="submit" value="Thêm mới">
-                    </div>
+                    
                 }
-                <div><a href="@Url.Action("Catogories","Modules")">Back To Product List</a></div>
+                <div><a href="@Url.Action("Catogories","Modules")"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back To Catogories List</a></div>
             </div>
         </div>
     </div>

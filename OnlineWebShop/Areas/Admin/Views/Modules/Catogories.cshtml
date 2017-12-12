@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <button class="btn-success"><a href="@Url.Action("InsertCatogies","Modules")">Thêm Mới</a></button>
+        <button class="btn-success"><a href="@Url.Action("InsertCatogories","Modules")">Thêm Mới</a></button>
     </div>
 </div>
     <table class="table table-bordered table-hover table-striped">
@@ -34,7 +34,7 @@
                 <tr>
                     <td>@item.CatogoriesID</td>
                     <td>@item.CatogoriesName</td>
-                    <td>@item.RootCatogory.RootCatogoryName</td>
+                    <td>@item.ParentCatogory.RootCatogoryName</td>
                     <td><a href=" @Url.Action("EditCatogories","Modules",new {id=item.CatogoriesID })"><button type="button" class="btn btn-warning">Sửa</button></a>
                         <a href=" @Url.Action("DeleteCatogories","Modules",new {id=item.CatogoriesID })"><button type="button" class="btn btn-danger">Xóa</button></a></td>
                 </tr>

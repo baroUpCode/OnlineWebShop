@@ -213,7 +213,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult InsertCatogories(FormCollection f)
+        public ActionResult InsertCatogories(FormCollection f,string url)
         {
             Catogory cat = new Catogory();
             cat.CatogoriesName = f["catName"];
@@ -221,7 +221,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             cat.RootCatogoryID = Convert.ToInt32(f["catRoot"]);
             db.Catogories.InsertOnSubmit(cat);
             db.SubmitChanges();
-            return RedirectToAction("Catogories", "Modules");
+            return RedirectToAction("InsertProduct","Modules");
         }
         /// <summary>
         /// Xóa loại sản phẩm
@@ -305,7 +305,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             pro.Deleted = 1;
             db.Producers.InsertOnSubmit(pro);
             db.SubmitChanges();
-            return this.InsertProducer();
+            return RedirectToAction("InsertProduct","Modules");
         }
         /// <summary>
         /// Danh sách tin tức
