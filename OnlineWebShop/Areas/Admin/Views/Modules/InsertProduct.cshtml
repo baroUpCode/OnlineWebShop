@@ -25,9 +25,11 @@
                         @Html.DropDownList("productProducer",(IEnumerable<SelectListItem>)ViewBag.ProList,new { @class = "form-control" })
                         <a href="@Url.Action("InsertProducer","Modules")"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
                         <h5>Thời gian bảo hành:</h5>
-                        <input type="text" name="productWarranty"  id="email[1]" aria-required="true" required class="input" />
+                        <input type="number" name="productWarranty"  id="email[1]" aria-required="true" required class="input" />
+                        @ViewBag.ErrorWarranty
                         <h5>Số lượng</h5>
-                        <input type="text" name="productQuantity" id="email[1]" aria-required="true" required class="input" />
+                        <input type="number" name="productQuantity" id="email[1]" aria-required="true" required class="input" />
+                        @ViewBag.ErrorQuantity
                         <!--CKEDITOR-->
                         <h5>Mô tả:</h5>
                         <textarea name="productDescription" id="textarea" rows="10" cols="80"></textarea>

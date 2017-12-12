@@ -158,8 +158,24 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             pro.Name = f["productName"];
             pro.Status = true;
             pro.Deleted = 1;
-            pro.Quantity = Convert.ToInt32(f["productQuantity"]);
-            pro.Warranty = Convert.ToInt32(f["productWarranty"]);
+            if (Convert.ToInt32(f["productQuantity"].ToString()) >= 0)
+            {
+                pro.Quantity = Convert.ToInt32(f["productQuantity"]);
+            }
+            else
+            {
+                ViewBag.ErrorQuantity = "Vui lòng nhập lại số lượng";
+                return this.InsertProduct();
+            }
+            if (Convert.ToInt32(f["productWarranty"].ToString()) > 0)
+            {
+                pro.Warranty = Convert.ToInt32(f["productWarranty"]);
+            }
+            else
+            {
+                ViewBag.ErrorWarranty = "Vui lòng nhập lại thời gian bảo hành";
+                return this.InsertProduct();
+            }
             pro.Description = f["productDescription"];
             pro.ProducerID = Convert.ToInt32(f["productProducer"]);
             pro.CatogoriesID = Convert.ToInt32(f["productCatogories"]);
