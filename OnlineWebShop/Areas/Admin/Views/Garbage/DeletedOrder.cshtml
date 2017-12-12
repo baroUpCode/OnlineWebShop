@@ -53,7 +53,7 @@
                     <td><span>@String.Format("{0:0,0}", item.Total) VND</span></td>
                     <td>
                         <a href=" @Url.Action("RestoreOrder", "Garbage", new { id = item.OrderID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
-                        <a href=" @Url.Action("ConfirmDeleteOrders", "Garbage", new { id = item.OrderID })"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có thực sự muốn xóa')">Xóa khỏi dữ liệu</button></a>
+                        <a href=" @Url.Action("ConfirmDeleteOrders", "Modules", new { id = item.OrderID })"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có thực sự muốn xóa')">Xóa khỏi dữ liệu</button></a>
                         @*Html.ActionLink("Xóa khỏi dữ liệu",
                         "ConfirmDeleteOrders",
                         "Garbage",

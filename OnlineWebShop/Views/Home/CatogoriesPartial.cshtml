@@ -3,10 +3,13 @@
            <div class="list">
                 <ul class="list-group">
                     @foreach (var item in Model)
-            {
-                        <a href="@Url.Action("SortByCatogories", "Home",new {id=item.CatogoriesID })" class="item">
+                    {
+                        if (item.Deleted == 1)
+                        {
+                        <a href="@Url.Action("SortByCatogories", "Home", new { id = item.CatogoriesID })" class="item">
                             <li class="list-group-item"><h4>@item.CatogoriesName</h4></li>
                         </a>
+                        }
                     }
                 </ul>
            </div>

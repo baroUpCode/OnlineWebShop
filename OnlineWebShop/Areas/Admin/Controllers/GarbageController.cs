@@ -48,6 +48,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             int pageNum = (page ?? 1);
             return View(pro.ToPagedList(pageNum, pageSize));
         }
+       
         /// <summary>
         /// Phục hồi dữ liệu loại sản phẩm (set Deleted==2)
         /// </summary>
@@ -161,18 +162,7 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult ConfirmDeleteOrders(int id)
-        {
-            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
-            var detail = db.Details.Where(x => x.OrderID == order.OrderID).ToList();
-            foreach (var item in detail)
-            {
-                db.Details.DeleteOnSubmit(item);
-            }
-            db.Orders.DeleteOnSubmit(order);
-            db.SubmitChanges();
-            return RedirectToAction("DeletedOrder", "Garbage");
-        }
+      
         /// <summary>
         /// Xóa hoàn toàn Khách hàng khỏi csdl
         /// </summary>

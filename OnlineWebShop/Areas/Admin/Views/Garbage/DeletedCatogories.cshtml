@@ -33,6 +33,7 @@
                 <td>@item.ParentCatogory.RootCatogoryName</td>
                 <td>
                     <a href=" @Url.Action("RestoreCatogories", "Garbage", new { id = item.CatogoriesID })"><button type="button" class="btn btn-success">Phục hồi</button></a>
+                    <a href=" @Url.Action("ConfirmDeleteCatogories", "Modules", new { id = item.CatogoriesID })"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có thực sự muốn xóa')">Xóa</button></a>
                 </td>
             </tr>
         }
