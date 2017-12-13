@@ -64,13 +64,13 @@
                         {
                                 <tr>
                                     <td>@item.ProductID</td> 
-                                    <td class="wh180"><img src="~/Assets/images/@item.ProductImages" style="width:200px;height:200px" /></td>
-                                    <td>@item.Name</td>
+                                    <td class="wh180"><img src="~/Assets/images/@item.Product.ProductImages" style="width:200px;height:200px" /></td>
+                                    <td>@item.Product.Name</td>
                                     @*<td style="max-width:100ch; overflow:hidden; white-space:nowrap;text-overflow:ellipsis" width="100px">@item.Description</td>*@
-                                    <td>@item.Catogory.CatogoriesName</td>
-                                    <td>@item.Producer.Name</td>
+                                    <td>@item.Product.Catogory.CatogoriesName</td>
+                                    <td>@item.Product.Producer.Name</td>
                                     <td>@item.Quantity</td>
-                                    <td>@String.Format("{0:0,0}", item.Price) VND</td>
+                                    <td>@String.Format("{0:0,0}", item.UnitPrice) VND</td>
                                     <td>
                                         <a href="@Url.Action("ProductDetail", "Modules", new { id = item.ProductID })"><button type="button" class="btn btn-success">Chi tiết</button></a>
                                     </td>

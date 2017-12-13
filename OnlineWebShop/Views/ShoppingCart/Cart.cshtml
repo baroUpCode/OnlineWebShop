@@ -107,7 +107,7 @@ $(document).ready(function(c) {
                         <li><a href="@Url.Action("Details","Home",new {id=item._productID})"><span>@item._productName</span></a></li>
                         @using (Html.BeginForm("UpdateAmount", "ShoppingCart", new { id = item._productID }))
                         {
-                            <li><span><input type="number" min="1" name="amount" value="@item._quantity" /><input type="submit" value="Cập Nhật"/></span></li>
+                            <li><span><input type="number" min="1" name="quantity" value="@item._quantity" /><input type="submit" value="Cập Nhật"/></span></li>
                             <li><span>@String.Format("{0:0,0}", item._unitPrice) VND </span></li>
                             <li><span>@String.Format("{0:0,0}", item._total) VND</span></li>
                             

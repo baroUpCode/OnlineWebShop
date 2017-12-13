@@ -13,24 +13,44 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         dbOnlineWebShopDataContext db = new dbOnlineWebShopDataContext();
         // GET: Admin/Details
         public ActionResult OrderDetail(int id) {
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
             var order = db.Orders.SingleOrDefault(x=>x.OrderID==id);
-            List<Product> pro = new List<Product>();
+            List<Detail> pro = new List<Detail>();
             foreach (var item in order.Details)
             {
-                var listor = db.Products.Single(x => x.ProductID == item.ProductID);
+                var listor = db.Details.Single(x =>(x.ProductID == item.ProductID) &&( x.OrderID==id));
                 pro.Add(listor);
             }
             ViewBag.ProductList = pro;
             return View(order);
+            }
+            else
+                return RedirectToAction("Login", "Admin");
         }
         public ActionResult NewsDetail(int id)
-        {   
-            var news = db.News.SingleOrDefault(x => x.NewsID == id);
-            return View(news);
+        {
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                var news = db.News.SingleOrDefault(x => x.NewsID == id);
+                return View(news);
+            }
+            else
+                return RedirectToAction("Login", "Admin");
+
         }
         public ActionResult CustomerDetail(int id) {
-            var cus = db.Customers.SingleOrDefault(x => x.CustomerID==id);
-            return View(cus);
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                var cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
+                return View(cus);
+            }
+            else
+                return RedirectToAction("Login", "Admin");
+
         }
     }
 }

@@ -32,9 +32,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         }
         public ActionResult Products(int? page)
         {
-            int pageSize = 8;
-            int pageNum = (page ?? 1);
-            return View(db.Products.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                int pageSize = 8;
+                int pageNum = (page ?? 1);
+                return View(db.Products.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            }
+            return RedirectToAction("Login", "Admin");
+            
         }
         /// <summary>
         /// Sửa sản phẩm
@@ -43,23 +49,28 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult EditProduct(int id)
         {
-
-            Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
-            List<SelectListItem> deleList = new List<SelectListItem>() {new SelectListItem() { Value = "1", Text = "Chưa xóa", Selected = true},
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                Product pro = db.Products.SingleOrDefault(x => x.ProductID == id);
+                List<SelectListItem> deleList = new List<SelectListItem>() {new SelectListItem() { Value = "1", Text = "Chưa xóa", Selected = true},
                                                                          new SelectListItem() { Value = "2", Text = "Đã xóa" }};
 
-            ViewBag.deleteList = deleList;
-            List<Producer> producer = db.Producers.ToList();
-            SelectList producerList = new SelectList(producer, "ProducerID", "Name", pro.ProducerID);
-            ViewBag.ProList = producerList;
-            List<Catogory> cat = db.Catogories.ToList();
-            SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName", pro.CatogoriesID);
-            ViewBag.CatList = catList;
-            //TempData -> lưu giá trị hình ảnh hiện tại của Product trước khi thay đổi và display ở View
-            TempData["file"] = pro.ProductImages;
-            //ViewBag.Error = TempData["e"] == null ? "" : TempData["e"].ToString();
-            //ViewBag.Files = TempData["file"] == null ? new List<string>() : (List<string>)TempData["file"];
-            return View(pro);
+                ViewBag.deleteList = deleList;
+                List<Producer> producer = db.Producers.ToList();
+                SelectList producerList = new SelectList(producer, "ProducerID", "Name", pro.ProducerID);
+                ViewBag.ProList = producerList;
+                List<Catogory> cat = db.Catogories.ToList();
+                SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName", pro.CatogoriesID);
+                ViewBag.CatList = catList;
+                //TempData -> lưu giá trị hình ảnh hiện tại của Product trước khi thay đổi và display ở View
+                TempData["file"] = pro.ProductImages;
+                //ViewBag.Error = TempData["e"] == null ? "" : TempData["e"].ToString();
+                //ViewBag.Files = TempData["file"] == null ? new List<string>() : (List<string>)TempData["file"];
+                return View(pro);
+            }
+            else
+                return RedirectToAction("Login", "Admin");
         }
         [HttpPost, ActionName("EditProduct")]
         [ValidateInput(false)]
@@ -115,13 +126,19 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult InsertProduct()
         {
-            //List<Producer> producer = db.Producers.ToList();
-            //SelectList producerList = new SelectList(producer, "ProducerID", "Name");
-            ViewBag.ProList = new SelectList(db.Producers.OrderBy(x => x.Name), "ProducerID", "Name");
-            //List<Catogory> cat = db.Catogories.ToList();
-            //SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName");
-            ViewBag.CatList = new SelectList(db.Catogories.OrderBy(x => x.CatogoriesName), "CatogoriesID", "CatogoriesName"); ;
-            return View();
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                //List<Producer> producer = db.Producers.ToList();
+                //SelectList producerList = new SelectList(producer, "ProducerID", "Name");
+                ViewBag.ProList = new SelectList(db.Producers.OrderBy(x => x.Name), "ProducerID", "Name");
+                //List<Catogory> cat = db.Catogories.ToList();
+                //SelectList catList = new SelectList(cat, "CatogoriesID", "CatogoriesName");
+                ViewBag.CatList = new SelectList(db.Catogories.OrderBy(x => x.CatogoriesName), "CatogoriesID", "CatogoriesName"); ;
+                return View();
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         [ValidateInput(false)]
@@ -191,9 +208,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Catogories(int? page)
         {
-            int pageSize = 8;
-            int pageNum = (page ?? 1);
-            return View(db.Catogories.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                int pageSize = 8;
+                int pageNum = (page ?? 1);
+                return View(db.Catogories.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            }
+            else
+                return RedirectToAction("Login", "Admin");
         }
         /// <summary>
         /// Sửa loại sản phẩm
@@ -202,12 +225,17 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult EditCatogories(int id)
         {
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
+                List<ParentCatogory> root = db.ParentCatogories.ToList();
 
-            Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
-            List<ParentCatogory> root = db.ParentCatogories.ToList();
-
-            ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", cat.RootCatogoryID);
-            return View(cat);
+                ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", cat.RootCatogoryID);
+                return View(cat);
+            }
+            else
+                return RedirectToAction("Login", "Admin");
         }
         [HttpPost]
         public ActionResult EditCatogories(int id, FormCollection f)
@@ -225,8 +253,14 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult InsertCatogories()
         {
-            ViewBag.CatList = new SelectList(db.ParentCatogories.OrderBy(x => x.RootCatogoryName), "RootCatogoryID", "RootCatogoryName");
-            return View();
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                ViewBag.CatList = new SelectList(db.ParentCatogories.OrderBy(x => x.RootCatogoryName), "RootCatogoryID", "RootCatogoryName");
+                return View();
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult InsertCatogories(FormCollection f,string url)
@@ -246,21 +280,33 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult DeleteCatogories(int id)
         {
-            Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
-            cat.Deleted = 2;
-            db.SubmitChanges();
-            return RedirectToAction("Catogories", "Modules");
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                Catogory cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
+                cat.Deleted = 2;
+                db.SubmitChanges();
+                return RedirectToAction("Catogories", "Modules");
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         public ActionResult ConfirmDeleteCatogories(int id)
         {
-            var cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
-            if (cat.Deleted == 2)
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
             {
-                db.Catogories.DeleteOnSubmit(cat);
-                db.SubmitChanges();
+                var cat = db.Catogories.SingleOrDefault(x => x.CatogoriesID == id);
+                if (cat.Deleted == 2)
+                {
+                    db.Catogories.DeleteOnSubmit(cat);
+                    db.SubmitChanges();
+                    return RedirectToAction("DeletedCatogories", "Garbage");
+                }
                 return RedirectToAction("DeletedCatogories", "Garbage");
             }
-            return RedirectToAction("DeletedCatogories", "Garbage");
+            else
+                return RedirectToAction("Login","Admin");
 
         }
         //public ActionResult CatogoriesList( )
@@ -276,9 +322,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Producer(int? page)
         {
-            int pageSize = 8;
-            int pageNum = (page ?? 1);
-            return View(db.Producers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                int pageSize = 8;
+                int pageNum = (page ?? 1);
+                return View(db.Producers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         /// <summary>
         /// Sửa thông tin nhà sản xuất
@@ -287,8 +339,14 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult EditProducer(int id)
         {
-            Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
-            return View(pro);
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
+                return View(pro);
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult EditProducer(int id, FormCollection f)
@@ -310,10 +368,16 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult DeleteProducer(int id)
         {
-            Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
-            pro.Deleted = 2;
-            db.SubmitChanges();
-            return RedirectToAction("Products", "Modules");
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                Producer pro = db.Producers.SingleOrDefault(x => x.ProducerID == id);
+                pro.Deleted = 2;
+                db.SubmitChanges();
+                return RedirectToAction("Products", "Modules");
+            }
+            else
+                return RedirectToAction("Login","Admin");
 
         }
         /// <summary>
@@ -322,7 +386,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult InsertProducer()
         {
-            return View();
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult InsertProducer(FormCollection f)
@@ -342,9 +412,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult News(int? page)
         {
-            int pageSize = 8;
-            int pageNum = (page ?? 1);
-            return View(db.News.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                int pageSize = 8;
+                int pageNum = (page ?? 1);
+                return View(db.News.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         /// <summary>
         /// Sửa thông tin tin tức 
@@ -353,10 +429,16 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult EditNews(int id)
         {
-            New ne = db.News.SingleOrDefault(x => x.NewsID == id);
-            List<ParentCatogory> root = db.ParentCatogories.ToList();
-            ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", ne.RootCatogoryID);
-            return View(ne);
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                New ne = db.News.SingleOrDefault(x => x.NewsID == id);
+                List<ParentCatogory> root = db.ParentCatogories.ToList();
+                ViewBag.RootCat = new SelectList(root, "RootCatogoryID", "RootCatogoryName", ne.RootCatogoryID);
+                return View(ne);
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         [ValidateInput(false)]
@@ -472,9 +554,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Customers(int? page)
         {
-            int pageSize = 8;
-            int pageNum = (page ?? 1);
-            return View(db.Customers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                int pageSize = 8;
+                int pageNum = (page ?? 1);
+                return View(db.Customers.OrderByDescending(x => x.CreatedAt).ToList().ToPagedList(pageNum, pageSize));
+            }
+            else
+                return RedirectToAction("Login", "Admin");
         }
         /// <summary>
         /// Sửa thông tin khách hàng
@@ -483,8 +571,14 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult EditCustomer(int id)
         {
-            Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
-            return View(cus);
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                Customer cus = db.Customers.SingleOrDefault(x => x.CustomerID == id);
+                return View(cus);
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult EditCustomer(int id, FormCollection f)
@@ -520,7 +614,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult InsertCustomer()
         {
-            return View();
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult InsertCustomer(FormCollection f)
@@ -552,7 +652,13 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult InsertAdmin()
         {
-            return View();
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult InsertAdmin(FormCollection f)
@@ -566,12 +672,12 @@ namespace OnlineWebShop.Areas.Admin.Controllers
             db.SubmitChanges();
             return RedirectToAction("Index", "Admin");
         }
-        public ActionResult InsertAdmin(int id)
-        {
-            var admin = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
+        //public ActionResult InsertAdmin(int id)
+        //{
+        //    var admin = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
 
-            return View(admin);
-        }
+        //    return View(admin);
+        //}
         /// <summary>
         /// Hàm lấy dữ liệu PermissionID từ DB để trả về HTML.DropDownLis
         /// </summary>
@@ -604,10 +710,16 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult DeleteAdmin(int id)
         {
-            var u = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
-            db.AdminAccounts.DeleteOnSubmit(u);
-            db.SubmitChanges();
-            return RedirectToAction("Index", "Admin");
+            AdminAccount u1 = (AdminAccount)Session["AdminAccount"];
+            if (u1 != null)
+            {
+                var u = db.AdminAccounts.SingleOrDefault(x => x.AdminID == id);
+                db.AdminAccounts.DeleteOnSubmit(u);
+                db.SubmitChanges();
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         /// <summary>
         /// Show-Sua Order
@@ -616,9 +728,15 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Orders(int? page)
         {
-            int pageSize = 10;
-            int pageNum = (page ?? 1);
-            return View(db.Orders.OrderByDescending(x => x.CreatedAt).ToPagedList(pageNum, pageSize));
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                int pageSize = 10;
+                int pageNum = (page ?? 1);
+                return View(db.Orders.OrderByDescending(x => x.CreatedAt).ToPagedList(pageNum, pageSize));
+            }
+            else
+                return RedirectToAction("Login", "Admin");
         }
         public ActionResult SearchOrders(int? page, string searchString)
         {
@@ -656,13 +774,19 @@ namespace OnlineWebShop.Areas.Admin.Controllers
 
         public ActionResult EditOrders(int id)
         {
-            //Tạo một danh sách đối tượng SelectListItem để lưu giá trị Item trong SelectList và trả về cho View bằng ViewBag
-            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
-            List<SelectListItem> status = new List<SelectListItem>();
-            status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0" });
-            status.Add(new SelectListItem() { Text = "Đã giao", Value = "1" });
-            ViewBag.OrderStatus = new SelectList(status, "Value", "Text", order.Status.Value);
-            return View(order);
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                //Tạo một danh sách đối tượng SelectListItem để lưu giá trị Item trong SelectList và trả về cho View bằng ViewBag
+                var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
+                List<SelectListItem> status = new List<SelectListItem>();
+                status.Add(new SelectListItem() { Text = "Đang xử lý", Value = "0" });
+                status.Add(new SelectListItem() { Text = "Đã giao", Value = "1" });
+                ViewBag.OrderStatus = new SelectList(status, "Value", "Text", order.Status.Value);
+                return View(order);
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         [HttpPost]
         public ActionResult EditOrders(int id, FormCollection f)
@@ -694,22 +818,34 @@ namespace OnlineWebShop.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult DeleteOrders(int id)
         {
-            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
-            order.Deleted = 2;
-            db.SubmitChanges();
-            return RedirectToAction("Orders", "Modules");
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
+            {
+                var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
+                order.Deleted = 2;
+                db.SubmitChanges();
+                return RedirectToAction("Orders", "Modules");
+            }
+            else
+                return RedirectToAction("Login","Admin");
         }
         public ActionResult ConfirmDeleteOrders(int id)
         {
-            var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
-            var detail = db.Details.Where(x => x.OrderID == order.OrderID).ToList();
-            foreach (var item in detail)
+            AdminAccount u = (AdminAccount)Session["AdminAccount"];
+            if (u != null)
             {
-                db.Details.DeleteOnSubmit(item);
+                var order = db.Orders.SingleOrDefault(x => x.OrderID == id);
+                var detail = db.Details.Where(x => x.OrderID == order.OrderID).ToList();
+                foreach (var item in detail)
+                {
+                    db.Details.DeleteOnSubmit(item);
+                }
+                db.Orders.DeleteOnSubmit(order);
+                db.SubmitChanges();
+                return RedirectToAction("DeletedOrder", "Garbage");
             }
-            db.Orders.DeleteOnSubmit(order);
-            db.SubmitChanges();
-            return RedirectToAction("DeletedOrder", "Garbage");
+            else
+                return RedirectToAction("Login","Admin");
         }
         /// <summary>
         /// Searching button

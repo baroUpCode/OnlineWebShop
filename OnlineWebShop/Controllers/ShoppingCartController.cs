@@ -154,7 +154,7 @@ namespace OnlineWebShop.Controllers
             ShoppingCartModels product = carts.SingleOrDefault(x => x._productID == id);
             if(product != null)
             {
-                product._quantity = int.Parse(f["amount"].ToString());// số lượng sản phẩm = số lượng từ forrm truyền vào 
+                product._quantity = int.Parse(f["quantity"].ToString());// số lượng sản phẩm = số lượng từ forrm truyền vào 
             }
             return RedirectToAction("Cart");
         }
